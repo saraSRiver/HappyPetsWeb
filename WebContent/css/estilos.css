@@ -1,0 +1,339 @@
+
+/*plantilla genérica*/
+*{
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+--colorNav: white;
+--colorFondo: lightblue;
+--colorFooter:#ccffff;
+--colorFuente: black;
+
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    background-color:var(--colorFondo);
+}
+
+.logo{ 
+    position: relative;
+    padding:1% 1% 1% 1%;
+}
+
+.ContenedorHeader{
+   display: flex;
+    position:relative;
+    height: 5%;
+    width:80%;
+    margin-left: 5%;
+  
+    background-color:var(--colorNav);
+    padding: 0 5%;
+}
+
+.secciones{
+    position: relative;
+    font-size:  1.5vw;
+    padding-top: 1%;
+   padding-bottom: 1%; 
+    width: 100%;
+    text-align: center;
+   height: auto;
+    position: relative;
+    margin-right: 20%;
+   
+}
+.secciones .boton{
+    width: 100%;
+    font-size:  1.5vw;
+    border: none;
+    background-color: var(--colorNav);
+}
+nav a{
+    font-size: 14pt;
+}
+.nav1{
+    background-color: var(--colorNav);
+    text-align: center;
+    height: 5%;
+    display:flex;
+    width: 50%;
+    position: relative;
+   
+    }
+    .nav2{
+        background-color: var(--colorNav);
+        position: relative;
+        font-size:  1.5vw;
+        padding-top: 1%;
+       padding-bottom: 1%; 
+       position: relative;
+       margin-right: 3%;
+       
+        height: auto;
+        display:flex;
+        margin-left: auto;
+        position: relative;
+        width: 15%;
+    }
+  
+    .secciones2 a{
+        text-align: right;
+        font-size: 14pt;
+
+    }
+    
+    body{
+        
+        position: relative;
+    
+         background-color:var(--colorFondo);
+    }
+
+footer{
+    background-color: var(--colorFooter);
+    border-radius: 2%/50%;
+    position: relative;
+    margin-top:5%;
+    width: 100%;
+    
+    
+   
+}
+footer p{
+    text-align: center;
+    font-size: 13pt;
+    position: relative;
+    margin-top: 3%;
+   
+}
+
+.ContenedorFooter{
+ 
+    display: flex;
+ 
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+  }
+
+  .ContenedorFooter  figure {
+      width: 100%;
+    display:flex;
+    justify-content: center;
+    flex-shrink: 0;
+  
+  }
+   .redes{
+    flex-shrink: 0;
+    margin: 10%;
+    width:50%;
+
+  }
+   .redes img{
+      width: 100%;
+     
+ 
+  }
+  .contactos{
+    position:relative;
+    width: 100%;
+    
+    display:flex;
+    justify-content: space-around;
+   
+  }
+  .contactos >  div{
+      display: flex;
+      width: 25%;
+      
+  }
+  .contactos figure{
+    margin-left: 5%;
+      position: relative;
+      width: 20%;
+  }
+  .contactos figure > img{
+    width: 250%;
+    margin-right: 0px;
+   
+  }
+
+  .contactos h2{
+    width: 100%;
+    position: relative;
+    margin: auto 1% auto 1%;
+    margin-top: 4%;
+  }
+
+/*/página index/*/
+figure{
+    margin:0;
+}
+.MascotaMes{
+margin-top: 5%;
+position: relative;
+}
+.MascotaMes h2{
+    text-align: center;
+    
+}
+
+.ContenedorIMG{
+    position: relative;
+    width: 40%;
+}
+
+.MascotaMes figure{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.MASCMES{
+    transition: .5s ease;
+    backface-visibility: hidden;
+    opacity: 1;
+    display: block;
+    border-radius: 10%;
+    max-width: 100%;
+  height: auto;
+}
+
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+  }
+  
+  .ContenedorIMG:hover .MASCMES {
+    opacity: 0.3;
+  }
+  
+  .ContenedorIMG:hover .middle {
+    opacity: 1;
+  }
+  
+  .text {
+    background-color:  var(--colorNav);
+    color: var(--colorFuente);
+    font-size: 13pt;
+    padding: 16px 32px;  
+    border-radius: 10%;
+  }
+  h2{
+      text-align: center;
+      margin-top: 4%;
+  }
+ .servicios{
+    display: flex;
+    flex-direction: row;
+    margin-left:20%;
+    
+ }
+
+ .servicios figure{
+    padding: 3%;
+ }
+ .servicios figcaption{
+    text-align: center;
+}
+
+/*/registro del cuidador/*/
+section{
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    height: auto;
+   
+    align-content: center;
+}
+.registro{
+    text-align: center;
+
+width: 30%;
+}
+.registro p{
+    padding: 0 0 1% 0;
+}
+.especiesServicios{
+  
+    width: 30%;
+}
+
+.access{
+text-align: center;
+}
+.mascotas{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.mascotasInfo{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 50%;  
+    
+}
+.fotoMascota{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 50%;  
+    margin-right: 0%;
+}
+.cliente2 p:nth-child(1){
+  text-decoration: underline;
+}
+.cliente{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.cliente1{
+    grid-column-start: 2;
+    grid-column-end: 2;
+    width: 50%;  
+    
+}
+.cliente2{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 50%;  
+    
+}
+
+.cuidador{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.cuidador1{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    width: 20%;  
+    
+}
+
+.cuidador2{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    width: 20%;  
+}
+
+.cuidador3{
+    grid-column-start: 3;
+    grid-column-end: 3;
+    width: 20%; 
+}
+.cuidador1 p:nth-child(1){
+    text-decoration: underline;
+  }
+.cuidador2 p:nth-child(1){
+    text-decoration: underline;
+  }
+  .cuidador3 p:nth-child(1){
+    text-decoration: underline;
+  }
