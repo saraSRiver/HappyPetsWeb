@@ -1,6 +1,7 @@
 package com.jal.prueba.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import com.happypets.aplicacion.service.CuidadorService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.jal.prueba.utils.ActionNames;
+import com.jal.prueba.utils.AttributeNames;
 import com.jal.prueba.utils.ParameterNames;
 import com.jal.prueba.utils.ViewsNames;
 
@@ -38,7 +40,9 @@ public class BusquedaCuidadorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter(ParameterNames.ACTION2);
-
+		if(logger.isDebugEnabled()) {
+			logger.debug(request.getParameterMap());
+		}
 		if (ActionNames.CUIDADOR_BUSCAR.equalsIgnoreCase(action)) {
 			String poblacion = request.getParameter(ParameterNames.POBLACION2);
 			String idiomas= request.getParameter(ParameterNames.IDIOMAS2);
@@ -61,9 +65,10 @@ public class BusquedaCuidadorServlet extends HttpServlet {
 			criteria.setPrecioHasta(Double.valueOf(precioHasta));
 		
 			try {
-				List<Cuidador>cuidadores= cuidServ.findByCriteria(criteria);
+				List<Cuidador>cuidadores= new ArrayList();
+				cuidadores=cuidServ.findByCriteria(criteria);
 			
-				request.setAttribute(ActionNames.CUIDADOR_BUSCAR,cuidadores);
+				request.setAttribute(AttributeNames.CUIDADOR,cuidadores);
 				
 				request.getRequestDispatcher(ViewsNames.RESULTS)
 				.forward(request, response);
@@ -71,13 +76,13 @@ public class BusquedaCuidadorServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		else if(ActionNames.CUIDADOR_DETAIL.equalsIgnoreCase(ParameterNames.ACTION2)){
-			request.getParameter(ParameterNames.ID_CUIDADOR);
-			Long id = Long.valueOf(ParameterNames.ID_CUIDADOR);
-			
+		else if(ActionNames.CUIDADOR_DETAIL.equalsIgnoreCase(action)){
+		
+		String idCuidador=	request.getParameter(ParameterNames.ID_CUIDADOR);
+			Long id  = Long.valueOf(idCuidador);
 			try {
 				Cuidador cuidador=cuidServ.findById(id);
-				request.setAttribute(ParameterNames.CUIDADOR,cuidador);
+				request.setAttribute(AttributeNames.CUIDADOR,cuidador);
 				request.getRequestDispatcher(ViewsNames.DETAIL)
 				.forward(request, response);
 

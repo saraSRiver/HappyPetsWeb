@@ -19,13 +19,13 @@ import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
  */
 @WebServlet("/mascotaMesIndex")
 public class MascotaMesIndex extends HttpServlet {
-	  private MascotaService mascServ;
-	  private ClienteService client;
-    public MascotaMesIndex() {
-    	mascServ= new MascotaServiceImpl();
-    }
+	private MascotaService mascServ;
+	private ClienteService client;
+	public MascotaMesIndex() {
+		mascServ= new MascotaServiceImpl();
+	}
 
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		if("index".equalsIgnoreCase(action)) {
@@ -36,19 +36,16 @@ public class MascotaMesIndex extends HttpServlet {
 				request.setAttribute("mascota",mascota);
 				request.getRequestDispatcher("/html/index.jsp").forward(request, response);
 			} catch (NumberFormatException | DataException e) {
-				
+
 				e.printStackTrace();
 			}
-		
-		
-		
-	
-	}
+
 		}
-	
+	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 

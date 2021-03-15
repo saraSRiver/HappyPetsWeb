@@ -17,6 +17,7 @@ public class ParameterNames {
 	public  static final String IDIOMAS2 = "idiomas";
 
 	public  static final String POBLACION2 = "poblacion";
+	
 	public  static final String ID_CUIDADOR="id";
-	public  static final String CUIDADOR= "cuidador";
+
 }

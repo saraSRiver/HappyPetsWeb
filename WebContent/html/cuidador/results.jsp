@@ -3,54 +3,16 @@
 <%@ page import="com.happypets.aplicacion.model.*" %>
 <%@ page import="java.util.List" %>
     <%@ page import="com.jal.prueba.utils.*" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Happy Pets</title>
-<link rel= "stylesheet" href="http://localhost:8080/HelloWorld1/css/estilos.css">
-</head>
-<body>
-<header>
-  
-    <img class="logo" src="http://localhost:8080/HelloWorld1/img/LogoHappyPets.png" width="80" height="100">
-      <div class="ContenedorHeader">
-     
-      <nav class="nav1">
-          <div class="secciones">
-          <button class= "boton"><a href=http://localhost:8080/HelloWorld1/html/index.jsp>Página principal</a></button>
-      </div>
-          <div class="secciones">
-          <button class= "boton"><a href=http://localhost:8080/HelloWorld1/html/cuidador/search.jsp>Buscar cuidadores</a></button>
-
-          </div>
-      <div class="secciones">
-          <button class= "boton"><a href=RegistroCuidador.html>Conviértete en cuidador</a></button>
-        
-      </div>
-    
-      </nav>
-
-      <div class="nav2">
-        <div class="secciones2">
-        <button class= "boton"><a href=acceso.html>Acceder</a></button>
-    </div>
-    <div class="secciones2">
-        <button class= "boton"><a href=registro_cliente.html>Registrarse</a></button>
-    </div>
-      </div>
-
-    </div>
-    </header>
+      <%@include file="/html/common/header.jsp"%>
 <%
-List<Cuidador>cuidadores = (List<Cuidador>) request.getAttribute(ViewsNames.RESULTS);
+List<Cuidador>cuidadores = (List<Cuidador>) request.getAttribute(AttributeNames.CUIDADOR);
 %>
 <p>Resultados de tu búsqueda:<%=cuidadores.size()%></p>
 	<%
 	
 	for(Cuidador c: cuidadores){
 		%>
-		<a href="http://localhost:8080/HelloWorld1/busquedaCuidador?action=detail&id=
+		<a href="<%=UrlBuilder.builderUrlForm(request,"/busquedaCuidador?action=detail&id=")%>
 		<%=c.getIdcuidador()%>"><%=c.getNombre()%></a>
 		<p><%=c.getApellidos()%></p>
 		<h4>Idiomas:</h4>
@@ -84,5 +46,4 @@ List<Cuidador>cuidadores = (List<Cuidador>) request.getAttribute(ViewsNames.RESU
 	<%
 	}
 %>
-</body>
-</html>
+   <%@include file="/html/common/footer.jsp"%>

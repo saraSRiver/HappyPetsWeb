@@ -1,48 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.jal.prueba.utils.*" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Happy Pets</title>
-  <link rel= "stylesheet" href="http://localhost:8080/HappyPetsWeb/css/estilos.css">
-</head>
-<header>
-  
-    <img class="logo" src="http://localhost:8080/HelloWorld1/img/LogoHappyPets.png" width="80" height="100">
-      <div class="ContenedorHeader">
-     
-      <nav class="nav1">
-          <div class="secciones">
-          <button class= "boton"><a href=http://localhost:8080/HelloWorld1/html/index.jsp>Página principal</a></button>
-      </div>
-          <div class="secciones">
-          <button class= "boton"><a href=http://localhost:8080/HelloWorld1/html/cuidador/search.jsp>Buscar cuidadores</a></button>
-
-          </div>
-      <div class="secciones">
-          <button class= "boton"><a href=RegistroCuidador.html>Conviértete en cuidador</a></button>
-        
-      </div>
-    
-      </nav>
-
-      <div class="nav2">
-        <div class="secciones2">
-        <button class= "boton"><a href=http://localhost:8080/HelloWorld1/html/usuario/login.jsp>Acceder</a></button>
-    </div>
-    <div class="secciones2">
-        <button class= "boton"><a href=registro_cliente.html>Registrarse</a></button>
-    </div>
-      </div>
-
-    </div>
-    </header>
+      <%@include file="/html/common/header.jsp"%>
    
 <body>
+
    <h2>Búsqueda de cuidadores</h2>
-   <form action= "http://localhost:8080/HelloWorld1/busquedaCuidador" method="post">
+   <form action= "<%=UrlBuilder.builderUrlForm(request, "/busquedaCuidador") %>" method="post">
+    
 
    <input type=hidden name="<%=ParameterNames.ACTION2%>" value="<%=ActionNames.CUIDADOR_BUSCAR%>"/>
    
@@ -129,5 +94,5 @@
 
     <input class="buscar" type="submit" value="buscar">
 </form>
-</body>
-</html>
+
+      <%@include file="/html/common/footer.jsp"%>
