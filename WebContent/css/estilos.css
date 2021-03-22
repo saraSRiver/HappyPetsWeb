@@ -12,7 +12,7 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 header{
     display: flex;
     flex-direction: row;
-    background-color:var(--colorFondo);
+    background-color: var(--colorFondo);
 }
 
 .logo{ 
@@ -26,7 +26,6 @@ header{
     height: 5%;
     width:80%;
     margin-left: 5%;
-  
     background-color:var(--colorNav);
     padding: 0 5%;
 }
@@ -41,7 +40,6 @@ header{
    height: auto;
     position: relative;
     margin-right: 20%;
-   
 }
 .secciones .boton{
     width: 100%;
@@ -69,7 +67,6 @@ nav a{
        padding-bottom: 1%; 
        position: relative;
        margin-right: 3%;
-       
         height: auto;
         display:flex;
         margin-left: auto;
@@ -86,12 +83,12 @@ nav a{
     body{
         
         position: relative;
-    
-         background-color:var(--colorFondo);
+    background-color: var(--colorFondo);
+        
     }
 
 footer{
-    background-color: var(--colorFooter);
+    background-color: var(--colorNav);
     border-radius: 2%/50%;
     position: relative;
     margin-top:5%;
@@ -243,26 +240,29 @@ position: relative;
  .servicios figcaption{
     text-align: center;
 }
-
+.servicios > figure  div{
+    display:none;
+}
+.servicios > figure:hover  div{
+    display:initial;
+    text-align: center;
+}
 /*/registro del cuidador/*/
 section{
     display: flex;
     flex-direction: column;
     width: 100%; 
     height: auto;
-   
     align-content: center;
 }
 .registro{
     text-align: center;
-
 width: 30%;
 }
 .registro p{
     padding: 0 0 1% 0;
 }
 .especiesServicios{
-  
     width: 30%;
 }
 
@@ -337,3 +337,24 @@ text-align: center;
   .cuidador3 p:nth-child(1){
     text-decoration: underline;
   }
+
+
+  /*/historial de contratos del cliente/*/
+
+  .seccionesHistorial{
+  display: flex;
+  flex-direction: row;
+  margin-left:5%;
+}
+
+body > div > div:nth-child(1){
+    justify-content: space-between;
+   
+}
+body > div > div:nth-child(2){
+    justify-content: space-between;
+    padding:2%;
+}
+body > div > div:nth-child(3){
+    justify-content: space-between;
+}

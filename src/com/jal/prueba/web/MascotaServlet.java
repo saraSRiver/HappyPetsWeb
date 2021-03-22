@@ -14,9 +14,9 @@ import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
  * Servlet implementation class PerfilMascota
  */
 @WebServlet("/perfilMascota")
-public class PerfilMascota extends HttpServlet {
+public class MascotaServlet extends HttpServlet {
     private MascotaService mascServ;
-    public PerfilMascota() {
+    public MascotaServlet() {
     	mascServ= new MascotaServiceImpl();
        
     }

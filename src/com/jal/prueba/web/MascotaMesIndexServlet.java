@@ -13,15 +13,16 @@ import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
+import com.jal.prueba.utils.ViewsNames;
 
 /**
  * Servlet implementation class MascotaMesIndex
  */
 @WebServlet("/mascotaMesIndex")
-public class MascotaMesIndex extends HttpServlet {
+public class MascotaMesIndexServlet extends HttpServlet {
 	private MascotaService mascServ;
 	private ClienteService client;
-	public MascotaMesIndex() {
+	public MascotaMesIndexServlet() {
 		mascServ= new MascotaServiceImpl();
 	}
 
@@ -32,10 +33,12 @@ public class MascotaMesIndex extends HttpServlet {
 			String fotoMascota= request.getParameter("mascota");
 			Mascota mascota= new Mascota();
 			try {
+				
 				mascota = mascServ.findById(Long.valueOf(fotoMascota));
+				
 				request.setAttribute("mascota",mascota);
-				request.getRequestDispatcher("/html/index.jsp").forward(request, response);
-			} catch (NumberFormatException | DataException e) {
+				request.getRequestDispatcher(ViewsNames.INDEX).forward(request, response);
+			} catch ( DataException e) {
 
 				e.printStackTrace();
 			}

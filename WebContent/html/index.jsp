@@ -8,8 +8,8 @@
                 <%
 	Mascota m = (Mascota) request.getAttribute("mascota");
 %>
-             <form action=http://localhost:8080/HelloWorld1/mascotaMesIndex?action=index&mascota=<%=m.getIdMascota()%> method="post">
-              <input type=hidden name="<%=ParameterNames.ACTION2%>" value="index"/>
+             <form action="<%=UrlBuilder.builderUrlForm(request, "/html/")%><%=ViewsNames.INDEX%><%=m.getIdMascota()%>" method="post">
+              <input type=hidden name="<%=ParameterNames.ACTION%>" value="index"/>
       <figure>
         
         <div class="ContenedorIMG">

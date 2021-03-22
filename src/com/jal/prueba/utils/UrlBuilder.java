@@ -45,4 +45,10 @@ public class UrlBuilder {
 
 		return sb.toString();
 	}
+	public static String builderUrlRedirect(HttpServletRequest request, String direccion) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("http://").append(request.getServerName()).append(":")
+		.append(request.getServerPort()).append(request.getContextPath()).append(direccion);
+		return sb.toString();
+	}
 }
