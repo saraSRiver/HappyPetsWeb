@@ -13,6 +13,7 @@ import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
+import com.jal.prueba.utils.ActionNames;
 import com.jal.prueba.utils.ViewsNames;
 
 /**
@@ -22,6 +23,7 @@ import com.jal.prueba.utils.ViewsNames;
 public class MascotaMesIndexServlet extends HttpServlet {
 	private MascotaService mascServ;
 	private ClienteService client;
+
 	public MascotaMesIndexServlet() {
 		mascServ= new MascotaServiceImpl();
 	}
@@ -29,13 +31,15 @@ public class MascotaMesIndexServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		if(action == null) {
+			action = "index";
+		}
 		if("index".equalsIgnoreCase(action)) {
-			String fotoMascota= request.getParameter("mascota");
+			
 			Mascota mascota= new Mascota();
 			try {
 				
-				mascota = mascServ.findById(Long.valueOf(fotoMascota));
-				
+				mascota = mascServ.findByPromocion(6);
 				request.setAttribute("mascota",mascota);
 				request.getRequestDispatcher(ViewsNames.INDEX).forward(request, response);
 			} catch ( DataException e) {

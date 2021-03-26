@@ -14,9 +14,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.happypets.aplicacion.model.Cuidador;
-import com.happypets.aplicacion.model.Direccion;
 import com.happypets.aplicacion.model.DireccionDTO;
 import com.happypets.aplicacion.model.Experiencia;
+import com.happypets.aplicacion.model.Servicio;
+import com.happypets.aplicacion.model.ServicioOfrecido;
 import com.happypets.aplicacion.service.CuidadorCriteria;
 import com.happypets.aplicacion.service.CuidadorService;
 import com.happypets.aplicacion.service.DataException;
@@ -24,13 +25,16 @@ import com.happypets.aplicacion.service.IdiomaService;
 import com.happypets.aplicacion.service.ServicioOfrecidoService;
 import com.happypets.aplicacion.service.ServicioService;
 import com.happypets.aplicacion.service.TipoEspecieService;
-import com.happypets.aplicacion.service.exceptions.ServiceException;
+import com.happypets.aplicacion.service.exceptions.MailException;
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ServicioOfrecidoServiceImpl;
+import com.happypets.aplicacion.serviceImpl.ServicioServiceImpl;
 import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
 import com.jal.prueba.utils.ActionNames;
 import com.jal.prueba.utils.AttributeNames;
+import com.jal.prueba.utils.ContextsPath;
+import com.jal.prueba.utils.MapPrint;
 import com.jal.prueba.utils.ParameterNames;
 import com.jal.prueba.utils.SessionManager;
 import com.jal.prueba.utils.UrlBuilder;
@@ -53,14 +57,19 @@ public class CuidadorServlet extends HttpServlet {
 		servOfrecido = new ServicioOfrecidoServiceImpl();
 		servEspecie= new TipoEspecieServiceImpl();
 		servIdioma= new IdiomaServiceImpl();
-	}
+		servServicio = new ServicioServiceImpl();
+	}	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, DataException {
-		if(logger.isDebugEnabled()) {
-			logger.debug(request.getParameterMap());
-		}
-		String action = request.getParameter(ParameterNames.ACTION);
+			throws ServletException, IOException {
 
+		if(logger.isDebugEnabled()) {
+			logger.debug(MapPrint.print(request.getParameterMap()));
+		}
+
+		String action = request.getParameter(ActionNames.ACTION);
+
+		String target=null;
+		boolean redirect=false;
 		if (ActionNames.CUIDADOR_BUSCAR.equalsIgnoreCase(action)) {
 			String poblacion = request.getParameter(ParameterNames.POBLACION);
 			String idiomas= request.getParameter(ParameterNames.IDIOMAS);
@@ -72,7 +81,6 @@ public class CuidadorServlet extends HttpServlet {
 			if (logger.isInfoEnabled()) {
 				logger.info("Buscando cuidadores");
 			}
-
 
 			CuidadorCriteria criteria = new CuidadorCriteria();
 			criteria.setIdTipoEspecie(Long.valueOf(especies));
@@ -111,30 +119,28 @@ public class CuidadorServlet extends HttpServlet {
 		} 
 
 		if(ActionNames.REGISTRO_CUIDADOR.equalsIgnoreCase(action)) {
-			String target=null;
-			boolean redirect=false;
-			String nombre=request.getParameter("nombre");
-			String apellidos=request.getParameter("apellidos");
-			String password= request.getParameter("password");
-			String repPassword= request.getParameter("repPassword");
-			String email= request.getParameter("email");
-			String repEmail= request.getParameter("repEmail");
-			String telefono= request.getParameter("telefono");
-			String piso= request.getParameter("piso");
-			String portal= request.getParameter("nVivienda/portal");
-			String calle= request.getParameter("calle");
-			String cp=request.getParameter("CP");
-			String poblacion= request.getParameter("poblacion");
-			String provincia= request.getParameter("provincia");
-			String []idiomas= request.getParameterValues("idiomas");
-			String experienciaCuid= request.getParameter("experiencia");
-			String[]especies= request.getParameterValues("especies");
-			String []servicios= request.getParameterValues("servicios");
-			String precio= request.getParameter("precio");
+
+			String nombre=request.getParameter(ParameterNames.NOMBRE);
+			String apellidos=request.getParameter(ParameterNames.APELLIDOS);
+			String password= request.getParameter(ParameterNames.PASSWORD);
+			String repPassword= request.getParameter(ParameterNames.REP_PASSWORD);
+			String email= request.getParameter(ParameterNames.EMAIL);
+			String repEmail= request.getParameter(ParameterNames.REP_EMAIL);
+			String telefono= request.getParameter(ParameterNames.TELEFONO);
+			String piso= request.getParameter(ParameterNames.PISO);
+			String portal= request.getParameter(ParameterNames.PORTAL);
+			String calle= request.getParameter(ParameterNames.CALLE);
+			String cp=request.getParameter(ParameterNames.CP);
+			String poblacion= request.getParameter(ParameterNames.POBLACION);
+			String provincia= request.getParameter(ParameterNames.PROVINCIA);
+			String []idiomas= request.getParameterValues(ParameterNames.IDIOMAS);
+			String experienciaCuid= request.getParameter(ParameterNames.EXPERIENCIA);
+			String[]especies= request.getParameterValues(ParameterNames.ESPECIES);
+			String []servicios= request.getParameterValues(ParameterNames.SERVICIOS);
+			String []precio= request.getParameterValues(ParameterNames.PRECIO_SERVICIO);
 			StringBuilder stringBuilder2 = new StringBuilder();
 			stringBuilder2.append("registrando a ");
 			stringBuilder2.append(nombre);
-			System.out.println(stringBuilder2.toString());
 
 			Cuidador cuidador = new Cuidador();
 			cuidador.setNombre(nombre);
@@ -157,40 +163,44 @@ public class CuidadorServlet extends HttpServlet {
 			direccionDto.setIdpais(1L);
 			direccionDto.setNombrePais("España");
 			cuidador.setDireccion(direccionDto);
-
+			
 			try {
-				for(String es: especies) {
-					for(String i : idiomas) {
-						cuidador.add(servEspecie.findById(Long.valueOf(es),i));
-					}
+				for(int i= 0; i< servicios.length; i++) {
+					ServicioOfrecido servOfrecido = new ServicioOfrecido();
+			
+					Servicio servicio = servServicio.findById(Long.valueOf(servicios[i]), "es");
+					servOfrecido.setPrecio(Double.valueOf(precio[i]));
+					servOfrecido.setIdServicio(servicio.getIdServicio());
+					servOfrecido.setNombreServicio(servicio.getNombreServicio());
+					cuidador.add(servOfrecido);
 				}
-			} catch (DataException e) {
-				e.printStackTrace();
-			}
+				for(String es: especies) {
 
-			try {
+					cuidador.add(servEspecie.findById(Long.valueOf(es),"es"));
+				}
 				for(String i : idiomas) {
 					cuidador.add(servIdioma.findByid(i));
 				}
-			} catch (DataException e) {
+				cuidServ.registro(cuidador);
+				target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
+			} catch (DataException | MailException e) {
 				e.printStackTrace();
 			}
-			try {
-				for (String i: servicios) {
-					cuidador.add(servServicio.findById(cuidador.getIdcuidador(), precio));
-				}
-			}catch (DataException e) {
-				e.printStackTrace();
-			}
-			
-			if(redirect) {
-				logger.info("Redirect to..."+ target);
-				response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
-			}else {
-				logger.info("Forwading to..." + target);
-				request.getRequestDispatcher(target).forward(request, response);
-			}
+
 		}
+		else if(ActionNames.LOG_OUT.equalsIgnoreCase(action)) {
+			SessionManager.remove(request, AttributeNames.CUIDADOR);
+			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
+			redirect = true;
+		}
+		if(redirect) {
+			logger.info("Redirect to..."+ target);
+			response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
+		}else {
+			logger.info("Forwading to..." + target);
+			request.getRequestDispatcher(target).forward(request, response);
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.jal.prueba.utils.*" %>
-  </form>
+
 <footer role="contentinfo">
   <div class="contactos">
     <div class="ContenedorFooter">

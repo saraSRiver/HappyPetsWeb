@@ -41,10 +41,11 @@ public class ClienteServlet extends HttpServlet {
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}
-		String action = request.getParameter(ParameterNames.ACTION);
+		String target=null;
+		boolean redirect=false;
+		String action = request.getParameter(ActionNames.ACTION);
 		if(ActionNames.REGISTRO_CLIENTE.equalsIgnoreCase(action)) {
-			String target=null;
-			boolean redirect=false;
+	
 			String nombre=request.getParameter(ParameterNames.NOMBRE);
 			String apellidos=request.getParameter(ParameterNames.APELLIDOS);
 			String password= request.getParameter(ParameterNames.PASSWORD);
@@ -94,6 +95,12 @@ public class ClienteServlet extends HttpServlet {
 			}catch (DataException e) {
 				e.printStackTrace();
 			}
+		}
+		else if(ActionNames.LOG_OUT.equalsIgnoreCase(action)) {
+			SessionManager.remove(request, AttributeNames.CLIENTE);
+			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
+			redirect = true;
+		}
 			if(redirect) {
 				logger.info("Redirect to..."+ target);
 				response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
@@ -101,7 +108,7 @@ public class ClienteServlet extends HttpServlet {
 				logger.info("Forwading to..." + target);
 				request.getRequestDispatcher(target).forward(request, response);
 			}
-		}
+		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -35,5 +35,5 @@
 <p><%=c.getDireccion().getPortal()%></p>
 <h5>Piso:</h5>
 <p><%=c.getDireccion().getPiso()%></p>
-   <input class="buscar" type="submit" value="Contratar">
+  <button class= "boton"><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.CONTRATAR, ParameterNames.ID_CUIDADOR, String.valueOf(c.getIdcuidador()))%>">Contratar</a></button>
   <%@include file="/html/common/footer.jsp"%>

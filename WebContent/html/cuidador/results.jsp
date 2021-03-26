@@ -12,7 +12,7 @@ List<Cuidador>cuidadores = (List<Cuidador>) request.getAttribute(AttributeNames.
 	
 	for(Cuidador c: cuidadores){
 		%>
-		<a href="<%=UrlBuilder.builderUrlForm(request,"/busquedaCuidador?action=detail&id=")%>
+		<a href="<%=UrlBuilder.builderUrlForm(request,"/cuidador?action=detail&" + ParameterNames.ID_CUIDADOR + "=")%>
 		<%=c.getIdcuidador()%>"><%=c.getNombre()%></a>
 		<p><%=c.getApellidos()%></p>
 		<h4>Idiomas:</h4>

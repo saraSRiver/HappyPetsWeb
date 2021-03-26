@@ -1,6 +1,7 @@
 package com.jal.prueba.utils;
 
 public class ActionNames {
+	public static final String ACTION = "action";
 	public static final String CUIDADOR_BUSCAR  = "search";
 	public static final String CUIDADOR_DETAIL = "detail";
 	public static final String LOGIN= "login";
@@ -9,4 +10,8 @@ public class ActionNames {
 	public static final String REGISTRO_CLIENTE= "registroCliente";
 	public static final String CUIDADOR= "cuidador";
 	public static final String CLIENTE= "cliente";
+	public static final String ADD_MASCOTA= "addMascota";
+	public static final String LOG_OUT="logOut";
+	public static final String INDEX = "index";
+	public static final String HISTORIAL_CLIENTE= "historialCliente";
 }

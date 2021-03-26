@@ -9,7 +9,7 @@
    <form action= "<%=UrlBuilder.builderUrlForm(request, "/cuidador") %>" method="post">
     
 
-   <input type=hidden name="<%=ParameterNames.ACTION%>" value="<%=ActionNames.CUIDADOR_BUSCAR%>"/>
+   <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.CUIDADOR_BUSCAR%>"/>
    
 <section>
     <div class="busqueda">

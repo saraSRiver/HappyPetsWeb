@@ -6,7 +6,7 @@
    
  <h2>Hazte cliente</h2>
     <form action= "<%=UrlBuilder.builderUrlForm(request, "/cliente") %>"  method="post">
-    <input type=hidden name="<%=ParameterNames.ACTION%>" value="<%=ActionNames.REGISTRO_CLIENTE%>"/>
+    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.REGISTRO_CLIENTE%>"/>
   
   <p>
             Nombre:<br>

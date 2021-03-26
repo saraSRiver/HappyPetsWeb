@@ -346,7 +346,34 @@ text-align: center;
   flex-direction: row;
   margin-left:5%;
 }
+.perfil{
+    padding: 0 2% 0 2%;
+    
+}
+.perfil button{
+    background-color: white;
+    padding-bottom: 100%;
+    font-size: 1.2rem;
+    border:none;
+    display:block;
+}
+.perfil button:hover ~ div{
+    display: initial;
+}
+.perfil div:hover{
+    display:initial;
+}
+.perfil div{
+    position:absolute;
 
+    background-color:white;
+    padding: 0 2% 0 2%;
+    top: 90%;
+    display:none;
+    -webkit-box-shadow: 4px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 4px 10px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 4px 10px 5px 0px rgba(0,0,0,0.75);
+}
 body > div > div:nth-child(1){
     justify-content: space-between;
    

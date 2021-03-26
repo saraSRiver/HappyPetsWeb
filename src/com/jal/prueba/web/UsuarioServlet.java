@@ -1,7 +1,6 @@
 package com.jal.prueba.web;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import com.happypets.aplicacion.model.Cliente;
 import com.happypets.aplicacion.model.Cuidador;
@@ -26,9 +25,12 @@ import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.jal.prueba.utils.ActionNames;
 import com.jal.prueba.utils.AttributeNames;
 import com.jal.prueba.utils.ContextsPath;
+import com.jal.prueba.utils.ErrorCodes;
+import com.jal.prueba.utils.Errors;
 import com.jal.prueba.utils.ParameterNames;
 import com.jal.prueba.utils.SessionManager;
 import com.jal.prueba.utils.UrlBuilder;
+import com.jal.prueba.utils.ViewsNames;
 
 /**
  * Servlet implementation class Usuario
@@ -48,26 +50,45 @@ public class UsuarioServlet extends HttpServlet {
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}
-		String action = request.getParameter(ParameterNames.ACTION);
+		String action = request.getParameter(ActionNames.ACTION);
+		
 		String target=null;
 		boolean redirect=false;
+		
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
+		
 		//comprobación de si el usuario es cliente o cuidador
 		if(ActionNames.LOGIN.equalsIgnoreCase(action)) {
 			String tipoUsuario= request.getParameter(ParameterNames.TIPO_USUARIO);
-
 			//login de cuidador
 			if(ActionNames.CUIDADOR.equalsIgnoreCase(tipoUsuario)) {
-				String email= request.getParameter(ParameterNames.EMAIL);
-				String password= request.getParameter(ParameterNames.PASSWORD);
-				Cuidador cuidador = null;
-				try {
-					cuidador = cuidServ.login(email, password);
-					SessionManager.set(request, AttributeNames.CUIDADOR, cuidador);
-					target =ContextsPath.SEARCH_CUIDADOR;
-					redirect = true;
-				} catch (UserNotFoundException | IncorrectPasswordException | DataException e) {
+				String email = request.getParameter(ParameterNames.EMAIL);
+				String password = request.getParameter(ParameterNames.PASSWORD);
+				
+				if (StringUtils.isEmpty(email)) {
+					errors.addError(ParameterNames.EMAIL, ErrorCodes.PARAMETRO_OBLIGATORIO);
+				} 
+				// ... EMAIL VALIDO
+				
+				if (StringUtils.isEmpty(password)) {
+					errors.addError(ParameterNames.PASSWORD, ErrorCodes.PARAMETRO_OBLIGATORIO);
+				}
 
-					e.printStackTrace();
+				
+				if (errors.hasErrors()) {
+					target = "/html/usuario/usuario-login.jsp";					
+				} else {
+					Cuidador cuidador = null;
+					try {
+						cuidador = cuidServ.login(email, password);
+						SessionManager.set(request, AttributeNames.CUIDADOR, cuidador);
+						target =ContextsPath.SEARCH_CUIDADOR;
+						redirect = true;
+					} catch (UserNotFoundException | IncorrectPasswordException | DataException e) {
+
+						e.printStackTrace();
+					}
 				}
 
 			}
