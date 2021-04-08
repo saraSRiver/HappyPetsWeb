@@ -6,7 +6,7 @@
 <body>
 
    <h2>Búsqueda de cuidadores</h2>
-   <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CUIDADOR) %>" method="post">
+   <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CUIDADOR) %>" method="post">
     
 
    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.CUIDADOR_BUSCAR%>"/>

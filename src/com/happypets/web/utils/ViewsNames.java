@@ -8,7 +8,7 @@ public class ViewsNames {
 	public static final String BUSQUEDA_CUIDADORES="/html/cuidador/search.jsp";
 	public static final String REGISTRO_CUIDADOR= "html/cuidador/cuidador-registro.jsp";
 	public static final String SOLICITUD_CONTRATO= "/html/contrato/contrato-solicitud.jsp";
-	public static final String HISTORIAL_CLIENTE="/html/cliente/historial-cliente.jsp";
+	public static final String HISTORIAL_CLIENTE="/html/cliente/cliente-historial.jsp";
 	public static final String PERFIL_CLIENTE="/html/cliente/cliente-perfil.jsp";
 	public static final String PERFIL_CUIDADOR="/html/cliente/cuidador-perfil.jsp";
 	public static final String PERFIL_MASCOTA="/html/mascota/mascota-perfil.jsp";

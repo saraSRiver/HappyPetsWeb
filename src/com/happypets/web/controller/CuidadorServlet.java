@@ -64,7 +64,7 @@ public class CuidadorServlet extends HttpServlet {
 
 		if(logger.isDebugEnabled()) {
 			logger.debug(MapPrint.print(request.getParameterMap()));
-			System.out.println("llehga");
+		
 		}
 	
 		String action = request.getParameter(ActionNames.ACTION);
@@ -111,9 +111,8 @@ public class CuidadorServlet extends HttpServlet {
 			try {
 				Cuidador cuidador=cuidServ.findById(id);
 				request.setAttribute(AttributeNames.CUIDADOR,cuidador);
-				request.getRequestDispatcher(ViewsNames.DETAIL)
-				.forward(request, response);
-
+				target  = ViewsNames.DETAIL;
+				
 			} catch (DataException e) {
 				e.printStackTrace();
 			}
