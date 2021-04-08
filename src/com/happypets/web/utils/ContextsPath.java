@@ -1,4 +1,4 @@
-package com.jal.prueba.utils;
+package com.happypets.web.utils;
 
 public class ContextsPath {
 
@@ -7,4 +7,5 @@ public class ContextsPath {
 	public static final String CLIENTE = "/cliente";
 	public static final String PRECREATE =  "/precreate";
 	public static final String CONTRATO =  "/contrato";
+	public static final String MASCOTA =  "/mascota";
 }

@@ -1,4 +1,4 @@
-package com.jal.prueba.utils;
+package com.happypets.web.utils;
 
 public class ViewsNames {
 	public  static final String SEARCH_CUIDADOR="/html/cuidador/search.jsp";
@@ -14,4 +14,5 @@ public class ViewsNames {
 	public static final String PERFIL_MASCOTA="/html/mascota/mascota-perfil.jsp";
 	public static final String LOGIN_USUARIO="/html/usuario/usuario-login.jsp";
 	public static final String TUS_MASCOTAS="/html/mascota/seccion-tusMascotas.jsp";
+	public static final String EDITAR_PERFIL_MASCOTA="/html/mascota/mascota-editar-perfil.jsp";
 }

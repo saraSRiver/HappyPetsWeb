@@ -1,4 +1,4 @@
-package com.jal.prueba.web;
+package com.happypets.web.controller;
 
 import java.io.IOException;
 
@@ -23,13 +23,13 @@ import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.serviceImpl.ContratoServiceImpl;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.aplicacion.util.DBDataUtils;
-import com.jal.prueba.utils.ActionNames;
-import com.jal.prueba.utils.AttributeNames;
-import com.jal.prueba.utils.ContextsPath;
-import com.jal.prueba.utils.ParameterNames;
-import com.jal.prueba.utils.SessionManager;
-import com.jal.prueba.utils.UrlBuilder;
-import com.jal.prueba.utils.ViewsNames;
+import com.happypets.web.utils.ActionNames;
+import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ParameterNames;
+import com.happypets.web.utils.SessionManager;
+import com.happypets.web.utils.UrlBuilder;
+import com.happypets.web.utils.ViewsNames;
 
 /**
  * Servlet implementation class Contrato

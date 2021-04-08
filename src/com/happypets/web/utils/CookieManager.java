@@ -1,4 +1,4 @@
-package com.jal.prueba.utils;
+package com.happypets.web.utils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

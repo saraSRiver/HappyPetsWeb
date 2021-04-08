@@ -1,5 +1,5 @@
 
-<%@ page import="com.jal.prueba.utils.*"%>
+<%@ page import="com.happypets.web.utils.*"%>
 <%@ page import="com.happypets.aplicacion.model.*"%>
 
 <%

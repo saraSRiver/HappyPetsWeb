@@ -1,4 +1,4 @@
-package com.jal.prueba.web;
+package com.happypets.web.controller;
 
 import java.io.IOException;
 
@@ -22,16 +22,16 @@ import com.happypets.aplicacion.service.exceptions.MailException;
 import com.happypets.aplicacion.service.exceptions.UserNotFoundException;
 import com.happypets.aplicacion.serviceImpl.ClienteServiceImpl;
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
-import com.jal.prueba.utils.ActionNames;
-import com.jal.prueba.utils.AttributeNames;
-import com.jal.prueba.utils.ContextsPath;
-import com.jal.prueba.utils.CookieManager;
-import com.jal.prueba.utils.ErrorCodes;
-import com.jal.prueba.utils.Errors;
-import com.jal.prueba.utils.ParameterNames;
-import com.jal.prueba.utils.SessionManager;
-import com.jal.prueba.utils.UrlBuilder;
-import com.jal.prueba.utils.ViewsNames;
+import com.happypets.web.utils.ActionNames;
+import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.CookieManager;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
+import com.happypets.web.utils.ParameterNames;
+import com.happypets.web.utils.SessionManager;
+import com.happypets.web.utils.UrlBuilder;
+import com.happypets.web.utils.ViewsNames;
 
 /**
  * Servlet implementation class Usuario

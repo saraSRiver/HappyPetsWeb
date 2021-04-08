@@ -1,4 +1,4 @@
-package com.jal.prueba.filters;
+package com.happypets.web.filters;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.jal.prueba.utils.ActionNames;
-import com.jal.prueba.utils.AttributeNames;
-import com.jal.prueba.utils.SessionManager;
+import com.happypets.web.utils.ActionNames;
+import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.SessionManager;
 
 /**
  * Servlet Filter implementation class IniciarSesion

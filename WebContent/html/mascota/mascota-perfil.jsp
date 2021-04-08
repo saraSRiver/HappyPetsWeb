@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.happypets.aplicacion.model.*" %>
-        <%@ page import="com.jal.prueba.utils.*" %>
+        <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
     <%
 Cliente cl = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
-
+Mascota m = (Mascota)request.getAttribute( AttributeNames.MASCOTA);
+TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
 %>
 
-<%for(Mascota mas: cl.getMascotas()){	%>
-    <h2><%=mas.getNombre()%></h2>
+
+    <h2><%=m.getNombre()%></h2>
 	
     <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.MASCOTA) %>"  method="post">
   <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.PERFIL_MASCOTA%>"/>
@@ -17,60 +18,63 @@ Cliente cl = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
         <div class="mascotas">
         <div class="fotoMascota">
         <!--imagen de la masctoa-->
-       <img src="" width="250" height="300">
+       <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>" width="250" height="300">
     </div>
-      <%} %>
+ 
     <div class="mascotasInfo">
         <form>
+     
         <p>
             Fecha de nacimiento (aproximada):<br>
-            <p></p>
+            <p><%=m.getFechaNacimiento()%></p>
         </p>
     
         <p>
+        
             Especie:<br>
-            <p></p>
+            <p><%=tp.getNombre()%></p>
         </p>
         <p>
             Tiene microchip?<br>
-            <p></p>
+            <p><%=m.getMicrochip()?"si":"no"%></p>
         </p>
         <p>
             Está vacunado?<br>
-            <p></p>
+            <p><%=m.getVacunado()?"si":"no"%></p>
     </p>
     <p>
-        Está esterilizado?<br>
-        <p></p>
+        Está desparasitado?<br>
+        <p><%=m.getDesparasitado()?"si":"no"%></p>
     </p>
     <p>
         Padece alguna alergia? (señala cuál en la sección de descripción)<br>
-        <p></p>
+        <p><%=m.getAlergia()?"si":"no"%></p>
     </p>
     <p>
         Está bajo tratamiento? (señala cuál en la sección de descripción)<br>
-        <p></p>
+        <p><%=m.getTratamiento()?"si":"no"%></p>
         
-        </select>
     </p>
     <p>
         Se lleva bien con otros animales?<br>
-        <p></p>
+        <p><%=m.getBuenoConAnimales()?"si":"no"%></p>
         
-        </select>
+     
     </p>
     <p>
         Se lleva bien con los niños?<br>
-        <p></p>
+        <p><%=m.getBuenoConNinos()?"si":"no"%></p>
         
-        </select>
     </p>
     <p>
         Descripción:<br>
-        <textarea id="descripcion"></textarea>
+          <p><%=m.getDescripcion()%></p>
     </p>
-    <form>
-    <input type="submit" value="Guardar">
+   
+   
+    <button type="button" value="Editar perfil"> 
+    <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA,ActionNames.DETAIL, ParameterNames.ID_MASCOTA, 
+    		String.valueOf(m.getIdMascota()), ActionNames.ACTION_UPDATE, ActionNames.UPDATE)%>">Editar perfil</a></button>
 
     </div>
 </div>

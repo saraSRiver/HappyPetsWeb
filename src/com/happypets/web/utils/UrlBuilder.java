@@ -1,4 +1,4 @@
-package com.jal.prueba.utils;
+package com.happypets.web.utils;
 
 
 
@@ -87,6 +87,7 @@ public class UrlBuilder {
 			for(int i=0; i < paramsAndValues.length; i+=2) {
 				sb.append(paramsAndValues[i]).append("=").append(paramsAndValues[i + 1]).append("&");
 			}}
+		
 		else {
 			sb.append(paramsAndValues[0]);
 		}

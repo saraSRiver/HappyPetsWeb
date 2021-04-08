@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="com.happypets.aplicacion.model.*, java.util.*" %>
-        <%@ page import="com.jal.prueba.utils.*" %>
+        <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
 <h2 class=>Historial del cliente</h2>
 <form action= "<%=UrlBuilder.builderUrlForm(request, "/contrato") %>" method="post">

@@ -1,4 +1,4 @@
-package com.jal.prueba.web;
+package com.happypets.web.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,14 +31,14 @@ import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ServicioOfrecidoServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ServicioServiceImpl;
 import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
-import com.jal.prueba.utils.ActionNames;
-import com.jal.prueba.utils.AttributeNames;
-import com.jal.prueba.utils.ContextsPath;
-import com.jal.prueba.utils.MapPrint;
-import com.jal.prueba.utils.ParameterNames;
-import com.jal.prueba.utils.SessionManager;
-import com.jal.prueba.utils.UrlBuilder;
-import com.jal.prueba.utils.ViewsNames;
+import com.happypets.web.utils.ActionNames;
+import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.MapPrint;
+import com.happypets.web.utils.ParameterNames;
+import com.happypets.web.utils.SessionManager;
+import com.happypets.web.utils.UrlBuilder;
+import com.happypets.web.utils.ViewsNames;
 
 /**
  * Servlet de cuidador

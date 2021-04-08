@@ -1,4 +1,4 @@
-package com.jal.prueba.web;
+package com.happypets.web.controller;
 
 import java.io.IOException;
 
@@ -16,10 +16,10 @@ import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
-import com.jal.prueba.utils.ActionNames;
-import com.jal.prueba.utils.AttributeNames;
-import com.jal.prueba.utils.MapPrint;
-import com.jal.prueba.utils.ViewsNames;
+import com.happypets.web.utils.ActionNames;
+import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.MapPrint;
+import com.happypets.web.utils.ViewsNames;
 
 /**
  * Servlet implementation class MascotaMesIndex

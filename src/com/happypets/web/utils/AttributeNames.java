@@ -1,10 +1,11 @@
-package com.jal.prueba.utils;
+package com.happypets.web.utils;
 
 public class AttributeNames {
 	public  static final String ERRORS = "errors";
 	
 	public  static final String CUIDADOR= "cuidador";
 	public static final String MASCOTA= "mascota";
+	public static final String ESPECIES = "especies";
 	public static final String CLIENTE= "cliente";
 	public static final String SERVICIOS= "servicios";
 	public static final String TIPO_ESPECIE = "tipoEspecie";

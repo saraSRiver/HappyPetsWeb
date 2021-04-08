@@ -1,5 +1,5 @@
-   <%@page import="com.jal.prueba.utils.ActionNames"%>
-<%@page import="com.jal.prueba.utils.ContextsPath"%>
+   <%@page import="com.happypets.web.utils.ActionNames"%>
+<%@page import="com.happypets.web.utils.ContextsPath"%>
 <div class="perfil">
         <button><%=cuidador.getNombre()%></button>
         <div>

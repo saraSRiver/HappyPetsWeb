@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="com.happypets.aplicacion.model.*"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.jal.prueba.utils.*"%>
+<%@ page import="com.happypets.web.utils.*"%>
 <%@include file="/html/common/header.jsp"%>
 
 <%

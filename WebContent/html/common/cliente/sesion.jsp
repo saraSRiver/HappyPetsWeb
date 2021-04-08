@@ -1,5 +1,5 @@
       <%@ page import="com.happypets.aplicacion.model.*, java.util.*" %>
-        <%@ page import="com.jal.prueba.utils.*" %>
+        <%@ page import="com.happypets.web.utils.*" %>
    <div class="perfil">
         <button><%=cliente.getNombre()%></button>
         <div>

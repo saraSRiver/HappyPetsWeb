@@ -1,4 +1,4 @@
-package com.jal.prueba.utils;
+package com.happypets.web.utils;
 
 public class ParameterNames {
 	
@@ -99,5 +99,7 @@ public class ParameterNames {
 	public static final String FOTO_MASCOTA= "foto";
 	
 	public static final String FOTO_FAVORITA= "fotoFav";
+	
+	
 	
 }
