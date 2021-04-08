@@ -25,6 +25,7 @@ import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.jal.prueba.utils.ActionNames;
 import com.jal.prueba.utils.AttributeNames;
 import com.jal.prueba.utils.ContextsPath;
+import com.jal.prueba.utils.CookieManager;
 import com.jal.prueba.utils.ErrorCodes;
 import com.jal.prueba.utils.Errors;
 import com.jal.prueba.utils.ParameterNames;
@@ -77,13 +78,14 @@ public class UsuarioServlet extends HttpServlet {
 
 				
 				if (errors.hasErrors()) {
-					target = "/html/usuario/usuario-login.jsp";					
+					target = ViewsNames.LOGIN_USUARIO;					
 				} else {
 					Cuidador cuidador = null;
 					try {
 						cuidador = cuidServ.login(email, password);
 						SessionManager.set(request, AttributeNames.CUIDADOR, cuidador);
-						target =ContextsPath.SEARCH_CUIDADOR;
+						
+						target =ViewsNames.PERFIL_CUIDADOR;
 						redirect = true;
 					} catch (UserNotFoundException | IncorrectPasswordException | DataException e) {
 
@@ -102,7 +104,7 @@ public class UsuarioServlet extends HttpServlet {
 				try {
 					cliente = cliServ.login(email, password);
 					SessionManager.set(request, AttributeNames.CLIENTE, cliente);
-					target = ContextsPath.SEARCH_CUIDADOR;
+					target = ViewsNames.PERFIL_CLIENTE;
 					redirect = true;
 				} catch (MailException | UserNotFoundException | IncorrectPasswordException | DataException
 						e) {

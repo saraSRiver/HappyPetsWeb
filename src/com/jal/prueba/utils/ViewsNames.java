@@ -1,6 +1,7 @@
 package com.jal.prueba.utils;
 
 public class ViewsNames {
+	public  static final String SEARCH_CUIDADOR="/html/cuidador/search.jsp";
 	public static final String RESULTS= "/html/cuidador/results.jsp";
 	public static final String DETAIL="/html/cuidador/cuidador-detail.jsp";
 	public static final String INDEX="/html/index.jsp";
@@ -8,4 +9,9 @@ public class ViewsNames {
 	public static final String REGISTRO_CUIDADOR= "html/cuidador/cuidador-registro.jsp";
 	public static final String SOLICITUD_CONTRATO= "/html/contrato/contrato-solicitud.jsp";
 	public static final String HISTORIAL_CLIENTE="/html/cliente/historial-cliente.jsp";
+	public static final String PERFIL_CLIENTE="/html/cliente/cliente-perfil.jsp";
+	public static final String PERFIL_CUIDADOR="/html/cliente/cuidador-perfil.jsp";
+	public static final String PERFIL_MASCOTA="/html/mascota/mascota-perfil.jsp";
+	public static final String LOGIN_USUARIO="/html/usuario/usuario-login.jsp";
+	public static final String TUS_MASCOTAS="/html/mascota/seccion-tusMascotas.jsp";
 }

@@ -3,17 +3,22 @@
 <%@ page import="com.happypets.aplicacion.model.*" %>
         <%@ page import="com.jal.prueba.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
+    
     <%
-    Cliente cl= (Cliente)request.getAttribute(AttributeNames.CLIENTE);
+    Cliente cl= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
     %>
 <h2><%=cl.getNombre()%>  <%=cl.getApellidos()%></h2>
+ <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CLIENTE) %>"  method="post">
+  <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.PERFIL_CLIENTE%>"/>
 <div  class="cliente">
 <div class="cliente1">
-<a href="<%=UrlBuilder.builderUrlForm(request, "/html/seccion-tusMascotas.jsp") %>">Tus mascotas<a>
+<a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.TUS_MASCOTAS) %>">Tus mascotas</a>
 </div>
 <div class="cliente2">
 <p>Datos personales</p>
-<p>Residencia: <%=cl.getDireccion()%></p>
+<p>Residencia: <%=cl.getDireccion().getCalle()%>, <%=cl.getDireccion().getPortal()%>,
+<%=cl.getDireccion().getPiso()%>.<%=cl.getDireccion().getNombrePoblacion()%>,
+<%=cl.getDireccion().getNombreProvincia()%></p>
 <p>Teléfono: <%=cl.getTelefono()%></p>
 <p>Correo electrónico: <%=cl.getEmail()%></p>
 <p>Idiomas: <%for(Idioma i: cl.getIdiomas()){ %>
@@ -22,7 +27,5 @@
 </div>   
 </div>
 <button>Editar perfil</button>
-    
-    
-    
+
      <%@include file="/html/common/footer.jsp"%>

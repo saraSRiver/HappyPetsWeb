@@ -31,6 +31,14 @@ public class UrlBuilder {
 
 		return sb.toString();
 	}
+	public static String builderUrlImgMascotas(HttpServletRequest request, String imagen) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("http://").append(request.getServerName()).append(":")
+		.append(request.getServerPort()).append(request.getContextPath()).append("/img/")
+		.append("/mascotas/").append(imagen);;
+
+		return sb.toString();
+	}
 	public static String builderUrlImgCommon(HttpServletRequest request, String imagen) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("http://").append(request.getServerName()).append(":")

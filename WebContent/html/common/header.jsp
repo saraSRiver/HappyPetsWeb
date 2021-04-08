@@ -20,10 +20,10 @@
      
       <nav class="nav1">
           <div class="secciones">
-          <button class= "boton" type="button"><a href="<%=UrlBuilder.builderUrlForm(request, "/html/index.jsp") %>">Página principal</a></button>
+          <button class= "boton" type="button"><a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.INDEX) %>">Página principal</a></button>
       </div>
           <div class="secciones">
-          <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request, "/html/cuidador/search.jsp")%>">Buscar cuidadores</a></button>
+          <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.BUSQUEDA_CUIDADORES)%>">Buscar cuidadores</a></button>
 
           </div>
          <%if(cuidador==null){%>

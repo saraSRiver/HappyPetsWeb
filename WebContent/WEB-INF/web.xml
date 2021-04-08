@@ -5,9 +5,5 @@
     <welcome-file>mascotaMesIndex</welcome-file>
    
   </welcome-file-list>
-  <servlet>
-  <servlet-name>MascotaMesIndexServlet</servlet-name>
-  <servlet-class>com.jal.prueba.web.MascotaMesIndexServlet</servlet-class>
-  </servlet>
-  
+
 </web-app>

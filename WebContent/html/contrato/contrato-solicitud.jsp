@@ -10,7 +10,7 @@ Cuidador c = (Cuidador) request.getAttribute(AttributeNames.CUIDADOR);
 Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
 %>
 
-<h2>Has solicitado los servicios de <%=c.getNombre()%>+" "+ <%= c.getApellidos()%></h2>
+<h2>Has solicitado los servicios de <%=c.getNombre()%> <%= c.getApellidos()%></h2>
 <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CONTRATO)%>" method="post">
     <input type="hidden" name="<%=ParameterNames.ID_CUIDADOR%>" value="<%=c.getIdcuidador()%>">
    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.CONTRATAR%>"/>
@@ -43,11 +43,11 @@ Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
             
             </p>
 			<p>
-				Fecha de comienzo del contrato:<br> <input type="text" placeholder="00/00/0000"
+				Fecha de comienzo del contrato:<br> <input type="text" placeholder="00-00-0000"
 					name="<%=ParameterNames.FECHA_INICIO %>">
 			</p>
 			<p>
-				Fecha del fin del contrato:<br> <input type="text" placeholder="00/00/0000"
+				Fecha del fin del contrato:<br> <input type="text" placeholder="00-00-0000"
 					name="<%=ParameterNames.FECHA_FIN %>">
 			</p>
 			<%if(cliente.getPromocion() != null){ %>

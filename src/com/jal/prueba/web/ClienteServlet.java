@@ -23,6 +23,7 @@ import com.jal.prueba.utils.ContextsPath;
 import com.jal.prueba.utils.ParameterNames;
 import com.jal.prueba.utils.SessionManager;
 import com.jal.prueba.utils.UrlBuilder;
+import com.jal.prueba.utils.ViewsNames;
 
 /**
  * Servlet implementation class Cliente
@@ -90,10 +91,15 @@ public class ClienteServlet extends HttpServlet {
 			try {
 				cliente = cliServ.registro(cliente);
 				SessionManager.set(request, AttributeNames.CLIENTE,cliente);
-				target =ContextsPath.SEARCH_CUIDADOR;
+				target = ViewsNames.PERFIL_CLIENTE;
 				redirect = true;
 			}catch (DataException e) {
 				e.printStackTrace();
+			}
+			
+			if(ActionNames.PERFIL_CLIENTE.equalsIgnoreCase(action)) {
+				target = ViewsNames.PERFIL_CLIENTE;
+				redirect = true;
 			}
 		}
 		else if(ActionNames.LOG_OUT.equalsIgnoreCase(action)) {

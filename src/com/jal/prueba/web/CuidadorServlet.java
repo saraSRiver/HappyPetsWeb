@@ -64,8 +64,9 @@ public class CuidadorServlet extends HttpServlet {
 
 		if(logger.isDebugEnabled()) {
 			logger.debug(MapPrint.print(request.getParameterMap()));
+			System.out.println("llehga");
 		}
-
+	
 		String action = request.getParameter(ActionNames.ACTION);
 
 		String target=null;
@@ -161,7 +162,7 @@ public class CuidadorServlet extends HttpServlet {
 			direccionDto.setIdPoblacion(Long.valueOf(poblacion));
 			direccionDto.setIdProvincia(Long.valueOf(provincia));
 			direccionDto.setIdpais(1L);
-			direccionDto.setNombrePais("España");
+			
 			cuidador.setDireccion(direccionDto);
 			
 			try {
@@ -184,7 +185,7 @@ public class CuidadorServlet extends HttpServlet {
 				cuidServ.registro(cuidador);
 				target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			} catch (DataException | MailException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(), e);
 			}
 
 		}
@@ -192,7 +193,10 @@ public class CuidadorServlet extends HttpServlet {
 			SessionManager.remove(request, AttributeNames.CUIDADOR);
 			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			redirect = true;
+		} else {
+			// ?
 		}
+		
 		if(redirect) {
 			logger.info("Redirect to..."+ target);
 			response.sendRedirect(UrlBuilder.builderUrlForm(request, target));

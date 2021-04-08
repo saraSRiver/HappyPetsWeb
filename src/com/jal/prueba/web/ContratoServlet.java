@@ -50,10 +50,11 @@ public class ContratoServlet extends HttpServlet {
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}
+		Cliente cliente  = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 		String target=null;
 		boolean redirect=false;
 		if (ActionNames.CONTRATAR.equalsIgnoreCase(action)) {
-			Cliente cliente  = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
+			
 			String mascota=request.getParameter(ParameterNames.ID_MASCOTA);
 			String servicio=request.getParameter(ParameterNames.SERVICIOS);
 			String cuidador=request.getParameter(ParameterNames.ID_CUIDADOR);
@@ -72,7 +73,6 @@ public class ContratoServlet extends HttpServlet {
 				contrato.setFechaInicio(DBDataUtils.formatDate(fechaInicio));
 				contrato.setFechaFinal(DBDataUtils.formatDate(fechaFin));
 			} catch (ParseException e1) {
-
 				e1.printStackTrace();
 			}
 	
@@ -92,16 +92,17 @@ public class ContratoServlet extends HttpServlet {
 			}
 		}
 		else if(ActionNames.HISTORIAL_CLIENTE.equals(action)){
-			Cliente cliente= new Cliente();
+	
 			List<Contrato> contratos = null;
 			try {
 				contratos = contrServ.findByHistorialCliente(cliente.getIdcliente());
+				request.setAttribute(AttributeNames.CONTRATOS, contratos);
+				target = ViewsNames.HISTORIAL_CLIENTE;
 			} catch (DataException e) {
 
 				e.printStackTrace();
 			}
-			request.setAttribute(AttributeNames.CONTRATOS, contratos);
-			target = UrlBuilder.getUrlForController(request, ViewsNames.HISTORIAL_CLIENTE);
+			
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);

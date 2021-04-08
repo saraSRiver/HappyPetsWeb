@@ -8,12 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.happypets.aplicacion.model.Mascota;
 import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.jal.prueba.utils.ActionNames;
+import com.jal.prueba.utils.AttributeNames;
+import com.jal.prueba.utils.MapPrint;
 import com.jal.prueba.utils.ViewsNames;
 
 /**
@@ -21,6 +26,7 @@ import com.jal.prueba.utils.ViewsNames;
  */
 @WebServlet("/mascotaMesIndex")
 public class MascotaMesIndexServlet extends HttpServlet {
+	private static Logger logger = LogManager.getLogger(MascotaMesIndexServlet.class);
 	private MascotaService mascServ;
 	private ClienteService client;
 
@@ -30,17 +36,21 @@ public class MascotaMesIndexServlet extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
-		if(action == null) {
-			action = "index";
+		if(logger.isDebugEnabled()) {
+			logger.debug(MapPrint.print(request.getParameterMap()));
 		}
-		if("index".equalsIgnoreCase(action)) {
-			
+		String action = request.getParameter(ActionNames.ACTION);
+		if(action == null) {
+			action = ActionNames.INDEX;
+		}
+		if( ActionNames.INDEX.equalsIgnoreCase(action)) {
+		
 			Mascota mascota= new Mascota();
 			try {
 				
 				mascota = mascServ.findByPromocion(6);
-				request.setAttribute("mascota",mascota);
+				System.out.println(mascota.getIdMascota());
+				request.setAttribute(AttributeNames.MASCOTA,mascota);
 				request.getRequestDispatcher(ViewsNames.INDEX).forward(request, response);
 			} catch ( DataException e) {
 

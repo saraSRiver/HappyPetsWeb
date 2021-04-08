@@ -8,8 +8,7 @@
                 <%
 	Mascota m = (Mascota) request.getAttribute("mascota");
 %>
-             <form action="<%=UrlBuilder.builderUrlForm(request, "/html/")%><%=ViewsNames.INDEX%><%=m.getIdMascota()%>" method="post">
-              <input type=hidden name="<%=ActionNames.ACTION%>" value="index"/>
+             
       <figure>
         
         <div class="ContenedorIMG">

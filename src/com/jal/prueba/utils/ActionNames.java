@@ -14,4 +14,7 @@ public class ActionNames {
 	public static final String LOG_OUT="logOut";
 	public static final String INDEX = "index";
 	public static final String HISTORIAL_CLIENTE= "historialCliente";
+	public static final String PERFIL_CLIENTE= "perfilCliente";
+	public static final String EDIT_PERFIL_MASCOTA= "editPerfilMascota";
+	public static final String PERFIL_MASCOTA= "perfilMascota";
 }
