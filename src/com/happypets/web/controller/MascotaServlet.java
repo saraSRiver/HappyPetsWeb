@@ -38,15 +38,15 @@ import com.happypets.web.utils.ViewsNames;
 @WebServlet("/mascota")
 public class MascotaServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(MascotaServlet.class);
-    private MascotaService mascServ;
-    private TipoEspecieService servEspecie=null;
-    private IdiomaService servIdioma=null;
-    public MascotaServlet() {
-    	mascServ= new MascotaServiceImpl();
-    	servEspecie= new TipoEspecieServiceImpl();
+	private MascotaService mascServ;
+	private TipoEspecieService servEspecie=null;
+	private IdiomaService servIdioma=null;
+	public MascotaServlet() {
+		mascServ= new MascotaServiceImpl();
+		servEspecie= new TipoEspecieServiceImpl();
 		servIdioma= new IdiomaServiceImpl();
-    }
-	
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
@@ -56,7 +56,7 @@ public class MascotaServlet extends HttpServlet {
 		String target=null;
 		boolean redirect=false;
 		if (ActionNames.ADD_MASCOTA.equalsIgnoreCase(action)) {
-		
+
 			String nombre = request.getParameter(ParameterNames.NOMBRE_MASCOTA);
 			String fechaNacimiento = request.getParameter(ParameterNames.FECHA_NACIMIENTO);
 			String especie=request.getParameter(ParameterNames.ESPECIES);
@@ -68,7 +68,7 @@ public class MascotaServlet extends HttpServlet {
 			String alergia = request.getParameter(ParameterNames.ALERGIA);
 			String tratamiento = request.getParameter(ParameterNames.TRATAMIENTO);
 			String descripcion = request.getParameter(ParameterNames.DESCRIPCION);
-			
+
 			if (logger.isInfoEnabled()) {
 				logger.info("Añadiendo mascota");
 			}
@@ -85,6 +85,14 @@ public class MascotaServlet extends HttpServlet {
 			mascota.setTratamiento(Boolean.valueOf(tratamiento));
 			mascota.setDescripcion(descripcion);
 			
+			try {
+				mascota=mascServ.create(mascota);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(mascota.getIdMascota()));
+				redirect = true;
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
+
 		}
 		else if(ActionNames.EDIT_PERFIL_MASCOTA.equals(action)) {
 			String nombre = request.getParameter(ParameterNames.NOMBRE_MASCOTA);
@@ -102,7 +110,7 @@ public class MascotaServlet extends HttpServlet {
 			if (logger.isInfoEnabled()) {
 				logger.info("Actualizando perfil mascota");
 			}
-	
+
 			Mascota mascota= new Mascota();
 			mascota.setIdMascota(Long.valueOf(idMascota));
 			mascota.setNombre(nombre);
@@ -117,7 +125,7 @@ public class MascotaServlet extends HttpServlet {
 			mascota.setTratamiento(Boolean.valueOf(tratamiento));
 			mascota.setDescripcion(descripcion);
 			try {
-			Mascota masc = 	mascServ.update(mascota);
+				Mascota masc = 	mascServ.update(mascota);
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(masc.getIdMascota()));
 				redirect = true;
 			} catch (DataException e) {
@@ -127,50 +135,42 @@ public class MascotaServlet extends HttpServlet {
 		else if(ActionNames.DETAIL.equals(action)) {
 			String idMascota = request.getParameter(ParameterNames.ID_MASCOTA);
 			String actionUpdate = request.getParameter(ActionNames.ACTION_UPDATE);
-		
-				
-					try {
-					Mascota m = mascServ.findById(Long.valueOf(idMascota));
-					TipoEspecie tip = 	servEspecie.findById(m.getIdTipo(), "es");
-					request.setAttribute(AttributeNames.MASCOTA, m);
-					request.setAttribute(AttributeNames.TIPO_ESPECIE, tip);
-					} catch (DataException e) {
-						e.printStackTrace();
-					}
-				
-				
-			
-			if(actionUpdate == null) {
-				
-			target = ViewsNames.PERFIL_MASCOTA;
-			}
-			else {
+
 			try {
-				List<TipoEspecie> listEspecie = servEspecie.findAll("es");
-				request.setAttribute(AttributeNames.ESPECIES, listEspecie);
+				Mascota m = mascServ.findById(Long.valueOf(idMascota));
+				TipoEspecie tip = 	servEspecie.findById(m.getIdTipo(), "es");
+				request.setAttribute(AttributeNames.MASCOTA, m);
+				request.setAttribute(AttributeNames.TIPO_ESPECIE, tip);
 			} catch (DataException e) {
-			
 				e.printStackTrace();
 			}
-			target = ViewsNames.EDITAR_PERFIL_MASCOTA;
-			}
-			
+				if(actionUpdate == null) {
+
+					target = ViewsNames.PERFIL_MASCOTA;
+				}
+				else {
+					try {
+						List<TipoEspecie> listEspecie = servEspecie.findAll("es");
+						request.setAttribute(AttributeNames.ESPECIES, listEspecie);
+					} catch (DataException e) {
+
+						e.printStackTrace();
+					}
+					target = ViewsNames.EDITAR_PERFIL_MASCOTA;
+				}
 		}
-			if(redirect) {
-				logger.info("Redirect to..."+ target);
-				response.sendRedirect( target);
-			}else {
-				logger.info("Forwading to..." + target);
-				request.getRequestDispatcher(target).forward(request, response);
-			}
-		
-	
-		
+		if(redirect) {
+			logger.info("Redirect to..."+ target);
+			response.sendRedirect( target);
+		}else {
+			logger.info("Forwading to..." + target);
+			request.getRequestDispatcher(target).forward(request, response);
+		}
 	}
 
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 

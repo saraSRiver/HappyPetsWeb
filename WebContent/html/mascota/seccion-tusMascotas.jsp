@@ -18,12 +18,11 @@ List<Mascota>mascotas= (List<Mascota>)request.getAttribute( AttributeNames.MASCO
     
     <input type="radio" name="favorito">
     
- 
      
 </div>
 	<%} %>
 <%if(cliente.getMascotas().size() < 3){%>
-	<button>añadir mascota</button>
+	<button>Añadir mascota</button>
 <%}%>
 
 

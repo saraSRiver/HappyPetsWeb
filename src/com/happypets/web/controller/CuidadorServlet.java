@@ -13,11 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.happypets.aplicacion.model.Cliente;
+import com.happypets.aplicacion.model.ContratoDTO;
 import com.happypets.aplicacion.model.Cuidador;
 import com.happypets.aplicacion.model.DireccionDTO;
 import com.happypets.aplicacion.model.Experiencia;
 import com.happypets.aplicacion.model.Servicio;
 import com.happypets.aplicacion.model.ServicioOfrecido;
+import com.happypets.aplicacion.service.ContratoDTOService;
 import com.happypets.aplicacion.service.CuidadorCriteria;
 import com.happypets.aplicacion.service.CuidadorService;
 import com.happypets.aplicacion.service.DataException;
@@ -26,6 +29,7 @@ import com.happypets.aplicacion.service.ServicioOfrecidoService;
 import com.happypets.aplicacion.service.ServicioService;
 import com.happypets.aplicacion.service.TipoEspecieService;
 import com.happypets.aplicacion.service.exceptions.MailException;
+import com.happypets.aplicacion.serviceImpl.ContratoDTOServiceImpl;
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ServicioOfrecidoServiceImpl;
@@ -51,13 +55,14 @@ public class CuidadorServlet extends HttpServlet {
 	private ServicioService servServicio=null;
 	private ServicioOfrecidoService servOfrecido = null;
 	private TipoEspecieService servEspecie=null;
-
+	private ContratoDTOService contrDTOServ;
 	public CuidadorServlet() {
 		cuidServ= new CuidadorServiceImpl();
 		servOfrecido = new ServicioOfrecidoServiceImpl();
 		servEspecie= new TipoEspecieServiceImpl();
 		servIdioma= new IdiomaServiceImpl();
 		servServicio = new ServicioServiceImpl();
+		contrDTOServ= new ContratoDTOServiceImpl();
 	}	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -192,8 +197,18 @@ public class CuidadorServlet extends HttpServlet {
 			SessionManager.remove(request, AttributeNames.CUIDADOR);
 			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			redirect = true;
-		} else {
-			// ?
+			
+		} else if (ActionNames.HISTORIAL_CUIDADOR.equalsIgnoreCase(action)){
+			Cuidador cuidador  = (Cuidador)SessionManager.get(request, AttributeNames.CUIDADOR);
+			List<ContratoDTO> contratos = null;
+			try {
+				contratos = contrDTOServ.findByIdCuidador(cuidador.getIdcuidador());
+				request.setAttribute(AttributeNames.CONTRATOS, contratos);
+				target = ViewsNames.HISTORIAL_CUIDADOR;
+			} catch (DataException e) {
+
+				e.printStackTrace();
+			}
 		}
 		
 		if(redirect) {

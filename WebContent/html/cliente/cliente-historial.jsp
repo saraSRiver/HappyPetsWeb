@@ -4,7 +4,7 @@
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
     <%
-List<Contrato> contratos = (List<Contrato>) request.getAttribute(AttributeNames.CONTRATOS);
+    List<ContratoDTO> contratos = (List<ContratoDTO>) request.getAttribute(AttributeNames.CONTRATOS);
 %>
 <h2 class=>Historial del cliente</h2>
 <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CONTRATOS) %>" method="post">
@@ -17,10 +17,10 @@ List<Contrato> contratos = (List<Contrato>) request.getAttribute(AttributeNames.
 
 <div class="seccionesHistorial">
 <%
-			for(Contrato ct: contratos){
+			for(ContratoDTO ct: contratos){
 				%>
-    <p><strong><%=ct.getIdCuidador()%></strong></p>
-    <p><strong><%=ct.getIdServicio()%></strong></p>
+    <p><strong><%=ct.getNombreCuidador()%> <%=ct.getApellidosCuidador()%></strong></p>
+    <p><strong><%=ct.getNombreServicio()%></strong></p>
     <p><strong><%=ct.getPrecioFinal()%></strong></p>
     <p><a href="#">Detalles</a></p>
    

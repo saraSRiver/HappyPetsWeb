@@ -17,9 +17,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.happypets.aplicacion.model.Cliente;
 import com.happypets.aplicacion.model.Contrato;
+import com.happypets.aplicacion.model.ContratoDTO;
+import com.happypets.aplicacion.service.ContratoDTOService;
 import com.happypets.aplicacion.service.ContratoService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.MascotaService;
+import com.happypets.aplicacion.serviceImpl.ContratoDTOServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ContratoServiceImpl;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.aplicacion.util.DBDataUtils;
@@ -39,9 +42,12 @@ public class ContratoServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(ContratoServlet.class);  
 	private ContratoService contrServ;
 	private MascotaService mascServ;
+	private ContratoDTOService contrDTOServ;
+	
 	public ContratoServlet() {
 		contrServ= new ContratoServiceImpl();
 		mascServ= new MascotaServiceImpl();
+		contrDTOServ= new ContratoDTOServiceImpl();
 	}
 
 
@@ -60,7 +66,7 @@ public class ContratoServlet extends HttpServlet {
 			String cuidador=request.getParameter(ParameterNames.ID_CUIDADOR);
 			String fechaInicio=request.getParameter(ParameterNames.FECHA_INICIO);
 			String fechaFin=request.getParameter(ParameterNames.FECHA_FIN);
-			String promocion=request.getParameter(ParameterNames.PROMOCION);
+	
 			if (logger.isInfoEnabled()) {
 				logger.info("Procesando tu solicitud");
 			}
@@ -93,15 +99,19 @@ public class ContratoServlet extends HttpServlet {
 		}
 		else if(ActionNames.HISTORIAL_CLIENTE.equals(action)){
 	
-			List<Contrato> contratos = null;
+			List<ContratoDTO> contratos = null;
 			try {
-				contratos = contrServ.findByHistorialCliente(cliente.getIdcliente());
+				contratos = contrDTOServ.findByIdCliente(cliente.getIdcliente());
 				request.setAttribute(AttributeNames.CONTRATOS, contratos);
 				target = ViewsNames.HISTORIAL_CLIENTE;
 			} catch (DataException e) {
 
 				e.printStackTrace();
 			}
+			
+		}
+		
+		else if(ActionNames.HISTORIAL_CUIDADOR.equals(action)) {
 			
 		}
 		if(redirect) {

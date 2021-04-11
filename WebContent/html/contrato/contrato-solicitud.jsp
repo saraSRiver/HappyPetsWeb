@@ -18,16 +18,18 @@ Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
 	<div class="solicitud">
 
 			<p>
-			<%
-			for(Mascota m: cliente.getMascotas()){
-				%>
+			
 			
 				Nombre de la mascota:<br> <select name="<%=ParameterNames.ID_MASCOTA%>">
+	
 					<option value="0">--seleciona mascota</option>
+								<%
+			for(Mascota m: cliente.getMascotas()){
+				%>
 					<option value="<%=m.getIdMascota()%>"><%=m.getNombre()%></option>
-						
+							<%} %>
 				</select>
-				<%} %>
+			
 			</p>
 
 			 <p>
