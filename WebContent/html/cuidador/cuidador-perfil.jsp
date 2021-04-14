@@ -1,4 +1,4 @@
-<%@page import="com.mysql.cj.jdbc.integration.c3p0.MysqlConnectionTester"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="com.happypets.aplicacion.model.*" %>

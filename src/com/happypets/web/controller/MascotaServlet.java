@@ -68,7 +68,7 @@ public class MascotaServlet extends HttpServlet {
 			String alergia = request.getParameter(ParameterNames.ALERGIA);
 			String tratamiento = request.getParameter(ParameterNames.TRATAMIENTO);
 			String descripcion = request.getParameter(ParameterNames.DESCRIPCION);
-
+			String fotoFavorita=request.getParameter(ParameterNames.FOTO_FAVORITA);
 			if (logger.isInfoEnabled()) {
 				logger.info("Añadiendo mascota");
 			}
@@ -84,10 +84,13 @@ public class MascotaServlet extends HttpServlet {
 			mascota.setAlergia(Boolean.valueOf(alergia));
 			mascota.setTratamiento(Boolean.valueOf(tratamiento));
 			mascota.setDescripcion(descripcion);
-			
+			mascota.setIdCliente(cliente.getIdcliente());
+			mascota.setFotoFavorita(Boolean.valueOf(fotoFavorita));
 			try {
 				mascota=mascServ.create(mascota);
+			
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(mascota.getIdMascota()));
+	
 				redirect = true;
 			} catch (DataException e) {
 				e.printStackTrace();
@@ -167,8 +170,6 @@ public class MascotaServlet extends HttpServlet {
 			request.getRequestDispatcher(target).forward(request, response);
 		}
 	}
-
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);

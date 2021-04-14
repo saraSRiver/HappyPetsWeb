@@ -27,6 +27,7 @@
 </div>   
 </div>
 
-<button>Editar perfil</button>
+  <button type="button" value="Editar perfil"> 
+    <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.EDIT_PERFIL_CLIENTE)%>">Editar perfil</a></button>
 
      <%@include file="/html/common/footer.jsp"%>

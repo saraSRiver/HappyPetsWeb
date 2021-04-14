@@ -22,7 +22,7 @@ List<Mascota>mascotas= (List<Mascota>)request.getAttribute( AttributeNames.MASCO
 </div>
 	<%} %>
 <%if(cliente.getMascotas().size() < 3){%>
-	<button>Añadir mascota</button>
+	<button><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.ADD_MASCOTA)%>">Añadir mascota</a></button>
 <%}%>
 
 

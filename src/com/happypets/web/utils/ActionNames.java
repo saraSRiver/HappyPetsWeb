@@ -18,6 +18,8 @@ public class ActionNames {
 	public static final String HISTORIAL_CLIENTE= "historialCliente";
 	public static final String HISTORIAL_CUIDADOR= "historialCuidador";
 	public static final String PERFIL_CLIENTE= "perfilCliente";
+	public static final String EDIT_PERFIL_CLIENTE= "editPerfilCliente";
+	public static final String EDIT_PERFIL_CUIDADOR= "editPerfilCuidador";
 	public static final String EDIT_PERFIL_MASCOTA= "editPerfilMascota";
 	public static final String PERFIL_MASCOTA= "perfilMascota";
 	public static final String UPDATE = "update";

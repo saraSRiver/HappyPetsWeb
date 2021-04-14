@@ -1,35 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@ page import="com.happypets.aplicacion.model.*" %>
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
     <%
 Cliente cl = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
-Mascota m = (Mascota)request.getAttribute( AttributeNames.MASCOTA);
-List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames.ESPECIES);
+List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames.TIPO_ESPECIE);
 %>
 
-<h2><%=m.getNombre()%></h2>
+<h2>Nueva mascota</h2>
 	
     <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.MASCOTA)%>"  method="post">
-  <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.EDIT_PERFIL_MASCOTA%>"/>
-   <input type=hidden name="<%=ParameterNames.ID_MASCOTA%>" value="<%=m.getIdMascota()%>">    
+  <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.ADD_MASCOTA%>"/>
+
         <div class="mascotas">
         <div class="fotoMascota">
         
-       <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>" width="250" height="350">
+       <img src="" width="250" height="350">
     </div>
     
     <div class="mascotasInfo">
         <form>
+        
          <p>
             <strong>Nombre:</strong><br>
-            <input type="text" name="<%=ParameterNames.NOMBRE_MASCOTA%>"  value="<%=m.getNombre()%>">
+            <input type="text" name="<%=ParameterNames.NOMBRE_MASCOTA%>">
         </p>
     
         <p>
             <strong>Fecha de nacimiento (aproximada):</strong><br>
-            <input type="date" name="<%=ParameterNames.FECHA_NACIMIENTO%>"  value="<%=m.getFechaNacimiento()%>">
+            <input type="date" name="<%=ParameterNames.FECHA_NACIMIENTO%>">
         </p>
     
         <p>
@@ -41,7 +40,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
 			for(TipoEspecie e: especies){
 				%>
                 <option value="<%=e.getIdTipoEspecie()%>"
-                <%if(m.getIdTipo() == e.getIdTipoEspecie())%>><%=e.getNombre()%></option>
+                ><%=e.getNombre()%></option>
 			<%} %>
             
             </select>
@@ -50,65 +49,65 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         <p>
             <strong>Tiene microchip?</strong><br>
             <select name="<%=ParameterNames.MICROCHIP%>">
-                <option value="true" <%if(m.getMicrochip())%>>SÌ</option>
-                <option value="false" <%if(!m.getMicrochip())%>>No</option>
+                <option value="true">S√≠</option>
+                <option value="false" >No</option>
             
             </select>
         </p>
         <p>
-            <strong>Est· vacunado?</strong><br>
+            <strong>Est√° vacunado?</strong><br>
             <select name="<%=ParameterNames.VACUNADO%>">
-                  <option value="true" <%if(m.getVacunado())%>>SÌ</option>
-                <option value="false" <%if(!m.getVacunado())%>>No</option>
+                  <option value="true">S√≠</option>
+                <option value="false" >No</option>
             
             </select>
     </p>
     <p>
-        <strong>Est· desparasitado?</strong><br>
+        <strong>Est√° desparasitado?</strong><br>
         <select name="<%=ParameterNames.DESPARASITADO%>">
-            <option value="true" <%if(m.getDesparasitado())%>>SÌ</option>
-                <option value="false" <%if(!m.getDesparasitado())%>>No</option>
+            <option value="true" >S√≠</option>
+                <option value="false">No</option>
         
         </select>
     </p>
     <p>
-        <strong>Padece alguna alergia? (seÒala cu·l en la secciÛn de descripciÛn)</strong><br>
+        <strong>Padece alguna alergia? (se√±ala cu√°l en la secci√≥n de descripci√≥n)</strong><br>
         <select name="<%=ParameterNames.ALERGIA%>">
-           <option value="true" <%if(m.getAlergia())%>>SÌ</option>
-                <option value="false" <%if(!m.getAlergia())%>>No</option>
+           <option value="true" >S√≠</option>
+                <option value="false">No</option>
         
         </select>
     </p>
     <p>
-       <strong> Est· bajo tratamiento? (seÒala cu·l en la secciÛn de descripciÛn)</strong><br>
+       <strong> Est√° bajo tratamiento? (se√±ala cu√°l en la secci√≥n de descripci√≥n)</strong><br>
         <select name="<%=ParameterNames.TRATAMIENTO%>">
-             <option value="true" <%if(m.getTratamiento())%>>SÌ</option>
-                <option value="false" <%if(!m.getTratamiento())%>>No</option>
+             <option value="true" >S√≠</option>
+                <option value="false">No</option>
         
         </select>
     </p>
     <p>
         <strong>Se lleva bien con otros animales?</strong><br>
         <select name="<%=ParameterNames.BIEN_CON_ANIMALES%>">
-             <option value="true" <%if(m.getBuenoConAnimales())%>>SÌ</option>
-                <option value="false" <%if(!m.getBuenoConAnimales())%>>No</option>
+             <option value="true" >S√≠</option>
+                <option value="false">No</option>
         
         </select>
     </p>
     <p>
-        <strong>Se lleva bien con los niÒos?</strong><br>
+        <strong>Se lleva bien con los ni√±os?</strong><br>
         <select name="<%=ParameterNames.BIEN_CON_NINOS%>">
-          <option value="true" <%if(m.getBuenoConNinos())%>>SÌ</option>
-                <option value="false" <%if(!m.getBuenoConNinos())%>>No</option>
+          <option value="true" >S√≠</option>
+          <option value="false" >No</option>
         
         </select>
     </p>
     <p>
-        <strong>DescripciÛn:</strong><br>
-        <textarea id="descripcion" name="<%=ParameterNames.DESCRIPCION%>"><%if(m.getDescripcion() != null){%><%=m.getDescripcion()%><%}%></textarea>
+        <strong>Descripci√≥n:</strong><br>
+        <textarea id="descripcion" name="<%=ParameterNames.DESCRIPCION%>"></textarea>
     </p>
      </div>
 </div>
-    <input type="submit" value="Guardar">
+ <input type="submit" value="Guardar">
 
      <%@include file="/html/common/footer.jsp"%>

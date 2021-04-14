@@ -117,6 +117,7 @@ public class UsuarioServlet extends HttpServlet {
 			logger.info("Redirect to..."+ target);
 			response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
 		}else {
+			System.out.println("action = "+action + " --> forwarding to ...> "+target);
 			logger.info("Forwading to..." + target);
 			request.getRequestDispatcher(target).forward(request, response);
 		}

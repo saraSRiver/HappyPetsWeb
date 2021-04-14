@@ -34,18 +34,18 @@
    		<%}%>
     
       </nav>
-      <%if(cliente != null){%>
-      <%@include file="/html/common/cliente/sesion.jsp"%>
-      <%}if(cuidador !=null){%>
-       <%@include file="/html/common/cuidador/sesion.jsp"%>
-      <%}%>
+    
 	<%if(cuidador == null&& cliente==null){%>
       <div class="nav2">
         <div class="secciones2">
         <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request, "/html/usuario/usuario-login.jsp")%>">Acceder</a></button>
     </div>
     <%}%>
-  
+    <%if(cliente != null){%>
+      <%@include file="/html/common/cliente/sesion.jsp"%>
+      <%}if(cuidador !=null){%>
+       <%@include file="/html/common/cuidador/sesion.jsp"%>
+      <%}%>
     <%if(cliente == null){%>
     <div class="secciones2">
         <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request,"/html/cliente/registro-cliente.jsp")%>">Hazte cliente</a></button>

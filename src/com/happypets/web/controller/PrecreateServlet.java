@@ -105,15 +105,42 @@ public class PrecreateServlet extends HttpServlet {
 				Cliente cliente= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 				Cuidador c= cuidadorServ.findById(Long.valueOf(cuidador));
 				request.setAttribute(AttributeNames.CUIDADOR, c);
-	
-
 				target =ViewsNames.SOLICITUD_CONTRATO;
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);
 			}
 		}
+		if(ActionNames.ADD_MASCOTA.equals(action)) {
+			List<TipoEspecie> listTipoEsp;
+			try {
+				listTipoEsp = tipEspService.findAll("es");
+				request.setAttribute(AttributeNames.TIPO_ESPECIE,listTipoEsp );
+				target = ViewsNames.ADD_MASCOTA;
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
+		}
+		if(ActionNames.EDIT_PERFIL_CLIENTE.equals(action)) {
+			try {
+				List<Servicio> listServicio = servicioService.findAll("es");
+				List<TipoEspecie>listTipoEsp = tipEspService.findAll("es");
+				List<Idioma> listIdioma = idiomaService.findAll();
+				List<Poblacion>listPoblacion = poblacionService.findAll();
+				List<Provincia>listProvincia = provinciaService.findAll();
+				List<Experiencia>listExperiencia = experienciaService.findAll("es");
+
+				request.setAttribute(AttributeNames.SERVICIOS, listServicio);
+				request.setAttribute(AttributeNames.TIPO_ESPECIE, listTipoEsp);
+				request.setAttribute(AttributeNames.IDIOMA, listIdioma);
+				request.setAttribute(AttributeNames.POBLACION, listPoblacion);
+				request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
+				request.setAttribute(AttributeNames.EXPERIENCIA, listExperiencia);
+				target = ViewsNames.EDITAR_PERFIL_CLIENTE;
+			} catch (DataException e) {
+				logger.warn(e.getMessage(),e);
+			}
+		}
 		
-	
 	if(redirect) {
 		logger.info("Redirect to..."+ target);
 		response.sendRedirect(UrlBuilder.builderUrlForm(request, target));

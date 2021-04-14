@@ -9,6 +9,10 @@ public class ParameterNames {
 	
 	public static final String PASSWORD="password";
 	
+	public static final String NEW_PASSWORD="newPassword";
+	
+	public static final String OLD_PASSWORD="oldPassword";
+	
 	public static final String PISO= "piso";
 	
 	public static final String PORTAL="portal";

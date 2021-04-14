@@ -15,12 +15,14 @@ import com.happypets.aplicacion.model.DireccionDTO;
 import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.IdiomaService;
+import com.happypets.aplicacion.service.exceptions.IncorrectPasswordException;
 import com.happypets.aplicacion.serviceImpl.ClienteServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
 import com.happypets.web.utils.ParameterNames;
+import com.happypets.web.utils.PasswordEncryptor;
 import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
@@ -45,8 +47,9 @@ public class ClienteServlet extends HttpServlet {
 		String target=null;
 		boolean redirect=false;
 		String action = request.getParameter(ActionNames.ACTION);
+		Cliente c = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 		if(ActionNames.REGISTRO_CLIENTE.equalsIgnoreCase(action)) {
-	
+
 			String nombre=request.getParameter(ParameterNames.NOMBRE);
 			String apellidos=request.getParameter(ParameterNames.APELLIDOS);
 			String password= request.getParameter(ParameterNames.PASSWORD);
@@ -61,7 +64,7 @@ public class ClienteServlet extends HttpServlet {
 			String poblacion= request.getParameter(ParameterNames.POBLACION);
 			String provincia= request.getParameter(ParameterNames.PROVINCIA);
 			String []idiomas= request.getParameterValues(ParameterNames.IDIOMAS);
-			
+
 			Cliente cliente= new Cliente();
 			cliente.setNombre(nombre);
 			cliente.setApellidos(apellidos);
@@ -72,6 +75,7 @@ public class ClienteServlet extends HttpServlet {
 			cliente.setTelefono(telefono);
 			cliente.setEstadoPromocion(false);
 			DireccionDTO direccionDto= new DireccionDTO();
+
 			direccionDto.setCalle(calle);
 			direccionDto.setPortal(Integer.valueOf(portal));
 			direccionDto.setCp(Integer.valueOf(cp));
@@ -96,7 +100,7 @@ public class ClienteServlet extends HttpServlet {
 			}catch (DataException e) {
 				e.printStackTrace();
 			}
-			
+
 			if(ActionNames.PERFIL_CLIENTE.equalsIgnoreCase(action)) {
 				target = ViewsNames.PERFIL_CLIENTE;
 				redirect = true;
@@ -107,6 +111,73 @@ public class ClienteServlet extends HttpServlet {
 			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			redirect = true;
 		}
+		else if(ActionNames.EDIT_PERFIL_CLIENTE.equalsIgnoreCase(action)) {
+			String nombre=request.getParameter(ParameterNames.NOMBRE);
+			String apellidos=request.getParameter(ParameterNames.APELLIDOS);
+			String passwordActual= request.getParameter(ParameterNames.PASSWORD);
+			String repPassword= request.getParameter(ParameterNames.REP_PASSWORD);
+			String email= request.getParameter(ParameterNames.EMAIL);
+			String repEmail= request.getParameter(ParameterNames.REP_EMAIL);
+			String telefono= request.getParameter(ParameterNames.TELEFONO);
+			String piso= request.getParameter(ParameterNames.PISO);
+			String portal= request.getParameter(ParameterNames.PORTAL);
+			String calle= request.getParameter(ParameterNames.CALLE);
+			String cp=request.getParameter(ParameterNames.CP);
+			String poblacion= request.getParameter(ParameterNames.POBLACION);
+			String provincia= request.getParameter(ParameterNames.PROVINCIA);
+			String []idiomas= request.getParameterValues(ParameterNames.IDIOMAS);
+			if (logger.isInfoEnabled()) {
+				logger.info("Actualizando perfil del cliente");
+			}
+			Cliente clienteActual= new Cliente();
+			String newPassword = request.getParameter(ParameterNames.NEW_PASSWORD); 
+			clienteActual.setNombre(nombre);
+			clienteActual.setApellidos(apellidos);
+			clienteActual.setPassword(passwordActual);
+			clienteActual.setPassword(repPassword);
+			clienteActual.setEmail(email);
+			clienteActual.setEmail(repEmail);
+			clienteActual.setTelefono(telefono);
+			clienteActual.setEstadoPromocion(false);
+			DireccionDTO direccionDto= new DireccionDTO();
+			direccionDto.setCalle(calle);
+			direccionDto.setPortal(Integer.valueOf(portal));
+			direccionDto.setCp(Integer.valueOf(cp));
+			direccionDto.setPiso(Integer.valueOf(piso));
+			direccionDto.setIdPoblacion(Long.valueOf(poblacion));
+			direccionDto.setIdProvincia(Long.valueOf(provincia));
+			direccionDto.setIdpais(1L);
+			direccionDto.setNombrePais("España");
+			direccionDto.setIdcliente(c.getIdcliente());
+			clienteActual.setDireccion(direccionDto);
+			clienteActual.setIdcliente(c.getIdcliente());
+			try {
+				for(String i : idiomas) {
+					clienteActual.add(servIdioma.findByid(i));
+				}
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
+
+			if(newPassword.equals(repPassword)) {
+				if(PasswordEncryptor.checkPassword(passwordActual, c.getPassword())) {
+					clienteActual.setIdcliente(c.getIdcliente());
+					clienteActual.setPassword(newPassword);
+
+					try {
+						Cliente cl;
+						cl = cliServ.update(clienteActual);
+						SessionManager.set(request, AttributeNames.CLIENTE,cl);
+						target = ViewsNames.PERFIL_CLIENTE;
+						redirect = true;
+					} catch (IncorrectPasswordException e) {
+						e.printStackTrace();
+					} catch (DataException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
 			if(redirect) {
 				logger.info("Redirect to..."+ target);
 				response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
@@ -114,11 +185,11 @@ public class ClienteServlet extends HttpServlet {
 				logger.info("Forwading to..." + target);
 				request.getRequestDispatcher(target).forward(request, response);
 			}
-		
+		}
 	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		doGet(request, response);
+			doGet(request, response);
+		}
+
 	}
-
-}

@@ -16,4 +16,7 @@ public class ViewsNames {
 	public static final String LOGIN_USUARIO="/html/usuario/usuario-login.jsp";
 	public static final String TUS_MASCOTAS="/html/mascota/seccion-tusMascotas.jsp";
 	public static final String EDITAR_PERFIL_MASCOTA="/html/mascota/mascota-editar-perfil.jsp";
+	public static final String EDITAR_PERFIL_CLIENTE="/html/cliente/cliente-editar-perfil.jsp";
+	public static final String EDITAR_PERFIL_CUIDADOR="/html/cuidador/cuidador-editar-perfil.jsp";
+	public static final String ADD_MASCOTA="/html/mascota/mascota-add.jsp";
 }

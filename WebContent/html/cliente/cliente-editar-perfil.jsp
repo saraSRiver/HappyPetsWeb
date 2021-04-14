@@ -4,9 +4,9 @@
     <%@ page import="com.happypets.web.utils.*" %>
       <%@include file="/html/common/header.jsp"%>
    
- <h2>Hazte cliente</h2>
-    <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CLIENTE) %>"  method="post">
-    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.REGISTRO_CLIENTE%>"/>
+ <h2>Actualiza tu perfil</h2>
+    <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CLIENTE) %>"  method="post">
+    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.EDIT_PERFIL_CLIENTE%>"/>
   
   <p>
             Nombre:<br>
@@ -16,13 +16,16 @@
         Apellidos:<br>
         <input type="text" name="<%=ParameterNames.APELLIDOS%>">
     </p>
-
-    <p>
-        Contraseña:<br>
+  <p>
+        Contraseña actual:<br>
         <input type="password" name="<%=ParameterNames.PASSWORD%>" >
     </p>
     <p>
-        Repetir contraseña:<br>
+        Contraseña nueva:<br>
+        <input type="password" name="<%=ParameterNames.NEW_PASSWORD%>" >
+    </p>
+    <p>
+        Repetir contraseña nueva:<br>
         <input type="password" name="<%=ParameterNames.REP_PASSWORD%>" >
     </p>
     <p>
@@ -88,4 +91,5 @@ Provincia<br>
 	</p>
       
         <input class="buscar" type="submit" value="Listo">
+</form>
       <%@include file="/html/common/footer.jsp"%>
