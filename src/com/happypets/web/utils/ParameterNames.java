@@ -71,6 +71,9 @@ public class ParameterNames {
 	
 	public static final String PROMOCION= "promocion";
 	
+	public static final String ESTADO= "estado";
+	
+	public  static final String ID_CONTRATO= "idContrato";
 	
 	//resgitro cuidador
 	public static final String PRECIO_SERVICIO= "precio";

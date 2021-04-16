@@ -10,7 +10,7 @@ Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
         <button><%=c.getNombre()%></button>
         <div>
                   <a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.PERFIL_CUIDADOR) %>"> Mi perfil</a>
-          <a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.HISTORIAL_CUIDADOR)%>">Historial de contratos</a>
+          <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CUIDADOR)%>">Historial de contratos</a>
           <a href="<%=UrlBuilder.builderUrlForm(request, ContextsPath.CUIDADOR + "?" + ActionNames.ACTION + "=" + ActionNames.LOG_OUT)%>">Cerrar sesión</a>
         </div>
       </div>

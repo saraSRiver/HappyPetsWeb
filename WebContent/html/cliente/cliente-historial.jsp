@@ -16,9 +16,7 @@
 </div>
 
 <div class="seccionesHistorial">
-<%
-			for(ContratoDTO ct: contratos){
-				%>
+<%for(ContratoDTO ct: contratos){%>
     <p><strong><%=ct.getNombreCuidador()%> <%=ct.getApellidosCuidador()%></strong></p>
     <p><strong><%=ct.getNombreServicio()%></strong></p>
     <p><strong><%=ct.getPrecioFinal()%></strong></p>

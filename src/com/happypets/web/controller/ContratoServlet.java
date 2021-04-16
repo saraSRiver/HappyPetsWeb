@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import com.happypets.aplicacion.model.Cliente;
 import com.happypets.aplicacion.model.Contrato;
 import com.happypets.aplicacion.model.ContratoDTO;
+import com.happypets.aplicacion.model.Cuidador;
 import com.happypets.aplicacion.service.ContratoDTOService;
 import com.happypets.aplicacion.service.ContratoService;
 import com.happypets.aplicacion.service.DataException;
@@ -43,7 +44,7 @@ public class ContratoServlet extends HttpServlet {
 	private ContratoService contrServ;
 	private MascotaService mascServ;
 	private ContratoDTOService contrDTOServ;
-	
+
 	public ContratoServlet() {
 		contrServ= new ContratoServiceImpl();
 		mascServ= new MascotaServiceImpl();
@@ -57,16 +58,17 @@ public class ContratoServlet extends HttpServlet {
 			logger.debug(request.getParameterMap());
 		}
 		Cliente cliente  = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
+		Cuidador cuid=(Cuidador)SessionManager.get(request, AttributeNames.CUIDADOR);
 		String target=null;
 		boolean redirect=false;
 		if (ActionNames.CONTRATAR.equalsIgnoreCase(action)) {
-			
+
 			String mascota=request.getParameter(ParameterNames.ID_MASCOTA);
 			String servicio=request.getParameter(ParameterNames.SERVICIOS);
 			String cuidador=request.getParameter(ParameterNames.ID_CUIDADOR);
 			String fechaInicio=request.getParameter(ParameterNames.FECHA_INICIO);
 			String fechaFin=request.getParameter(ParameterNames.FECHA_FIN);
-	
+
 			if (logger.isInfoEnabled()) {
 				logger.info("Procesando tu solicitud");
 			}
@@ -81,7 +83,7 @@ public class ContratoServlet extends HttpServlet {
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
-	
+
 			contrato.setFechaContrato(new Date());
 			contrato.setIdServicio(Long.valueOf(servicio));
 			contrato.setIdEstado('P');
@@ -91,14 +93,14 @@ public class ContratoServlet extends HttpServlet {
 				contrServ.create(contrato);
 				redirect = true;
 				target=UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE);;
-				
+
 			} catch (DataException e) {
 
 				e.printStackTrace();
 			}
 		}
 		else if(ActionNames.HISTORIAL_CLIENTE.equals(action)){
-	
+
 			List<ContratoDTO> contratos = null;
 			try {
 				contratos = contrDTOServ.findByIdCliente(cliente.getIdcliente());
@@ -108,11 +110,30 @@ public class ContratoServlet extends HttpServlet {
 
 				e.printStackTrace();
 			}
-			
+
 		}
-		
+		else if(ActionNames.CANCELAR.equals(action)) {
+			try {
+				Contrato co= new Contrato();
+				contrServ.updateEstado(co.getIdContrato(), 'R');
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
+
+		}
 		else if(ActionNames.HISTORIAL_CUIDADOR.equals(action)) {
-			
+			List<ContratoDTO> contratosCuidador = null;
+
+			try {
+				contratosCuidador = contrDTOServ.findByIdCuidador(cuid.getIdcuidador());
+				request.setAttribute(AttributeNames.CONTRATOS, contratosCuidador);
+				target = ViewsNames.HISTORIAL_CUIDADOR;
+			} catch (DataException e) {
+
+				e.printStackTrace();
+			}
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);

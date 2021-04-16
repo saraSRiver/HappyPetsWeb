@@ -28,6 +28,10 @@
 </div>
 
   <button type="button" value="Editar perfil"> 
-    <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.EDIT_PERFIL_CLIENTE)%>">Editar perfil</a></button>
+    <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE,
+    		ActionNames.EDIT_PERFIL_CLIENTE)%>">Editar perfil</a></button>
+    
+	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
+	(request, ContextsPath.CLIENTE,ActionNames.ELIMINAR)%>">Eliminar</a></button>
 
      <%@include file="/html/common/footer.jsp"%>

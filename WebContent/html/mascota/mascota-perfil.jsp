@@ -9,7 +9,6 @@ Mascota m = (Mascota)request.getAttribute( AttributeNames.MASCOTA);
 TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
 %>
 
-
     <h2><%=m.getNombre()%></h2>
 	
     <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.MASCOTA) %>"  method="post">
@@ -76,6 +75,8 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
     <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA,ActionNames.DETAIL, ParameterNames.ID_MASCOTA, 
     		String.valueOf(m.getIdMascota()), ActionNames.ACTION_UPDATE, ActionNames.UPDATE)%>">Editar perfil</a></button>
 
+	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA,ActionNames.ELIMINAR, ParameterNames.ID_MASCOTA, 
+    		String.valueOf(m.getIdMascota()))%>">Eliminar</a></button>
     </div>
 </div>
   </form>

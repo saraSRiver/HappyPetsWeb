@@ -15,9 +15,11 @@ import com.happypets.aplicacion.model.DireccionDTO;
 import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.IdiomaService;
+import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.service.exceptions.IncorrectPasswordException;
 import com.happypets.aplicacion.serviceImpl.ClienteServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
+import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
@@ -35,9 +37,11 @@ public class ClienteServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(ClienteServlet.class);
 	private ClienteService cliServ;
 	private IdiomaService servIdioma;
+	private MascotaService servMasc;
 	public ClienteServlet() {
 		cliServ= new ClienteServiceImpl();		
 		servIdioma= new IdiomaServiceImpl();
+		servMasc= new MascotaServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -177,7 +181,16 @@ public class ClienteServlet extends HttpServlet {
 					}
 				}
 			}
-
+			else if(ActionNames.ELIMINAR.equals(action)) {
+				String idCli= request.getParameter(ParameterNames.ID_CLIENTE);
+				try {
+					cliServ.baja(Long.valueOf(idCli));
+					servMasc.deleteMascotaByCliente(Long.valueOf(idCli));
+				} catch (DataException e) {
+					e.printStackTrace();
+				}
+				target =ViewsNames.INDEX;
+			}
 			if(redirect) {
 				logger.info("Redirect to..."+ target);
 				response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
@@ -187,9 +200,9 @@ public class ClienteServlet extends HttpServlet {
 			}
 		}
 	}
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			doGet(request, response);
-		}
-
+		doGet(request, response);
 	}
+
+}

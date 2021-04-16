@@ -23,4 +23,7 @@ public class ActionNames {
 	public static final String EDIT_PERFIL_MASCOTA= "editPerfilMascota";
 	public static final String PERFIL_MASCOTA= "perfilMascota";
 	public static final String UPDATE = "update";
+	public static final String CANCELAR="cancelar";
+	public static final String ELIMINAR="eliminar";
+
 }

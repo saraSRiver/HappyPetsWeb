@@ -88,9 +88,9 @@ public class MascotaServlet extends HttpServlet {
 			mascota.setFotoFavorita(Boolean.valueOf(fotoFavorita));
 			try {
 				mascota=mascServ.create(mascota);
-			
+
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(mascota.getIdMascota()));
-	
+
 				redirect = true;
 			} catch (DataException e) {
 				e.printStackTrace();
@@ -147,20 +147,28 @@ public class MascotaServlet extends HttpServlet {
 			} catch (DataException e) {
 				e.printStackTrace();
 			}
-				if(actionUpdate == null) {
+			if(actionUpdate == null) {
+				target = ViewsNames.PERFIL_MASCOTA;
+			}
+			else {
+				try {
+					List<TipoEspecie> listEspecie = servEspecie.findAll("es");
+					request.setAttribute(AttributeNames.ESPECIES, listEspecie);
+				} catch (DataException e) {
 
-					target = ViewsNames.PERFIL_MASCOTA;
+					e.printStackTrace();
 				}
-				else {
-					try {
-						List<TipoEspecie> listEspecie = servEspecie.findAll("es");
-						request.setAttribute(AttributeNames.ESPECIES, listEspecie);
-					} catch (DataException e) {
-
-						e.printStackTrace();
-					}
-					target = ViewsNames.EDITAR_PERFIL_MASCOTA;
-				}
+				target = ViewsNames.EDITAR_PERFIL_MASCOTA;
+			}
+		}
+		else if(ActionNames.ELIMINAR.equals(action)) {
+			String idMasc= request.getParameter(ParameterNames.ID_MASCOTA);
+			try {
+				mascServ.deleteMascota(Long.valueOf(idMasc));
+			} catch ( DataException e) {
+				e.printStackTrace();
+			}
+			target = ViewsNames.PERFIL_CLIENTE;
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);
