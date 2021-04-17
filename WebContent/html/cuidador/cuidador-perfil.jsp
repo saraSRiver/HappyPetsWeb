@@ -40,6 +40,8 @@ Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 </div>
 
 </div>
-<button>Editar perfil</button>
+	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
+	(request, ContextsPath.CUIDADOR, ActionNames.ELIMINAR, ParameterNames.ID_CUIDADOR, 
+    		String.valueOf(c.getIdcuidador()))%>">Eliminar</a></button>
 
      <%@include file="/html/common/footer.jsp"%>

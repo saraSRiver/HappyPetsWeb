@@ -388,3 +388,16 @@ body > div > div:nth-child(3){
 .mascotas1 img{
 height: 250px;
 }
+#usuarioNull{
+    text-align: center;
+}
+#nulo{
+    width:"550px"; 
+    height:"450px";
+   
+}
+#null{
+    align-items: center;
+    position:relative;
+    
+}

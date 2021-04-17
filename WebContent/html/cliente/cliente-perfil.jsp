@@ -32,6 +32,7 @@
     		ActionNames.EDIT_PERFIL_CLIENTE)%>">Editar perfil</a></button>
     
 	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
-	(request, ContextsPath.CLIENTE,ActionNames.ELIMINAR)%>">Eliminar</a></button>
+	(request, ContextsPath.CLIENTE, ActionNames.ELIMINAR, ParameterNames.ID_CLIENTE, 
+    		String.valueOf(cl.getIdcliente()))%>">Eliminar</a></button>
 
      <%@include file="/html/common/footer.jsp"%>

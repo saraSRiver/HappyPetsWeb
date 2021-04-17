@@ -48,6 +48,7 @@ public class ClienteServlet extends HttpServlet {
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}
+		
 		String target=null;
 		boolean redirect=false;
 		String action = request.getParameter(ActionNames.ACTION);
@@ -181,15 +182,15 @@ public class ClienteServlet extends HttpServlet {
 					}
 				}
 			}
+		}
 			else if(ActionNames.ELIMINAR.equals(action)) {
 				String idCli= request.getParameter(ParameterNames.ID_CLIENTE);
 				try {
 					cliServ.baja(Long.valueOf(idCli));
-					servMasc.deleteMascotaByCliente(Long.valueOf(idCli));
 				} catch (DataException e) {
 					e.printStackTrace();
 				}
-				target =ViewsNames.INDEX;
+				target =ViewsNames.BUSQUEDA_CUIDADORES;
 			}
 			if(redirect) {
 				logger.info("Redirect to..."+ target);
@@ -199,7 +200,7 @@ public class ClienteServlet extends HttpServlet {
 				request.getRequestDispatcher(target).forward(request, response);
 			}
 		}
-	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		doGet(request, response);

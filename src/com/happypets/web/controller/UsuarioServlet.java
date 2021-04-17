@@ -91,6 +91,9 @@ public class UsuarioServlet extends HttpServlet {
 
 						e.printStackTrace();
 					}
+					if(cuidador==null) {
+						target =ViewsNames.USUARIO_NULO;
+					}
 				}
 
 			}
@@ -111,7 +114,12 @@ public class UsuarioServlet extends HttpServlet {
 
 					e.printStackTrace();
 				}
+				if(cliente==null) {
+					target =ViewsNames.USUARIO_NULO;
+				}
 			}
+			
+			
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);
