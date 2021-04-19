@@ -16,4 +16,5 @@ public class AttributeNames {
 	public static final String CONTRATOS= "contratos";
 	public static final String CONTRATO= "contrato";
 	public static final String USUARIO= "usuario";
+	public static final String PUNTUACION= "puntuacion";
 }

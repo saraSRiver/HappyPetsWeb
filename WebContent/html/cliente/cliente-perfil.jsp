@@ -33,6 +33,6 @@
     
 	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CLIENTE, ActionNames.ELIMINAR, ParameterNames.ID_CLIENTE, 
-    		String.valueOf(cl.getIdcliente()))%>">Eliminar</a></button>
+    		String.valueOf(cl.getIdcliente()))%>">Darse de baja de Happy Pets</a></button>
 
      <%@include file="/html/common/footer.jsp"%>

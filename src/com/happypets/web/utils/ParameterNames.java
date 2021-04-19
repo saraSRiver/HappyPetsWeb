@@ -108,5 +108,7 @@ public class ParameterNames {
 	public static final String FOTO_FAVORITA= "fotoFav";
 	
 	
-	
+	//puntuacion
+	public static final String PUNTOS= "puntos";
+	public static final String COMENTARIO= "comentario";
 }

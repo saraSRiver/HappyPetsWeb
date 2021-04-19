@@ -190,7 +190,7 @@ public class ClienteServlet extends HttpServlet {
 				} catch (DataException e) {
 					e.printStackTrace();
 				}
-				target =ViewsNames.BUSQUEDA_CUIDADORES;
+				target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			}
 			if(redirect) {
 				logger.info("Redirect to..."+ target);

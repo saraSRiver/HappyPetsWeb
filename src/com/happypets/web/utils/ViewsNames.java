@@ -20,4 +20,5 @@ public class ViewsNames {
 	public static final String EDITAR_PERFIL_CUIDADOR="/html/cuidador/cuidador-editar-perfil.jsp";
 	public static final String ADD_MASCOTA="/html/mascota/mascota-add.jsp";
 	public static final String USUARIO_NULO="/html/usuario/usuario-nulo.jsp";
+	public static final String PUNTUACION_CUIDADOR="/html/puntuacion/puntuacion-cuidador.jsp";
 }

@@ -42,6 +42,6 @@ Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 </div>
 	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CUIDADOR, ActionNames.ELIMINAR, ParameterNames.ID_CUIDADOR, 
-    		String.valueOf(c.getIdcuidador()))%>">Eliminar</a></button>
+    		String.valueOf(c.getIdcuidador()))%>">Darse de baja de Happy Pets</a></button>
 
      <%@include file="/html/common/footer.jsp"%>

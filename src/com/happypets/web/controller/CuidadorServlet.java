@@ -210,6 +210,15 @@ public class CuidadorServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		else if(ActionNames.ELIMINAR.equals(action)) {
+			String idCuid= request.getParameter(ParameterNames.ID_CUIDADOR);
+			try {
+				cuidServ.baja(Long.valueOf(idCuid));
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
+			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
+		}
 		
 		if(redirect) {
 			logger.info("Redirect to..."+ target);
