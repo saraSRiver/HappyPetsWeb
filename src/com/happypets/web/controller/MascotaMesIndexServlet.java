@@ -19,6 +19,7 @@ import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.MapPrint;
+import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.ViewsNames;
 
 /**
@@ -47,10 +48,9 @@ public class MascotaMesIndexServlet extends HttpServlet {
 		
 			Mascota mascota= new Mascota();
 			try {
-				
 				mascota = mascServ.findByPromocion(6);
-				System.out.println(mascota.getIdMascota());
 				request.setAttribute(AttributeNames.MASCOTA,mascota);
+				
 				request.getRequestDispatcher(ViewsNames.INDEX).forward(request, response);
 			} catch ( DataException e) {
 

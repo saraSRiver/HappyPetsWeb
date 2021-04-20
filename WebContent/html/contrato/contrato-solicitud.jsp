@@ -17,47 +17,34 @@ Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
 <section>
 	<div class="solicitud">
 
-			<p>
-			
-			
-				Nombre de la mascota:<br> <select name="<%=ParameterNames.ID_MASCOTA%>">
+	<p>Nombre de la mascota:<br> <select name="<%=ParameterNames.ID_MASCOTA%>">
 	
-					<option value="0">--seleciona mascota</option>
+			<option value="0">--seleciona mascota</option>
 								<%
 			for(Mascota m: cliente.getMascotas()){
 				%>
 					<option value="<%=m.getIdMascota()%>"><%=m.getNombre()%></option>
 							<%} %>
-				</select>
-			
-			</p>
+				</select></p>
 
-			 <p>
-           
-            ¿Qué servicios te interesan?<br>
+			 <p>¿Qué servicios te interesan?<br>
             
            	<% for(ServicioOfrecido s: c.getServiciosOfrecidos()){%>
             <p>Precio:</p>
             <label><%=ParameterNames.PRECIO_SERVICIO %></label><br>
             <p><%=s.getPrecio()%></p>
             <input type="radio" name="<%=ParameterNames.SERVICIOS %>" value="<%=s.getIdServicio()%>"><%=s.getNombreServicio()%><br>
-            <%}%>
-            
-            </p>
-			<p>
-				Fecha de comienzo del contrato:<br> <input type="text" placeholder="00-00-0000"
-					name="<%=ParameterNames.FECHA_INICIO %>">
-			</p>
-			<p>
-				Fecha del fin del contrato:<br> <input type="text" placeholder="00-00-0000"
-					name="<%=ParameterNames.FECHA_FIN %>">
-			</p>
+            <%}%> </p>
+			<p>Fecha de comienzo del contrato:<br> <input type="text" placeholder="00-00-0000"
+					name="<%=ParameterNames.FECHA_INICIO %>"></p>
+			<p>Fecha del fin del contrato:<br> <input type="text" placeholder="00-00-0000"
+					name="<%=ParameterNames.FECHA_FIN %>"></p>
 			<%if(cliente.getPromocion() != null){ %>
 			<input type="checkbox" name="<%=ParameterNames.PROMOCION %>">Tienes una promoción
-			en este servicio, deseas aplicarla?<br>
-			<p>
+			en este servicio, ¿deseas aplicarla?<br>
+			
 			<%}%>
-			<%if(contrato !=null){%>
+			<p><%if(contrato !=null){%>
 				Precio<br>
 			<p><%=contrato.getPrecioFinal()%></p>
 			<%}%>

@@ -131,9 +131,18 @@ public class ContratoServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.CONTRATOS, contratosCuidador);
 				target = ViewsNames.HISTORIAL_CUIDADOR;
 			} catch (DataException e) {
-
 				e.printStackTrace();
 			}
+		}
+		else if(ActionNames.ELIMINAR.equals(action)) {
+			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
+			
+				try {
+					contrServ.updateEstado(Long.valueOf(idContrato), 'R');
+				} catch (DataException e) {
+					e.printStackTrace();
+				}
+				target = ViewsNames.HISTORIAL_CLIENTE;
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);

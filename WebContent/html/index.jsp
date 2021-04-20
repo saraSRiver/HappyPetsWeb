@@ -6,7 +6,7 @@
           <div class="MascotaMes">
             <h2>Mascota del mes</h2>
                 <%
-	Mascota m = (Mascota) request.getAttribute("mascota");
+	Mascota m = (Mascota) request.getAttribute(AttributeNames.MASCOTA);
 %>
              
       <figure>
@@ -19,7 +19,7 @@
         <div class="text"><%=m.getNombre()%></div>
       </div>
     </div>
-      <figcaption>Marzo 2021</figcaption>
+      <figcaption></figcaption>
     </figure>
 </div>
 

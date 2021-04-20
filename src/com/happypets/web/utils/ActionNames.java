@@ -8,6 +8,7 @@ public class ActionNames {
 	public static final String LOGIN= "login";
 	public static final String DETAIL = "detail";
 	public static final String CONTRATAR= "contratar";
+	public static final String HIRE_AGAIN="contratarOtraVez";
 	public static final String REGISTRO_CUIDADOR= "registroCuidador";
 	public static final String REGISTRO_CLIENTE= "registroCliente";
 	public static final String CUIDADOR= "cuidador";
@@ -27,5 +28,6 @@ public class ActionNames {
 	public static final String ELIMINAR="eliminar";
 	public static final String PUNTUAR_CUIDADOR="puntuarCuidador";
 	public static final String ACTUALIZAR_PUNTUACION="actualizarPuntuacion";
+	
 
 }

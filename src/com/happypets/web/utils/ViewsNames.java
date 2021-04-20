@@ -21,4 +21,5 @@ public class ViewsNames {
 	public static final String ADD_MASCOTA="/html/mascota/mascota-add.jsp";
 	public static final String USUARIO_NULO="/html/usuario/usuario-nulo.jsp";
 	public static final String PUNTUACION_CUIDADOR="/html/puntuacion/puntuacion-cuidador.jsp";
+	public static final String HIRE_AGAIN="/html/contrato/contrato-hire-again.jsp";
 }

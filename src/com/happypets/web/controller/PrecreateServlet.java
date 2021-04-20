@@ -102,7 +102,7 @@ public class PrecreateServlet extends HttpServlet {
 		if(ActionNames.CONTRATAR.equals(action)) {
 			try {
 				String cuidador=request.getParameter(ParameterNames.ID_CUIDADOR);
-				Cliente cliente= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
+			
 				Cuidador c= cuidadorServ.findById(Long.valueOf(cuidador));
 				request.setAttribute(AttributeNames.CUIDADOR, c);
 				target =ViewsNames.SOLICITUD_CONTRATO;

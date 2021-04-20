@@ -88,4 +88,5 @@ Provincia<br>
 	</p>
       
         <input class="buscar" type="submit" value="Listo">
+         </form>
       <%@include file="/html/common/footer.jsp"%>
