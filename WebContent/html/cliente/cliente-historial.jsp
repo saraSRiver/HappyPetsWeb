@@ -14,6 +14,7 @@
 
 <div class="seccionesHistorial">
    <a  href="<%=ViewsNames.HIRE_AGAIN%>">Volver a contratar</a>
+    <a  href="<%=ViewsNames.PUNTUACION_CUIDADOR%>">Cuidadores que has valorado</a>
 </div>
 
 <div class="seccionesHistorial">

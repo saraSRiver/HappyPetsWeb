@@ -27,7 +27,7 @@ import com.happypets.web.utils.ViewsNames;
 /**
  * Servlet implementation class PuntuacionServlet
  */
-@WebServlet("/Puntuacion")
+@WebServlet("/puntuacion")
 public class PuntuacionServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(PuntuacionServlet.class);
 	private ClienteService cliServ;

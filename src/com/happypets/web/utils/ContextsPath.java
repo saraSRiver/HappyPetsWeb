@@ -8,4 +8,5 @@ public class ContextsPath {
 	public static final String PRECREATE =  "/precreate";
 	public static final String CONTRATO =  "/contrato";
 	public static final String MASCOTA =  "/mascota";
+	public static final String PUNTUACION =  "/puntuacion";
 }

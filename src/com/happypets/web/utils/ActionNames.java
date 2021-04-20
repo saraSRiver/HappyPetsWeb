@@ -28,6 +28,6 @@ public class ActionNames {
 	public static final String ELIMINAR="eliminar";
 	public static final String PUNTUAR_CUIDADOR="puntuarCuidador";
 	public static final String ACTUALIZAR_PUNTUACION="actualizarPuntuacion";
-	
+	public static final String CUIDADORES_PUNTUADOS="cuidadoresPuntuados";
 
 }
