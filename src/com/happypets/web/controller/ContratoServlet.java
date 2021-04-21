@@ -83,29 +83,41 @@ public class ContratoServlet extends HttpServlet {
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
-
 			contrato.setFechaContrato(new Date());
 			contrato.setIdServicio(Long.valueOf(servicio));
 			contrato.setIdEstado('P');
 
-
 			try {
 				contrServ.create(contrato);
 				redirect = true;
-				target=UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE);;
+				target=UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE);
 
 			} catch (DataException e) {
 
 				e.printStackTrace();
 			}
 		}
-		else if(ActionNames.HISTORIAL_CLIENTE.equals(action)){
+		else if(ActionNames.HISTORIAL_CLIENTE.equalsIgnoreCase(action)){
 
 			List<ContratoDTO> contratos = null;
 			try {
 				contratos = contrDTOServ.findByIdCliente(cliente.getIdcliente());
 				request.setAttribute(AttributeNames.CONTRATOS, contratos);
 				target = ViewsNames.HISTORIAL_CLIENTE;
+			} catch (DataException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+		else if(ActionNames.DETAIL.equalsIgnoreCase(action)){
+
+			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
+			Long id  = Long.valueOf(idContrato);
+			try {
+				 Contrato contrato=contrServ.findByid(Long.valueOf(id));
+				request.setAttribute(AttributeNames.CONTRATO, contrato);
+				target = ViewsNames.CONTRATO_DETAIL;
 			} catch (DataException e) {
 
 				e.printStackTrace();
@@ -123,6 +135,7 @@ public class ContratoServlet extends HttpServlet {
 			}
 
 		}
+	
 		else if(ActionNames.HISTORIAL_CUIDADOR.equals(action)) {
 			List<ContratoDTO> contratosCuidador = null;
 
@@ -143,6 +156,27 @@ public class ContratoServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				target = ViewsNames.HISTORIAL_CLIENTE;
+		}
+		else if(ActionNames.ELIMINAR.equals(action)) {
+			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
+			
+				try {
+					contrServ.updateEstado(Long.valueOf(idContrato), 'R');
+				} catch (DataException e) {
+					e.printStackTrace();
+				}
+				target = ViewsNames.HISTORIAL_CUIDADOR;
+		}
+		else if(ActionNames.ACEPTAR.equals(action)) {
+			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
+			try {
+				contrServ.updateEstado(Long.valueOf(idContrato),  'A');
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
+			target = ViewsNames.HISTORIAL_CUIDADOR;
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);

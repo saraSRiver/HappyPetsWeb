@@ -26,6 +26,7 @@ public class ActionNames {
 	public static final String UPDATE = "update";
 	public static final String CANCELAR="cancelar";
 	public static final String ELIMINAR="eliminar";
+	public static final String ACEPTAR="aceptar";
 	public static final String PUNTUAR_CUIDADOR="puntuarCuidador";
 	public static final String ACTUALIZAR_PUNTUACION="actualizarPuntuacion";
 	public static final String CUIDADORES_PUNTUADOS="cuidadoresPuntuados";

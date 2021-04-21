@@ -33,11 +33,30 @@ $("span").append(elemento);
 let formulario = document.querySelector("#puntuacion");
 let inputs  = formulario.querySelectorAll("input");
 for(let item of inputs){
+ if(item.checked){actualizarPuntuacion(item)};
    item.addEventListener("click", puntuacion);
 }
 
 function  puntuacion(e){
     let padre = e.currentTarget.parentElement;
+    let estrellas  = document.querySelectorAll(".star, .full-star");
+    for(let i = 0; i < estrellas.length; i++){
+        if(estrellas[i] == padre){
+            estrellas[i].setAttribute("class", "full-star");
+         
+            for(let f = i+1; f < estrellas.length; f++){
+                estrellas[f].setAttribute("class", "star");
+            }
+            i = estrellas.length;
+        
+        }
+        else{
+            estrellas[i].setAttribute("class", "full-star");
+        }
+    }
+}
+function  actualizarPuntuacion(valor){
+    let padre = valor.parentElement;
     let estrellas  = document.querySelectorAll(".star, .full-star");
     for(let i = 0; i < estrellas.length; i++){
         if(estrellas[i] == padre){

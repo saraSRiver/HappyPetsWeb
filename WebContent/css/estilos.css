@@ -8,7 +8,17 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 --colorFuente: black;
 
 }
-
+  @font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?q600zz');
+    src:  url('fonts/icomoon.eot?q600zz#iefix') format('embedded-opentype'),
+      url('/happypets/fonts/icomoon.ttf?q600zz') format('truetype'),
+      url('fonts/icomoon.woff?q600zz') format('woff'),
+      url('fonts/icomoon.svg?q600zz#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
 header{
     display: flex;
     flex-direction: row;
@@ -401,3 +411,19 @@ height: 250px;
     position:relative;
     
 }
+
+
+/*****Puntuaciones*****/
+
+        .full-star:after{
+            content:"\e9d9" ;
+            font-family: 'icomoon';
+            font-size: 1.7rem;
+            position: absolute; 
+        }
+        .star:after{
+            content:"\e9d7" ;
+            font-family: 'icomoon';
+            font-size: 1.7rem;
+            position: absolute;
+        }

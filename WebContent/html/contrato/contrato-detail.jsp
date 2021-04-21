@@ -4,21 +4,23 @@
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
      <%
-    List<ContratoDTO> contratos = (List<ContratoDTO>) request.getAttribute(AttributeNames.CONTRATOS);
-	Contrato co=(Contrato) request.getAttribute(AttributeNames.CONTRATOS);
+     Cuidador c = (Cuidador) request.getAttribute(AttributeNames.CUIDADOR);
+	Contrato co=(Contrato) request.getAttribute(AttributeNames.CONTRATO);
     Cliente cl= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 %>
     <h2 class=>Detalles</h2>
 <p><%=co.getFechaContrato()%></p>
 <div class="contenedorHistorial">
 <div class="seccionesHistorial">
-    <p><strong>Dirección</strong></p>
-    <p><strong>Mascota</strong></p>
-    <p><strong>Duración del servicio</strong></p>
-    <p><strong>Resumen</strong></p>
+  <p><strong><%=cl.getDireccion().getCalle()%>, <%=cl.getDireccion().getPortal()%>,
+    		<%=cl.getDireccion().getPiso()%>.<%=cl.getDireccion().getNombrePoblacion()%>,
+    		<%=cl.getDireccion().getNombreProvincia()%>.</strong></p>
+    <p><strong><%=co.getNombreMascota()%></strong></p>
+     <p><strong><%=co.getNombreEspecie()%></strong></p>
+      <p><strong><%=co.getNombreServicio()%></strong></p>
+    <p><strong><%=co.getFechaInicio()%> hasta <%=co.getFechaFinal()%></strong></p>
+    <p><strong><%=co.getPrecioFinal()%></strong></p>
 </div>
-<p> <%=cl.getDireccion().getCalle()%>, <%=cl.getDireccion().getPortal()%>,
-<%=cl.getDireccion().getPiso()%>.<%=cl.getDireccion().getNombrePoblacion()%>.</p>
-<p></p>
+
 </div>
        <%@include file="/html/common/footer.jsp"%>

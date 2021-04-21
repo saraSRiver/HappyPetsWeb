@@ -1,6 +1,7 @@
 package com.happypets.web.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.happypets.aplicacion.model.Cliente;
+import com.happypets.aplicacion.model.Cuidador;
 import com.happypets.aplicacion.model.Puntuacion;
 import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.CuidadorService;
@@ -22,6 +25,8 @@ import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.MapPrint;
 import com.happypets.web.utils.ParameterNames;
+import com.happypets.web.utils.SessionManager;
+import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
 /**
@@ -33,8 +38,9 @@ public class PuntuacionServlet extends HttpServlet {
 	private ClienteService cliServ;
 	private CuidadorService cuidServ;
 	private PuntuacionService puntServ;
-	
+
     public PuntuacionServlet() {
+   
     	cliServ= new ClienteServiceImpl();
     	cuidServ= new CuidadorServiceImpl();
     	puntServ= new PuntuacionServiceImpl();
@@ -48,6 +54,7 @@ public class PuntuacionServlet extends HttpServlet {
 		String action = request.getParameter(ActionNames.ACTION);
 		String target=null;
 		boolean redirect=false;
+		Cliente cliente = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 		if (ActionNames.CUIDADOR_BUSCAR.equalsIgnoreCase(action)) {
 			String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
 			if(idCuidador!=null){
@@ -83,20 +90,43 @@ public class PuntuacionServlet extends HttpServlet {
 		}
 		else if(ActionNames.ACTUALIZAR_PUNTUACION.equalsIgnoreCase(action)) {
 			String puntuacion=request.getParameter(ParameterNames.PUNTOS);
-			String idCliente = request.getParameter(ParameterNames.ID_CLIENTE);
 			String comentario = request.getParameter(ParameterNames.COMENTARIO);
-			if(idCliente!=null){
+			String cuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
 				Puntuacion punt= new Puntuacion();
 				
 				try {
 					punt.setPuntuacion(Integer.valueOf(puntuacion));
 					punt.setComentario(comentario);
+					punt.setIdCliente(cliente.getIdcliente());
+					punt.setIdCuidador(Long.valueOf(cuidador));
+					
 					puntServ.update(punt);
 					target=ViewsNames.BUSQUEDA_CUIDADORES;
 				} catch (DataException e) {
 					e.printStackTrace();
 				}
-			}
+			
+		}
+		else if(ActionNames.CUIDADORES_PUNTUADOS.equalsIgnoreCase(action)) {
+				String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
+				try {
+					Long cuidador = Long.valueOf(idCuidador);
+					Puntuacion punt = puntServ.findPuntuacion(cliente.getIdcliente(), cuidador);
+					Cuidador cuid = cuidServ.findById(cuidador);
+					request.setAttribute(AttributeNames.CUIDADOR, cuid);
+					request.setAttribute(AttributeNames.PUNTUACION, punt);
+					target = ViewsNames.PUNTUACION_CUIDADOR;
+				} catch ( DataException e) {
+				
+					e.printStackTrace();
+				}
+		}
+		if(redirect) {
+			logger.info("Redirect to..."+ target);
+			response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
+		}else {
+			logger.info("Forwading to..." + target);
+			request.getRequestDispatcher(target).forward(request, response);
 		}
 	}
 

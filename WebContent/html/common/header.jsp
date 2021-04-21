@@ -7,10 +7,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Happy Pets</title>
-
-	
   <link rel= "stylesheet" href="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/css/estilos.css">
+<script defer src ="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/puntuacion.js"></script>
+ <script src="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
+
 </head>
+
 <header>
   	<%Cliente cliente = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
   	Cuidador cuidador = (Cuidador)SessionManager.get(request, AttributeNames.CUIDADOR);

@@ -13,16 +13,15 @@
  <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.HISTORIAL_CLIENTE%>"/>
 
 <div class="seccionesHistorial">
-   <a  href="<%=ViewsNames.HIRE_AGAIN%>">Volver a contratar</a>
-    <a  href="<%=ViewsNames.PUNTUACION_CUIDADOR%>">Cuidadores que has valorado</a>
-</div>
 
-<div class="seccionesHistorial">
 <%for(ContratoDTO ct: contratos){%>
+
     <p><strong><%=ct.getNombreCuidador()%> <%=ct.getApellidosCuidador()%></strong></p>
     <p><strong><%=ct.getNombreServicio()%></strong></p>
     <p><strong><%=ct.getPrecioFinal()%></strong></p>
-    <p><a href="#">Detalles</a></p>
+    <p><a href="<%=UrlBuilder.getUrlForController
+	(request, ContextsPath.CONTRATO, ActionNames.DETAIL, ParameterNames.ID_CONTRATO, 
+    		String.valueOf(ct.getIdContrato()))%>">Detalles</a></p>
 </div>
 
 <div class="seccionesHistorial">
@@ -31,6 +30,9 @@
 </div>
 <div class="seccionesHistorial">
     <p><strong><%=ct.getIdEstado()%></strong></p>
+     <a  href="<%=UrlBuilder.getUrlForController
+	(request, ContextsPath.PUNTUACION, ActionNames.CUIDADORES_PUNTUADOS, ParameterNames.ID_CUIDADOR, 
+    		String.valueOf(ct.getIdCuidador()))%>">Puntuar cuidador</a>
     <%if(ct.getIdEstado()!='R'){%>
      <button><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CONTRATO, ActionNames.ELIMINAR, ParameterNames.ID_CONTRATO, 
