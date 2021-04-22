@@ -23,12 +23,12 @@
 
     <p><strong><%=cd.getNombre()%> <%=cd.getApellidos()%></strong></p>
 
- 		<label class="star"><input type="radio" value="1" name="<%=ParameterNames.PUNTOS%>" <%if(pt.getPuntuacion() == 1){%>checked<%}%>></label>
-        <label class="star"><input type="radio" value="2" name="<%=ParameterNames.PUNTOS%>" <%if(pt.getPuntuacion() == 2){%>checked<%}%>></label>
-        <label class="star"><input type="radio" value="3" name="<%=ParameterNames.PUNTOS%>" <%if(pt.getPuntuacion() == 3){%>checked<%}%>></label>
-        <label class="star"><input type="radio" value="4" name="<%=ParameterNames.PUNTOS%>" <%if(pt.getPuntuacion() == 4){%>checked<%}%>></label>
-       <label class="star"> <input type="radio" value="5"  name="<%=ParameterNames.PUNTOS%>" <%if(pt.getPuntuacion() == 5){%>checked<%}%>></label>
-         
+ 		<label class="star"><input type="radio" value="1" name="<%=ParameterNames.PUNTOS%>" <%if(pt!=null){if(pt.getPuntuacion() == 1){%>checked<%}}%>></label>
+        <label class="star"><input type="radio" value="2" name="<%=ParameterNames.PUNTOS%>" <%if(pt!=null){if(pt.getPuntuacion() == 2){%>checked<%}}%>></label>
+        <label class="star"><input type="radio" value="3" name="<%=ParameterNames.PUNTOS%>" <%if(pt!=null){if(pt.getPuntuacion() == 3){%>checked<%}}%>></label>
+        <label class="star"><input type="radio" value="4" name="<%=ParameterNames.PUNTOS%>" <%if(pt!=null){if(pt.getPuntuacion() == 4){%>checked<%}}%>></label>
+       <label class="star"> <input type="radio" value="5"  name="<%=ParameterNames.PUNTOS%>" <%if(pt!=null){if(pt.getPuntuacion() == 5){%>checked<%}}%>></label>
+
 </div>
 <textarea value="<%=ParameterNames.COMENTARIO%>"><%=pt.getComentario() != null? pt.getComentario():""%></textarea>
 <button type="submit" class="Buscar"><%if(pt == null){%>Valorar cuidador
