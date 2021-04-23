@@ -23,6 +23,7 @@ import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.happypets.aplicacion.serviceImpl.PuntuacionServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.ContextsPath;
 import com.happypets.web.utils.MapPrint;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.SessionManager;
@@ -39,87 +40,72 @@ public class PuntuacionServlet extends HttpServlet {
 	private CuidadorService cuidServ;
 	private PuntuacionService puntServ;
 
-    public PuntuacionServlet() {
-   
-    	cliServ= new ClienteServiceImpl();
-    	cuidServ= new CuidadorServiceImpl();
-    	puntServ= new PuntuacionServiceImpl();
-    }
+	public PuntuacionServlet() {
+
+		cliServ= new ClienteServiceImpl();
+		cuidServ= new CuidadorServiceImpl();
+		puntServ= new PuntuacionServiceImpl();
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if(logger.isDebugEnabled()) {
 			logger.debug(MapPrint.print(request.getParameterMap()));
-		
+
 		}
 		String action = request.getParameter(ActionNames.ACTION);
 		String target=null;
 		boolean redirect=false;
 		Cliente cliente = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
-		if (ActionNames.CUIDADOR_BUSCAR.equalsIgnoreCase(action)) {
-			String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
-			if(idCuidador!=null){
-				Long id=Long.valueOf(idCuidador);
-				try {
-					Double mediaCuidador=puntServ.findByMedia(id);
-					request.setAttribute(AttributeNames.PUNTUACION, mediaCuidador);
-					target=ViewsNames.PUNTUACION_CUIDADOR;
-				} catch (DataException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		else if(ActionNames.PUNTUAR_CUIDADOR.equalsIgnoreCase(action)) {
+	
+		 if(ActionNames.PUNTUAR_CUIDADOR.equalsIgnoreCase(action)) {
 			String puntuacion=request.getParameter(ParameterNames.PUNTOS);
 			String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
-			String idCliente = request.getParameter(ParameterNames.ID_CLIENTE);
 			String comentario = request.getParameter(ParameterNames.COMENTARIO);
-			if(idCliente!=null){
-				Puntuacion punt= new Puntuacion();
-				
-				try {
-					punt.setIdCliente(Long.valueOf(idCliente));
-					punt.setIdCuidador(Long.valueOf(idCuidador));
-					punt.setPuntuacion(Integer.valueOf(puntuacion));
-					punt.setComentario(comentario);
-					puntServ.create(punt);
-					target=ViewsNames.BUSQUEDA_CUIDADORES;
-				} catch (DataException e) {
-					e.printStackTrace();
-				}
+			Puntuacion punt= new Puntuacion();
+			try {
+				punt.setIdCliente(cliente.getIdcliente());
+				punt.setIdCuidador(Long.valueOf(idCuidador));
+				punt.setPuntuacion(Double.valueOf(puntuacion));
+				punt.setComentario(comentario);
+				puntServ.create(punt);
+				target=UrlBuilder.getUrlForController(request, ContextsPath.PUNTUACION, 
+						ActionNames.CUIDADORES_PUNTUADOS, redirect);
+			} catch (DataException e) {
+				e.printStackTrace();
 			}
 		}
 		else if(ActionNames.ACTUALIZAR_PUNTUACION.equalsIgnoreCase(action)) {
 			String puntuacion=request.getParameter(ParameterNames.PUNTOS);
 			String comentario = request.getParameter(ParameterNames.COMENTARIO);
 			String cuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
-				Puntuacion punt= new Puntuacion();
-				
-				try {
-					punt.setPuntuacion(Integer.valueOf(puntuacion));
-					punt.setComentario(comentario);
-					punt.setIdCliente(cliente.getIdcliente());
-					punt.setIdCuidador(Long.valueOf(cuidador));
-					
-					puntServ.update(punt);
-					target=ViewsNames.BUSQUEDA_CUIDADORES;
-				} catch (DataException e) {
-					e.printStackTrace();
-				}
-			
+			Puntuacion punt= new Puntuacion();
+
+			try {
+				punt.setPuntuacion(Double.valueOf(puntuacion));
+				punt.setComentario(comentario);
+				punt.setIdCliente(cliente.getIdcliente());
+				punt.setIdCuidador(Long.valueOf(cuidador));
+
+				puntServ.update(punt);
+				target=UrlBuilder.getUrlForController(request, ContextsPath.PUNTUACION, 
+						ActionNames.CUIDADORES_PUNTUADOS, redirect);
+			} catch (DataException e) {
+				e.printStackTrace();
+			}
 		}
 		else if(ActionNames.CUIDADORES_PUNTUADOS.equalsIgnoreCase(action)) {
-				String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
-				try {
-					Long cuidador = Long.valueOf(idCuidador);
-					Puntuacion punt = puntServ.findPuntuacion(cliente.getIdcliente(), cuidador);
-					Cuidador cuid = cuidServ.findById(cuidador);
-					request.setAttribute(AttributeNames.CUIDADOR, cuid);
-					request.setAttribute(AttributeNames.PUNTUACION, punt);
-					target = ViewsNames.PUNTUACION_CUIDADOR;
-				} catch ( DataException e) {
-				
-					e.printStackTrace();
-				}
+			String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
+			try {
+				Long cuidador = Long.valueOf(idCuidador);
+				Cuidador cuid = cuidServ.findById(cuidador);
+				Puntuacion punt = puntServ.findPuntuacion(cliente.getIdcliente(), cuidador);
+
+				request.setAttribute(AttributeNames.CUIDADOR, cuid);
+				request.setAttribute(AttributeNames.PUNTUACION, punt);
+				target = ViewsNames.PUNTUACION_CUIDADOR;
+			} catch ( DataException e) {
+				e.printStackTrace();
+			}
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);

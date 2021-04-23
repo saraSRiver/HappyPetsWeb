@@ -102,9 +102,8 @@ public class CuidadorServlet extends HttpServlet {
 				cuidadores=cuidServ.findByCriteria(criteria);
 
 				request.setAttribute(AttributeNames.CUIDADOR,cuidadores);
-
-				request.getRequestDispatcher(ViewsNames.RESULTS)
-				.forward(request, response);
+				target = ViewsNames.RESULTS;
+				
 			} catch (DataException e) {
 				e.printStackTrace();
 			}

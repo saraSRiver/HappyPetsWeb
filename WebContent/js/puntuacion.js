@@ -11,18 +11,18 @@ $("span").html("");
 for(let i=0;i<5;i++){
     if(i < absoluto){
     let elemento=document.createElement("label");
-    elemento.setAttribute("class","llena");
+    elemento.setAttribute("class","full-star");
 $("span").append(elemento);
     }
     else if(decimal > 0){
         let elemento=document.createElement("label");
-        elemento.setAttribute("class","media");
+        elemento.setAttribute("class","half-star");
     $("span").append(elemento);
     decimal = -1;
     }
     else{
         let elemento=document.createElement("label");
-        elemento.setAttribute("class","vacia");
+        elemento.setAttribute("class","star");
     $("span").append(elemento);
     }
 
@@ -31,11 +31,13 @@ $("span").append(elemento);
 
 //puntuar///
 let formulario = document.querySelector("#puntuacion");
+if(formulario !=null){
 let inputs  = formulario.querySelectorAll("input");
+
 for(let item of inputs){
  if(item.checked){actualizarPuntuacion(item)};
    item.addEventListener("click", puntuacion);
-}
+}}
 
 function  puntuacion(e){
     let padre = e.currentTarget.parentElement;

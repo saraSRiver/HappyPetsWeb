@@ -9,7 +9,8 @@
 %>
 
 <img src="<%=UrlBuilder.builderUrlImg(request, "cuidadores/" + String.valueOf(c.getIdcuidador()))+ "-detail.jpg"%>"/>
-<h2><%=c.getNombre()%> <%=c.getApellidos()%></h2>
+<h2><%=c.getNombre()%> <%=c.getApellidos()%> <span><%=c.getPuntuacionMedia()%></span></h2>
+
 <h4>Especies:</h4>
 <%for(TipoEspecie e: c.getEspecies()){ %>
 			<p><%=e.getNombre()%></p>
@@ -35,5 +36,6 @@
 <p><%=c.getDireccion().getPortal()%></p>
 <h5>Piso:</h5>
 <p><%=c.getDireccion().getPiso()%></p>
+
   <button class= "boton"><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.CONTRATAR, ParameterNames.ID_CUIDADOR, String.valueOf(c.getIdcuidador()))%>">Contratar</a></button>
   <%@include file="/html/common/footer.jsp"%>

@@ -419,11 +419,17 @@ height: 250px;
             content:"\e9d9" ;
             font-family: 'icomoon';
             font-size: 1.7rem;
-            position: absolute; 
+            
         }
         .star:after{
             content:"\e9d7" ;
             font-family: 'icomoon';
             font-size: 1.7rem;
-            position: absolute;
+            
+        }
+        .half-star:after{
+            content:"\e9d8" ;
+            font-family: 'icomoon';
+            font-size: 1.7rem;
+            
         }

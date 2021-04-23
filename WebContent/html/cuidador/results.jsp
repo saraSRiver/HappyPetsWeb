@@ -41,7 +41,7 @@ List<Cuidador>cuidadores = (List<Cuidador>) request.getAttribute(AttributeNames.
 			<h4>Provincia:</h4>
 			<p><%=c.getDireccion().getNombreProvincia()%></p>
 			<h4>Puntuación media:</h4>
-			<p><%=c.getPuntuacionMedia()%></p>
+			<span><%=c.getPuntuacionMedia()%></span>
 			
 	<%
 	}

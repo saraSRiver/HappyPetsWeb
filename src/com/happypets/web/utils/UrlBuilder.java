@@ -87,7 +87,7 @@ public class UrlBuilder {
 			for(int i=0; i < paramsAndValues.length; i+=2) {
 				sb.append(paramsAndValues[i]).append("=").append(paramsAndValues[i + 1]).append("&");
 			}}
-		
+
 		else {
 			sb.append(paramsAndValues[0]);
 		}
@@ -106,5 +106,20 @@ public class UrlBuilder {
 
 		return sb.toString();
 
+	}
+	public static String getUrlForController(HttpServletRequest request, String controllerPath, String controllerAction, boolean redirect ) {
+		StringBuilder sb = new StringBuilder();
+		if(redirect==true) {
+			sb.append("http://").append(request.getServerName()).append(":")
+			.append(request.getServerPort())
+			.append(request.getContextPath());
+		}
+		sb.append("/").append(controllerPath)
+		.append("?")
+		.append(ActionNames.ACTION)
+		.append("=")
+		.append(controllerAction);
+
+		return sb.toString();
 	}
 }
