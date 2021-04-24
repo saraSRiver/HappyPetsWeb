@@ -33,10 +33,7 @@ import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
-/**
- * Servlet implementation class Usuario
- */
-@WebServlet("/usuario")
+
 public class UsuarioServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(UsuarioServlet.class);
 	private CuidadorService cuidServ;

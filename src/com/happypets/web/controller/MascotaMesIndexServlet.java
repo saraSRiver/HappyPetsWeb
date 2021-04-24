@@ -25,7 +25,7 @@ import com.happypets.web.utils.ViewsNames;
 /**
  * Servlet implementation class MascotaMesIndex
  */
-@WebServlet("/mascotaMesIndex")
+
 public class MascotaMesIndexServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(MascotaMesIndexServlet.class);
 	private MascotaService mascServ;

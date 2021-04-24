@@ -9,4 +9,5 @@ public class ContextsPath {
 	public static final String CONTRATO =  "/contrato";
 	public static final String MASCOTA =  "/mascota";
 	public static final String PUNTUACION =  "/puntuacion";
+	public static final String USUARIO =  "/usuario";
 }

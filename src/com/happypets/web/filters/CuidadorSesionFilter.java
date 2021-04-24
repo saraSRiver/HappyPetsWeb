@@ -20,41 +20,36 @@ import com.happypets.web.utils.ContextsPath;
 import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
 
-public class IniciarSesionFilter implements Filter {
-	private static Logger logger = LogManager.getLogger(IniciarSesionFilter.class);
-    
-    public IniciarSesionFilter() {
-       
-    }
+public class CuidadorSesionFilter implements Filter {
 
-	
-	public void destroy() {
-		
+	private static Logger logger = LogManager.getLogger(CuidadorSesionFilter.class);
+	public CuidadorSesionFilter() {
 	}
 
-	
+	public void destroy() {
+	}
+
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		String target = null;
-		logger.info("aplicando IniciarSesionFilter");
-		if((SessionManager.get(httpRequest, AttributeNames.CLIENTE))!=null||
-				SessionManager.get(httpRequest, AttributeNames.CUIDADOR)!=null) {
+		logger.info("aplicando CuidadorSesionFilter");
+		if((SessionManager.get(httpRequest, AttributeNames.CUIDADOR))==null||
+				SessionManager.get(httpRequest, AttributeNames.CLIENTE)!=null) {
 			logger.info("Filtro aplicado");
-			
+
 			target = UrlBuilder.getUrlForController(httpRequest, ContextsPath.MASCOTA_MES, ActionNames.INDEX, true);
 			logger.info("Redirect to..." + target);
 			httpResponse.sendRedirect(target);
-			
+
 		}
 		else {
 			chain.doFilter(request, response);
 		}
+
 	}
-	
 	public void init(FilterConfig fConfig) throws ServletException {
-		
+
 	}
 
 }

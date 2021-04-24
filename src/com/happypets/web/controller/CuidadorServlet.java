@@ -44,10 +44,7 @@ import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
-/**
- * Servlet de cuidador
- */
-@WebServlet("/cuidador")
+
 public class CuidadorServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(CuidadorServlet.class);
 	private CuidadorService cuidServ;

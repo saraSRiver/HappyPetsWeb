@@ -29,10 +29,6 @@ import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
-/**
- * Servlet implementation class Cliente
- */
-@WebServlet("/cliente")
 public class ClienteServlet extends HttpServlet {
 	private static Logger logger = LogManager.getLogger(ClienteServlet.class);
 	private ClienteService cliServ;
