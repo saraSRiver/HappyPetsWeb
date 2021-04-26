@@ -30,6 +30,8 @@ import com.happypets.aplicacion.util.DBDataUtils;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
@@ -54,6 +56,7 @@ public class ContratoServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter(ActionNames.ACTION);
+		
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}
@@ -61,6 +64,8 @@ public class ContratoServlet extends HttpServlet {
 		Cuidador cuid=(Cuidador)SessionManager.get(request, AttributeNames.CUIDADOR);
 		String target=null;
 		boolean redirect=false;
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
 		if (ActionNames.CONTRATAR.equalsIgnoreCase(action)) {
 
 			String mascota=request.getParameter(ParameterNames.ID_MASCOTA);
@@ -93,8 +98,10 @@ public class ContratoServlet extends HttpServlet {
 				target=UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE);
 
 			} catch (DataException e) {
-
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		else if(ActionNames.HISTORIAL_CLIENTE.equalsIgnoreCase(action)){
@@ -105,8 +112,10 @@ public class ContratoServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.CONTRATOS, contratos);
 				target = ViewsNames.HISTORIAL_CLIENTE;
 			} catch (DataException e) {
-
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 
 		}
@@ -119,8 +128,10 @@ public class ContratoServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.CONTRATO, contrato);
 				target = ViewsNames.CONTRATO_DETAIL;
 			} catch (DataException e) {
-
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 
 		}
@@ -129,9 +140,15 @@ public class ContratoServlet extends HttpServlet {
 				Contrato co= new Contrato();
 				contrServ.updateEstado(co.getIdContrato(), 'R');
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 
 		}
@@ -144,7 +161,10 @@ public class ContratoServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.CONTRATOS, contratosCuidador);
 				target = ViewsNames.HISTORIAL_CUIDADOR;
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = ViewsNames.INDEX;
 			}
 		}
 		else if(ActionNames.ELIMINAR.equals(action)) {
@@ -153,7 +173,10 @@ public class ContratoServlet extends HttpServlet {
 				try {
 					contrServ.updateEstado(Long.valueOf(idContrato), 'R');
 				} catch (DataException e) {
-					e.printStackTrace();
+					logger.warn(e.getMessage(),e);
+					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+					request.setAttribute(AttributeNames.ERRORS, errors);
+					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 				}
 				target = ViewsNames.HISTORIAL_CLIENTE;
 		}
@@ -163,7 +186,10 @@ public class ContratoServlet extends HttpServlet {
 				try {
 					contrServ.updateEstado(Long.valueOf(idContrato), 'R');
 				} catch (DataException e) {
-					e.printStackTrace();
+					logger.warn(e.getMessage(),e);
+					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+					request.setAttribute(AttributeNames.ERRORS, errors);
+					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 				}
 				target = ViewsNames.HISTORIAL_CUIDADOR;
 		}
@@ -172,9 +198,15 @@ public class ContratoServlet extends HttpServlet {
 			try {
 				contrServ.updateEstado(Long.valueOf(idContrato),  'A');
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 			target = ViewsNames.HISTORIAL_CUIDADOR;
 		}

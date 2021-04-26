@@ -8,6 +8,5 @@
 	if (errors == null) {
 		errors = new Errors();
 	}
-	// el error general se renderizaria aqui
-	// ...
+	
 %>

@@ -42,6 +42,9 @@ import com.happypets.aplicacion.serviceImpl.ServicioServiceImpl;
 import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
@@ -78,6 +81,8 @@ public class PrecreateServlet extends HttpServlet {
 		String action = request.getParameter(ActionNames.ACTION);
 		String target = null;
 		boolean redirect = false;
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
 		if(ActionNames.REGISTRO_CUIDADOR.equals(action)) {
 			try {
 				List<Servicio> listServicio = servicioService.findAll("es");
@@ -96,6 +101,9 @@ public class PrecreateServlet extends HttpServlet {
 				target = ViewsNames.REGISTRO_CUIDADOR;
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 
 		}
@@ -108,6 +116,9 @@ public class PrecreateServlet extends HttpServlet {
 				target =ViewsNames.SOLICITUD_CONTRATO;
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		if(ActionNames.ADD_MASCOTA.equals(action)) {
@@ -117,7 +128,10 @@ public class PrecreateServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.TIPO_ESPECIE,listTipoEsp );
 				target = ViewsNames.ADD_MASCOTA;
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		if(ActionNames.EDIT_PERFIL_CLIENTE.equals(action)) {
@@ -138,6 +152,9 @@ public class PrecreateServlet extends HttpServlet {
 				target = ViewsNames.EDITAR_PERFIL_CLIENTE;
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		

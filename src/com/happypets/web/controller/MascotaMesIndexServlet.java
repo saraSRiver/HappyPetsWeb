@@ -18,8 +18,12 @@ import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.MapPrint;
 import com.happypets.web.utils.SessionManager;
+import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
 /**
@@ -41,9 +45,11 @@ public class MascotaMesIndexServlet extends HttpServlet {
 			logger.debug(MapPrint.print(request.getParameterMap()));
 		}
 		String action = request.getParameter(ActionNames.ACTION);
+		
 		if(action == null) {
 			action = ActionNames.INDEX;
 		}
+		
 		if( ActionNames.INDEX.equalsIgnoreCase(action)) {
 		
 			Mascota mascota= new Mascota();
@@ -53,8 +59,7 @@ public class MascotaMesIndexServlet extends HttpServlet {
 				
 				request.getRequestDispatcher(ViewsNames.INDEX).forward(request, response);
 			} catch ( DataException e) {
-
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
 			}
 
 		}

@@ -1,6 +1,7 @@
 package com.happypets.web.utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Errors {
@@ -11,15 +12,28 @@ public class Errors {
 			errorsMap = new HashMap<String, String>();
 		}
 		
-		public void addError(String key, String code) {
-			errorsMap.put(key, code);
+		public void addError(String error, String errorNombre) {
+			errorsMap.put(error, errorNombre);
 		}
 		
-		public String getError(String key) {
-			return errorsMap.get(key);
+		public String getError(String error) {
+			return errorsMap.get(error);
 		}
 		
 		public boolean hasErrors() {
 			return !errorsMap.isEmpty();
+		}
+		public String printError(String parameter) {
+			
+			String errores = errorsMap.get(parameter);
+			if(errores == null) {
+				return null;
+			}
+			if(errores.isEmpty()) {
+				return null;
+			}
+		
+			
+			return errores;
 		}
 }

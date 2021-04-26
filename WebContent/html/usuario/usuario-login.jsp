@@ -7,7 +7,7 @@
 
 <h2>Eres cuidador o cliente?</h2>
 
-<%@include file="/html/common/errors-header.jsp"%>
+
 
 <form action= "<%=UrlBuilder.builderUrlForm(request, "/usuario") %>" method="post">
     <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.LOGIN%>"/>  
@@ -16,15 +16,19 @@
 	<%
 		String emailError = errors.getError(ParameterNames.EMAIL);
 		if (emailError!=null) { 
-			%><%=emailError%>
+			%>
+			<p><%=emailError%>
 			<%}%>
+			</p>
 	<input type="text" name="email">
 	
 		<%
 		String passwordError = errors.getError(ParameterNames.PASSWORD);
 		if (passwordError!=null) { 
-			%><%=passwordError%>
+			%>
+			<p><%=passwordError%>
 			<%}%>
+			</p>
 	<input type="text" name="password">
             <input class="buscar" type="submit" value="Listo">
 <%@include file="/html/common/footer.jsp"%>

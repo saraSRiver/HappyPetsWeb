@@ -38,6 +38,8 @@ import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.MapPrint;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.SessionManager;
@@ -70,7 +72,8 @@ public class CuidadorServlet extends HttpServlet {
 		}
 	
 		String action = request.getParameter(ActionNames.ACTION);
-
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
 		String target=null;
 		boolean redirect=false;
 		if (ActionNames.CUIDADOR_BUSCAR.equalsIgnoreCase(action)) {
@@ -102,7 +105,10 @@ public class CuidadorServlet extends HttpServlet {
 				target = ViewsNames.RESULTS;
 				
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		else if(ActionNames.CUIDADOR_DETAIL.equalsIgnoreCase(action)){
@@ -115,7 +121,10 @@ public class CuidadorServlet extends HttpServlet {
 				target  = ViewsNames.DETAIL;
 				
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		} 
 
@@ -185,7 +194,10 @@ public class CuidadorServlet extends HttpServlet {
 				cuidServ.registro(cuidador);
 				target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			} catch (DataException | MailException e) {
-				logger.warn(e.getMessage(), e);
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 
 		}
@@ -202,8 +214,10 @@ public class CuidadorServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.CONTRATOS, contratos);
 				target = ViewsNames.HISTORIAL_CUIDADOR;
 			} catch (DataException e) {
-
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		else if(ActionNames.ELIMINAR.equals(action)) {
@@ -211,7 +225,10 @@ public class CuidadorServlet extends HttpServlet {
 			try {
 				cuidServ.baja(Long.valueOf(idCuid));
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 		}

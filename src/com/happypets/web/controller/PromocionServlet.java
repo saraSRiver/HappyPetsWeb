@@ -13,6 +13,8 @@ import org.apache.logging.log4j.Logger;
 import com.happypets.aplicacion.service.PromocionService;
 import com.happypets.aplicacion.serviceImpl.PromocionServiceImpl;
 import com.happypets.web.utils.ActionNames;
+import com.happypets.web.utils.AttributeNames;
+import com.happypets.web.utils.Errors;
 
 /**
  * Servlet implementation class PromocionServlet
@@ -29,6 +31,7 @@ public class PromocionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		String action = request.getParameter(ActionNames.ACTION);
+		
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}

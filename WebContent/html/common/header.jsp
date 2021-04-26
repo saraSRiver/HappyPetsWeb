@@ -12,7 +12,7 @@
  <script src="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 
 </head>
-
+	<%@include file="/html/common/errors-header.jsp"%>
 <header>
   	<%Cliente cliente = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
   	Cuidador cuidador = (Cuidador)SessionManager.get(request, AttributeNames.CUIDADOR);
@@ -50,7 +50,7 @@
       <%}%>
     <%if(cliente == null){%>
     <div class="secciones2">
-        <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request,"/html/cliente/registro-cliente.jsp")%>">Hazte cliente</a></button>
+        <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request,"/html/cliente/cliente-registro.jsp")%>">Hazte cliente</a></button>
     </div>
     <%} %>
       </div>

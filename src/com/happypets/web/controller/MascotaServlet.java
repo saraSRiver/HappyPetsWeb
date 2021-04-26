@@ -26,6 +26,8 @@ import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.SessionManager;
 import com.happypets.web.utils.UrlBuilder;
@@ -55,6 +57,8 @@ public class MascotaServlet extends HttpServlet {
 		Cliente cliente = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 		String target=null;
 		boolean redirect=false;
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
 		if (ActionNames.ADD_MASCOTA.equalsIgnoreCase(action)) {
 
 			String nombre = request.getParameter(ParameterNames.NOMBRE_MASCOTA);
@@ -93,7 +97,10 @@ public class MascotaServlet extends HttpServlet {
 
 				redirect = true;
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 
 		}
@@ -132,7 +139,10 @@ public class MascotaServlet extends HttpServlet {
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(masc.getIdMascota()));
 				redirect = true;
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		else if(ActionNames.DETAIL.equals(action)) {
@@ -145,7 +155,10 @@ public class MascotaServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.MASCOTA, m);
 				request.setAttribute(AttributeNames.TIPO_ESPECIE, tip);
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 			if(actionUpdate == null) {
 				target = ViewsNames.PERFIL_MASCOTA;
@@ -155,8 +168,10 @@ public class MascotaServlet extends HttpServlet {
 					List<TipoEspecie> listEspecie = servEspecie.findAll("es");
 					request.setAttribute(AttributeNames.ESPECIES, listEspecie);
 				} catch (DataException e) {
-
-					e.printStackTrace();
+					logger.warn(e.getMessage(),e);
+					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+					request.setAttribute(AttributeNames.ERRORS, errors);
+					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 				}
 				target = ViewsNames.EDITAR_PERFIL_MASCOTA;
 			}
@@ -166,7 +181,10 @@ public class MascotaServlet extends HttpServlet {
 			try {
 				mascServ.deleteMascota(Long.valueOf(idMasc));
 			} catch ( DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 			target = ViewsNames.PERFIL_CLIENTE;
 		}

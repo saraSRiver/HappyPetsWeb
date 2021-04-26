@@ -23,5 +23,6 @@ public class ViewsNames {
 	public static final String PUNTUACION_CUIDADOR="/html/puntuacion/puntuacion-cuidador.jsp";
 	public static final String HIRE_AGAIN="/html/contrato/contrato-hire-again.jsp";
 	public static final String CONTRATO_DETAIL="/html/contrato/contrato-detail.jsp";
-	
+	public static final String ERROR_404="/html/error/404.jsp";
+	public static final String ERROR_500="/html/error/500.jsp";
 }

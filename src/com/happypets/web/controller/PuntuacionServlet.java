@@ -24,6 +24,8 @@ import com.happypets.aplicacion.serviceImpl.PuntuacionServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.MapPrint;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.SessionManager;
@@ -56,7 +58,8 @@ public class PuntuacionServlet extends HttpServlet {
 		String target=null;
 		boolean redirect=false;
 		Cliente cliente = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
-	
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
 		 if(ActionNames.PUNTUAR_CUIDADOR.equalsIgnoreCase(action)) {
 			String puntuacion=request.getParameter(ParameterNames.PUNTOS);
 			String idCuidador = request.getParameter(ParameterNames.ID_CUIDADOR);
@@ -71,7 +74,10 @@ public class PuntuacionServlet extends HttpServlet {
 				target=UrlBuilder.getUrlForController(request, ContextsPath.PUNTUACION, 
 						ActionNames.CUIDADORES_PUNTUADOS, redirect);
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		else if(ActionNames.ACTUALIZAR_PUNTUACION.equalsIgnoreCase(action)) {
@@ -90,7 +96,10 @@ public class PuntuacionServlet extends HttpServlet {
 				target=UrlBuilder.getUrlForController(request, ContextsPath.PUNTUACION, 
 						ActionNames.CUIDADORES_PUNTUADOS, redirect);
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		else if(ActionNames.CUIDADORES_PUNTUADOS.equalsIgnoreCase(action)) {
@@ -104,7 +113,10 @@ public class PuntuacionServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.PUNTUACION, punt);
 				target = ViewsNames.PUNTUACION_CUIDADOR;
 			} catch ( DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
 		if(redirect) {

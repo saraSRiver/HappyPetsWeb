@@ -2,7 +2,6 @@ package com.happypets.web.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +22,8 @@ import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.web.utils.ActionNames;
 import com.happypets.web.utils.AttributeNames;
 import com.happypets.web.utils.ContextsPath;
+import com.happypets.web.utils.ErrorCodes;
+import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.ParameterNames;
 import com.happypets.web.utils.PasswordEncryptor;
 import com.happypets.web.utils.SessionManager;
@@ -48,6 +49,8 @@ public class ClienteServlet extends HttpServlet {
 		String target=null;
 		boolean redirect=false;
 		String action = request.getParameter(ActionNames.ACTION);
+		Errors errors = new Errors();
+		request.setAttribute(AttributeNames.ERRORS, errors);
 		Cliente c = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 		if(ActionNames.REGISTRO_CLIENTE.equalsIgnoreCase(action)) {
 
@@ -76,7 +79,6 @@ public class ClienteServlet extends HttpServlet {
 			cliente.setTelefono(telefono);
 			cliente.setEstadoPromocion(false);
 			DireccionDTO direccionDto= new DireccionDTO();
-
 			direccionDto.setCalle(calle);
 			direccionDto.setPortal(Integer.valueOf(portal));
 			direccionDto.setCp(Integer.valueOf(cp));
@@ -91,7 +93,11 @@ public class ClienteServlet extends HttpServlet {
 					cliente.add(servIdioma.findByid(i));
 				}
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+			
 			}
 			try {
 				cliente = cliServ.registro(cliente);
@@ -99,7 +105,11 @@ public class ClienteServlet extends HttpServlet {
 				target = ViewsNames.PERFIL_CLIENTE;
 				redirect = true;
 			}catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+			
 			}
 
 			if(ActionNames.PERFIL_CLIENTE.equalsIgnoreCase(action)) {
@@ -157,7 +167,11 @@ public class ClienteServlet extends HttpServlet {
 					clienteActual.add(servIdioma.findByid(i));
 				}
 			} catch (DataException e) {
-				e.printStackTrace();
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+				
 			}
 
 			if(newPassword.equals(repPassword)) {
@@ -172,9 +186,17 @@ public class ClienteServlet extends HttpServlet {
 						target = ViewsNames.PERFIL_CLIENTE;
 						redirect = true;
 					} catch (IncorrectPasswordException e) {
-						e.printStackTrace();
+						logger.warn(e.getMessage(),e);
+						errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+						request.setAttribute(AttributeNames.ERRORS, errors);
+						target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+						
 					} catch (DataException e) {
-						e.printStackTrace();
+						logger.warn(e.getMessage(),e);
+						errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+						request.setAttribute(AttributeNames.ERRORS, errors);
+						target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+						
 					}
 				}
 			}
@@ -184,7 +206,11 @@ public class ClienteServlet extends HttpServlet {
 				try {
 					cliServ.baja(Long.valueOf(idCli));
 				} catch (DataException e) {
-					e.printStackTrace();
+					logger.warn(e.getMessage(),e);
+					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+					request.setAttribute(AttributeNames.ERRORS, errors);
+					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+				
 				}
 				target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			}
