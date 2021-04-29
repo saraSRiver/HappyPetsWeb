@@ -86,7 +86,7 @@ public class ContratoServlet extends HttpServlet {
 				contrato.setFechaInicio(DBDataUtils.formatDate(fechaInicio));
 				contrato.setFechaFinal(DBDataUtils.formatDate(fechaFin));
 			} catch (ParseException e1) {
-				e1.printStackTrace();
+				logger.warn(e1.getMessage(),e1);
 			}
 			contrato.setFechaContrato(new Date());
 			contrato.setIdServicio(Long.valueOf(servicio));

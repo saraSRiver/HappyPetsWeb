@@ -5,7 +5,7 @@
       <%@include file="/html/common/header.jsp"%>
    
  <h2>Hazte cliente</h2>
-    <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CLIENTE) %>"  method="post">
+    <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CLIENTE) %>"  method="post">
     <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.REGISTRO_CLIENTE%>"/>
   
   <p>

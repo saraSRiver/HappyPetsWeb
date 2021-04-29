@@ -69,6 +69,7 @@
 <url-pattern>/html/cliente/cliente-historial.jsp</url-pattern>
 <url-pattern>/html/cliente/cliente-editar-perfil.jsp</url-pattern>
 <url-pattern>/html/contrato/*</url-pattern>
+<url-pattern>/html/puntuacion/*</url-pattern>
 </filter-mapping>
 
 <filter>

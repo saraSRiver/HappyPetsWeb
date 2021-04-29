@@ -191,7 +191,10 @@ public class CuidadorServlet extends HttpServlet {
 				for(String i : idiomas) {
 					cuidador.add(servIdioma.findByid(i));
 				}
-				cuidServ.registro(cuidador);
+				
+				cuidador = cuidServ.registro(cuidador);
+				cuidador = cuidServ.findById(cuidador.getIdcuidador());
+				SessionManager.set(request, AttributeNames.CUIDADOR, cuidador);
 				target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			} catch (DataException | MailException e) {
 				logger.warn(e.getMessage(),e);
@@ -224,6 +227,7 @@ public class CuidadorServlet extends HttpServlet {
 			String idCuid= request.getParameter(ParameterNames.ID_CUIDADOR);
 			try {
 				cuidServ.baja(Long.valueOf(idCuid));
+				SessionManager.remove(request, AttributeNames.CUIDADOR);
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);
 				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);

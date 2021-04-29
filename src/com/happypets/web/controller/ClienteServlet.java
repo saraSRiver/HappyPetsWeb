@@ -51,7 +51,7 @@ public class ClienteServlet extends HttpServlet {
 		String action = request.getParameter(ActionNames.ACTION);
 		Errors errors = new Errors();
 		request.setAttribute(AttributeNames.ERRORS, errors);
-		Cliente c = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
+	
 		if(ActionNames.REGISTRO_CLIENTE.equalsIgnoreCase(action)) {
 
 			String nombre=request.getParameter(ParameterNames.NOMBRE);
@@ -92,15 +92,9 @@ public class ClienteServlet extends HttpServlet {
 				for(String i : idiomas) {
 					cliente.add(servIdioma.findByid(i));
 				}
-			} catch (DataException e) {
-				logger.warn(e.getMessage(),e);
-				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
-				request.setAttribute(AttributeNames.ERRORS, errors);
-				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			
-			}
-			try {
 				cliente = cliServ.registro(cliente);
+				cliente = cliServ.findById(cliente.getIdcliente());
 				SessionManager.set(request, AttributeNames.CLIENTE,cliente);
 				target = ViewsNames.PERFIL_CLIENTE;
 				redirect = true;
@@ -123,6 +117,7 @@ public class ClienteServlet extends HttpServlet {
 			redirect = true;
 		}
 		else if(ActionNames.EDIT_PERFIL_CLIENTE.equalsIgnoreCase(action)) {
+			Cliente c = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 			String nombre=request.getParameter(ParameterNames.NOMBRE);
 			String apellidos=request.getParameter(ParameterNames.APELLIDOS);
 			String passwordActual= request.getParameter(ParameterNames.PASSWORD);
@@ -202,9 +197,11 @@ public class ClienteServlet extends HttpServlet {
 			}
 		}
 			else if(ActionNames.ELIMINAR.equals(action)) {
+				
 				String idCli= request.getParameter(ParameterNames.ID_CLIENTE);
 				try {
 					cliServ.baja(Long.valueOf(idCli));
+					SessionManager.remove(request, AttributeNames.CLIENTE);
 				} catch (DataException e) {
 					logger.warn(e.getMessage(),e);
 					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
