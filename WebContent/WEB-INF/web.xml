@@ -16,6 +16,17 @@
 <url-pattern>/mascotaMesIndex</url-pattern>
 </servlet-mapping>
 
+<servlet>
+<servlet-name>LocalServlet</servlet-name>
+<servlet-class>com.happypets.web.controller.LocalServlet</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+<servlet-name>LocalServlet</servlet-name>
+<url-pattern>/localidad</url-pattern>
+</servlet-mapping>
+
 
 <servlet>
 <servlet-name>UsuarioServlet</servlet-name>

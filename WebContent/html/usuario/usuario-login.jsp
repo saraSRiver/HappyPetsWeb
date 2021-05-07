@@ -5,11 +5,8 @@
 
 <%@include file="/html/common/header.jsp"%>
 
-<h2>Eres cuidador o cliente?</h2>
-
-
-
-<form action= "<%=UrlBuilder.builderUrlForm(request, "/usuario") %>" method="post">
+<h2>¿Eres cuidador o cliente?</h2>
+<form action= "<%=UrlBuilder.builderUrlForm(request, "/usuario") %>" method="post" id="formLogin">
     <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.LOGIN%>"/>  
 	<input type="radio"  name="tipoUsuario" value="cuidador">Cuidador<br>
     <input type="radio"  name="tipoUsuario" value="cliente">Cliente<br>
@@ -30,5 +27,7 @@
 			<%}%>
 			</p>
 	<input type="text" name="password">
-            <input class="buscar" type="submit" value="Listo">
+	 <input type="radio" name="" value="1">Recordar usuario<br>
+	
+            <button class="buscar" type="button">Iniciar sesión</button>
 <%@include file="/html/common/footer.jsp"%>

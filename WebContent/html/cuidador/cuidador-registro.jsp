@@ -7,7 +7,7 @@
  <%List<Idioma> idiomas = (List<Idioma>)request.getAttribute(AttributeNames.IDIOMA);
  List<Experiencia> experiencia = (List<Experiencia>)request.getAttribute(AttributeNames.EXPERIENCIA);
  List<TipoEspecie> tipoEspecie = (List<TipoEspecie>)request.getAttribute(AttributeNames.TIPO_ESPECIE);
- List<Poblacion> poblacion =(List<Poblacion>)request.getAttribute(AttributeNames.POBLACION);
+
  List<Provincia> provincia = (List<Provincia>)request.getAttribute(AttributeNames.PROVINCIA);
  List<Servicio> servicios = (List<Servicio>)request.getAttribute(AttributeNames.SERVICIOS);
  %>
@@ -58,24 +58,23 @@
     Calle:<br>
     <input type="text" name="<%=ParameterNames.CALLE%>">
 </p>
-<p>
-    Población:<br>
-     <select name="<%=ParameterNames.POBLACION%>">
-              <option value="0">--Selecciona poblacion</option>
-			<%for(Poblacion p: poblacion){%>
-			<option value="<%=p.getIdPoblacion()%>"><%=p.getNombre()%></option>
-            <%} %>
-            </select>
-          </p>  
+
 <p>
 Provincia<br>
-<select name="<%=ParameterNames.PROVINCIA%>">
+<select name="<%=ParameterNames.PROVINCIA%>" id="provincia">
        <option value="0">--Selecciona provincia</option>
 			<%for(Provincia p: provincia){%>
 			<option value="<%=p.getidProvincia()%>"><%=p.getNombre()%></option>
 			<%} %>
 </select>
 </p>
+<p>
+    Población:<br>
+     <select name="<%=ParameterNames.POBLACION%>" id="poblacion">
+              <option value="0">--Selecciona poblacion</option>
+		
+            </select>
+          </p>  
 <p>
 	Idiomas<br>
 	<%for(Idioma i: idiomas){%>

@@ -4,6 +4,7 @@
     <%@ page import="com.happypets.web.utils.*" %>
       <%@include file="/html/common/header.jsp"%>
    
+   	<%List<Provincia> provincias = (List<Provincia>)request.getAttribute(AttributeNames.PROVINCIA);%>
  <h2>Hazte cliente</h2>
     <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CLIENTE) %>"  method="post">
     <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.REGISTRO_CLIENTE%>"/>
@@ -54,32 +55,23 @@
     Calle:<br>
     <input type="text" name="<%=ParameterNames.CALLE%>">
 </p>
-<p>
-    Población:<br>
-     <select name="<%=ParameterNames.POBLACION%>">
-                <option  value="1">Chantada</option>
-                <option value="2">O Grove</option>
-                <option value="3">A Coruña</option>
-                <option value="4">Ferrol</option>
-                 <option value="5">Lalín</option>
-                  <option value="6">Sanxexo</option>
-                   <option value="7">Portonovo</option>
-                    <option value="8">Neda</option>
-                      <option value="9">Fene</option>
-                        <option value="10">Narón</option>
-            </select>
-          </p>  
+ 
 <p>
 Provincia<br>
-<select name="<%=ParameterNames.PROVINCIA%>">
-    <option value="0">- selecciona tu provincia-</option>
-    <option value="1">A Coruña</option>
-    <option value="2">Pontevedra</option>
-    <option value="3">Lugo</option>
-    <option value="4">Ourense</option>
+<select name="<%=ParameterNames.PROVINCIA%>" id="provincia">
+  <option value="0">- selecciona una provincia-</option>
+	 	<%for(Provincia p: provincias) {%>
+	 		<option value="<%=p.getidProvincia()%>"><%=p.getNombre()%></option>
+	 	<%}%>
 
 </select>
 </p>
+<p>
+    Población:<br>
+     <select name="<%=ParameterNames.POBLACION%>" id="poblacion">
+              <option value="0">- selecciona una poblacion-</option>
+            </select>
+          </p> 
 <p>
 	Idiomas<br>
 	<input type="checkbox"  name="<%=ParameterNames.IDIOMAS %>" id="1" value="es">Español<br>

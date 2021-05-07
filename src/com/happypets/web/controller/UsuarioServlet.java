@@ -87,6 +87,8 @@ public class UsuarioServlet extends HttpServlet {
 				try {
 					cliente = cliServ.login(email, password);
 					SessionManager.set(request, AttributeNames.CLIENTE, cliente);
+			
+					
 					target = ViewsNames.PERFIL_CLIENTE;
 					redirect = true;
 

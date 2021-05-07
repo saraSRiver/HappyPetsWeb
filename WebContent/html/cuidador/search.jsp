@@ -4,7 +4,7 @@
       <%@include file="/html/common/header.jsp"%>
    
 <body>
-
+	<%List<Provincia> provincias = (List<Provincia>)request.getAttribute(AttributeNames.PROVINCIA);%>
    <h2>Búsqueda de cuidadores</h2>
    <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CUIDADOR) %>" method="post">
     
@@ -49,32 +49,23 @@
                
                 </div>
         
-<p>
-    Población:<br>
-     <select name="<%=ParameterNames.POBLACION%>">
-                <option  value="1">Chantada</option>
-                <option value="2">O Grove</option>
-                <option value="3">A Coruña</option>
-                <option value="4">Ferrol</option>
-                 <option value="5">Lalín</option>
-                  <option value="6">Sanxexo</option>
-                   <option value="7">Portonovo</option>
-                    <option value="8">Neda</option>
-                      <option value="9">Fene</option>
-                        <option value="10">Narón</option>
-            </select>
-          </p>  
+
 <p>
 	Provincia<br>
-	<select name="<%=ParameterNames.PROVINCIA%>">
-	    <option value="1">- selecciona una provincia-</option>
-	    <option value="2">A Coruña</option>
-	    <option value="3">Pontevedra</option>
-	    <option value="4">Lugo</option>
-	    <option value="5">Ourense</option>
+	<select name="<%=ParameterNames.PROVINCIA%>" id="provincia">
+	    <option value="0">- selecciona una provincia-</option>
+	 	<%for(Provincia p: provincias) {%>
+	 		<option value="<%=p.getidProvincia()%>"><%=p.getNombre()%></option>
+	 	<%}%>
 	
 	</select>
 </p>
+<p>
+    Población:<br>
+     <select name="<%=ParameterNames.POBLACION%>" id="poblacion">
+      <option value="0">- selecciona una poblacion-</option>
+            </select>
+          </p>  
 <p>
 	Idiomas<br>
 	<input type="radio"  name="<%=ParameterNames.IDIOMAS %>" id="1" value="es">Español<br>

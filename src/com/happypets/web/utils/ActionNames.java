@@ -30,5 +30,7 @@ public class ActionNames {
 	public static final String PUNTUAR_CUIDADOR="puntuarCuidador";
 	public static final String ACTUALIZAR_PUNTUACION="actualizarPuntuacion";
 	public static final String CUIDADORES_PUNTUADOS="cuidadoresPuntuados";
+	public static final String PROVINCIA = "provincia";
+	public static final String POBLACION = "poblacion";
 
 }

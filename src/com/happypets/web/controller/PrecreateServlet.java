@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.happypets.aplicacion.model.Cliente;
+
 import com.happypets.aplicacion.model.Cuidador;
 import com.happypets.aplicacion.model.Experiencia;
 import com.happypets.aplicacion.model.Idioma;
-import com.happypets.aplicacion.model.Mascota;
+
 import com.happypets.aplicacion.model.Poblacion;
 import com.happypets.aplicacion.model.Provincia;
 import com.happypets.aplicacion.model.Servicio;
 import com.happypets.aplicacion.model.TipoEspecie;
-import com.happypets.aplicacion.service.ClienteService;
+
 import com.happypets.aplicacion.service.CuidadorService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.ExperienciaService;
@@ -31,7 +31,7 @@ import com.happypets.aplicacion.service.PoblacionService;
 import com.happypets.aplicacion.service.ProvinciaService;
 import com.happypets.aplicacion.service.ServicioService;
 import com.happypets.aplicacion.service.TipoEspecieService;
-import com.happypets.aplicacion.serviceImpl.ClienteServiceImpl;
+
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ExperienciaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
@@ -46,7 +46,7 @@ import com.happypets.web.utils.ContextsPath;
 import com.happypets.web.utils.ErrorCodes;
 import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.ParameterNames;
-import com.happypets.web.utils.SessionManager;
+
 import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
@@ -88,14 +88,12 @@ public class PrecreateServlet extends HttpServlet {
 				List<Servicio> listServicio = servicioService.findAll("es");
 				List<TipoEspecie>listTipoEsp = tipEspService.findAll("es");
 				List<Idioma> listIdioma = idiomaService.findAll();
-				List<Poblacion>listPoblacion = poblacionService.findAll();
 				List<Provincia>listProvincia = provinciaService.findAll();
 				List<Experiencia>listExperiencia = experienciaService.findAll("es");
 
 				request.setAttribute(AttributeNames.SERVICIOS, listServicio);
 				request.setAttribute(AttributeNames.TIPO_ESPECIE, listTipoEsp);
 				request.setAttribute(AttributeNames.IDIOMA, listIdioma);
-				request.setAttribute(AttributeNames.POBLACION, listPoblacion);
 				request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
 				request.setAttribute(AttributeNames.EXPERIENCIA, listExperiencia);
 				target = ViewsNames.REGISTRO_CUIDADOR;
@@ -107,6 +105,22 @@ public class PrecreateServlet extends HttpServlet {
 			}
 
 		}
+		
+		if(ActionNames.REGISTRO_CLIENTE.equals(action)) {
+			try {
+				List<Provincia>listProvincia = provinciaService.findAll();
+				
+				request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
+				target = ViewsNames.REGISTRO_CLIENTE;
+			} catch (DataException e) {
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+			}
+
+		}
+		
 		if(ActionNames.CONTRATAR.equals(action)) {
 			try {
 				String cuidador=request.getParameter(ParameterNames.ID_CUIDADOR);
@@ -119,6 +133,20 @@ public class PrecreateServlet extends HttpServlet {
 				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
 				request.setAttribute(AttributeNames.ERRORS, errors);
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+			}
+		}
+		if(ActionNames.CUIDADOR_BUSCAR.equals(action)) {
+			List<Provincia> listProvincia;
+			try {
+				listProvincia = provinciaService.findAll();
+		
+			request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
+			target =ViewsNames.BUSQUEDA_CUIDADORES;
+			} catch (DataException e) {
+				logger.warn(e.getMessage(),e);
+				errors.addError(ActionNames.CUIDADOR_BUSCAR, ErrorCodes.ERROR_GENERIC);
+				request.setAttribute(AttributeNames.ERRORS, errors);
+				target = UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.INDEX, false);
 			}
 		}
 		if(ActionNames.ADD_MASCOTA.equals(action)) {

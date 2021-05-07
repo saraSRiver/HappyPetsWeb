@@ -5,6 +5,7 @@
     <%@include file="/html/common/header.jsp"%>
     <%
 Cliente cl = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
+
 Mascota m = (Mascota)request.getAttribute( AttributeNames.MASCOTA);
 TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
 %>
@@ -25,9 +26,9 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
      
         <p>
             Fecha de nacimiento (aproximada):<br>
-            <p><%=m.getFechaNacimiento()%></p>
+            <p id="fechaNacMasc"><%=m.getFechaNacimiento()%></p>
         </p>
-    
+    	<p></p>
         <p>
         
             Especie:<br>

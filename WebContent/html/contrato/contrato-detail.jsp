@@ -18,9 +18,9 @@
     <p><strong><%=co.getNombreMascota()%></strong></p>
      <p><strong><%=co.getNombreEspecie()%></strong></p>
       <p><strong><%=co.getNombreServicio()%></strong></p>
-    <p><strong><%=co.getFechaInicio()%> hasta <%=co.getFechaFinal()%></strong></p>
+    <p id="fechaDuracion"><strong><%=co.getFechaInicio()%> hasta <%=co.getFechaFinal()%></strong></p>
     <p><strong><%=co.getPrecioFinal()%></strong></p>
 </div>
-
+	<p id="contador"></p>
 </div>
        <%@include file="/html/common/footer.jsp"%>

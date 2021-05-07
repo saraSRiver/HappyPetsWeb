@@ -10,7 +10,7 @@
   <link rel= "stylesheet" href="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/css/estilos.css">
 <script defer src ="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/puntuacion.js"></script>
  <script src="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
-
+<script defer src ="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/funcionalidades.js"></script>
 </head>
 	<%@include file="/html/common/errors-header.jsp"%>
 <header>
@@ -25,7 +25,7 @@
           <button class= "boton" type="button"><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX) %>">Página principal</a></button>
       </div>
           <div class="secciones">
-          <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.BUSQUEDA_CUIDADORES)%>">Buscar cuidadores</a></button>
+          <button class= "boton"><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.CUIDADOR_BUSCAR)%>">Buscar cuidadores</a></button>
 
           </div>
          <%if(cuidador==null){%>
@@ -40,7 +40,7 @@
 	<%if(cuidador == null&& cliente==null){%>
       <div class="nav2">
         <div class="secciones2">
-        <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request, "/html/usuario/usuario-login.jsp")%>">Acceder</a></button>
+        <button class= "boton" id="login"><a href="<%=UrlBuilder.builderUrlForm(request, "/html/usuario/usuario-login.jsp")%>">Acceder</a></button>
     </div>
     <%}%>
     <%if(cliente != null){%>
@@ -50,7 +50,7 @@
       <%}%>
     <%if(cliente == null){%>
     <div class="secciones2">
-        <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request,"/html/cliente/cliente-registro.jsp")%>">Hazte cliente</a></button>
+        <button class= "boton"><a href="<%=UrlBuilder.builderUrlForm(request, ContextsPath.PRECREATE + "?" + ActionNames.ACTION + "=" + ActionNames.REGISTRO_CLIENTE)%>">Hazte cliente</a></button>
     </div>
     <%} %>
       </div>

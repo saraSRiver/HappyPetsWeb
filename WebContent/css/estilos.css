@@ -93,8 +93,12 @@ nav a {
 .secciones2 a {
 	text-align: right;
 	font-size: 14pt;
+	  text-decoration: none;
 }
-
+.secciones2 .boton{
+	background-color: var(--colorNav);
+	border:none;
+}
 body {
 	position: relative;
 	background-color: var(--colorFondo);
@@ -102,7 +106,7 @@ body {
 
 footer {
 	background-color: var(--colorNav);
-	border-radius: 2%/50%;
+	border-radius: 100px;
 	position: relative;
 	margin-top: 5%;
 	width: 95%;
@@ -120,7 +124,13 @@ footer p {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 70%;
+	width: 25%;
+	justify-content:flex-start;
+	
+}
+.contenedorFooter h2{
+	margin:0;
+	margin-top:4%;
 }
 
 .ContenedorFooter  figure {
@@ -145,6 +155,7 @@ footer p {
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
+	
 }
 
 .contactos>div {
@@ -156,6 +167,8 @@ footer p {
 	margin-left: 5%;
 	position: relative;
 	width: 20%;
+	margin-top:25%;
+	
 }
 
 .contactos figure>img {
@@ -163,14 +176,15 @@ footer p {
 	margin-right: 0px;
 }
 
-.contactos h2 {
+.contactos >div:nth-child(2) h2 {
 	width: 100%;
 	position: relative;
 	margin: auto 1% auto 1%;
 	margin-top: 4%;
 }
 
-/*/página index/*/
+
+/*/pagina index/*/
 figure {
 	margin: 0;
 }
@@ -240,11 +254,16 @@ h2 {
 .servicios {
 	display: flex;
 	flex-direction: row;
-	margin-left: 20%;
+	
 }
 
 .servicios figure {
 	padding: 3%;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	width:25%;
+	min-height:320px;
 }
 
 .servicios figcaption {
@@ -253,6 +272,7 @@ h2 {
 
 .servicios>figure  div {
 	display: none;
+	width:100%;
 }
 
 .servicios>figure:hover  div {
@@ -353,18 +373,19 @@ section {
 
 .perfil button {
 	background-color: white;
-	padding-bottom: 100%;
+	
 	font-size: 1.2rem;
 	border: none;
 	display: block;
 }
 
-.perfil button:hover ~ div {
-	display: initial;
+
+.perfil:hover div{
+	display:flex;
 }
 
 .perfil div:hover {
-	display: initial;
+	display: flex;
 }
 
 .perfil div {
@@ -373,11 +394,14 @@ section {
 	padding: 0 2% 0 2%;
 	top: 90%;
 	display: none;
+	flex-direction:column;
 	-webkit-box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.75);
 	box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
-
+.perfil div a{
+	margin-bottom: 2%;
+}
 body>div>div:nth-child(1) {
 	justify-content: space-between;
 }

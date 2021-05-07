@@ -60,7 +60,9 @@ public class ContratoServlet extends HttpServlet {
 		if(logger.isDebugEnabled()) {
 			logger.debug(request.getParameterMap());
 		}
+
 		Cliente cliente  = (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
+
 		Cuidador cuid=(Cuidador)SessionManager.get(request, AttributeNames.CUIDADOR);
 		String target=null;
 		boolean redirect=false;
@@ -108,6 +110,7 @@ public class ContratoServlet extends HttpServlet {
 
 			List<ContratoDTO> contratos = null;
 			try {
+			
 				contratos = contrDTOServ.findByIdCliente(cliente.getIdcliente());
 				request.setAttribute(AttributeNames.CONTRATOS, contratos);
 				target = ViewsNames.HISTORIAL_CLIENTE;

@@ -112,6 +112,7 @@ public class ClienteServlet extends HttpServlet {
 			}
 		}
 		else if(ActionNames.LOG_OUT.equalsIgnoreCase(action)) {
+			logger.info("LogOut");
 			SessionManager.remove(request, AttributeNames.CLIENTE);
 			target = ContextsPath.MASCOTA_MES + "?" + ActionNames.ACTION + "=" + ActionNames.INDEX;
 			redirect = true;
@@ -197,7 +198,7 @@ public class ClienteServlet extends HttpServlet {
 			}
 		}
 			else if(ActionNames.ELIMINAR.equals(action)) {
-				
+				logger.info("Eliminar");
 				String idCli= request.getParameter(ParameterNames.ID_CLIENTE);
 				try {
 					cliServ.baja(Long.valueOf(idCli));
