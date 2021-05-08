@@ -249,6 +249,7 @@
 	
 	let dataStart = new Date(fechas[0].trim());
 	let dataEnd = new Date(fechas[1].trim());
+	if(dataEnd > new Date()){
 	let diferencia = Math.abs( dataStart - dataEnd);
 	let seconds = diferencia / 1000;
 	let years = Math.abs(dataStart.getFullYear() - dataEnd.getFullYear());
@@ -256,6 +257,7 @@
 	let dias = Math.floor(seconds/86400);
 	
 	contador.innerHTML = "El contrato finaliza en  " + month + " meses y " + dias +  " dias";
+}
 	}
 	if(dataDesde !=null){
 	

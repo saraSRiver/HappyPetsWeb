@@ -8,19 +8,28 @@
 	Contrato co=(Contrato) request.getAttribute(AttributeNames.CONTRATO);
     Cliente cl= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 %>
+
     <h2 class=>Detalles</h2>
-<p><%=co.getFechaContrato()%></p>
-<div class="contenedorHistorial">
-<div class="seccionesHistorial">
+
+<div id="titulosHistorial">
+<p>Dirección</p>
+<p>Mascota</p>
+<p>Especie</p>
+<p>Servicio</p>
+<p>Duración</p>
+<p>Precio</p>
+</div>
+
+<div class="seccionesDetail">
   <p><strong><%=cl.getDireccion().getCalle()%>, <%=cl.getDireccion().getPortal()%>,
     		<%=cl.getDireccion().getPiso()%>.<%=cl.getDireccion().getNombrePoblacion()%>,
     		<%=cl.getDireccion().getNombreProvincia()%>.</strong></p>
-    <p><strong><%=co.getNombreMascota()%></strong></p>
-     <p><strong><%=co.getNombreEspecie()%></strong></p>
-      <p><strong><%=co.getNombreServicio()%></strong></p>
+    <p id="nMas"><strong><%=co.getNombreMascota()%></strong></p>
+     <p id="nEs"><strong><%=co.getNombreEspecie()%></strong></p>
+      <p id="nSe"><strong><%=co.getNombreServicio()%></strong></p>
     <p id="fechaDuracion"><strong><%=co.getFechaInicio()%> hasta <%=co.getFechaFinal()%></strong></p>
-    <p><strong><%=co.getPrecioFinal()%></strong></p>
+    <p id="pr"><strong><%=co.getPrecioFinal()%></strong></p>
 </div>
 	<p id="contador"></p>
-</div>
+
        <%@include file="/html/common/footer.jsp"%>

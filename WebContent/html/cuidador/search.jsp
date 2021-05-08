@@ -4,14 +4,17 @@
       <%@include file="/html/common/header.jsp"%>
    
 <body>
-	<%List<Provincia> provincias = (List<Provincia>)request.getAttribute(AttributeNames.PROVINCIA);%>
+	<%List<Provincia> provincias = (List<Provincia>)request.getAttribute(AttributeNames.PROVINCIA);
+	List<Cuidador>cuidadores = (List<Cuidador>) request.getAttribute(AttributeNames.CUIDADOR);
+	%>
    <h2>Búsqueda de cuidadores</h2>
+  <section id="search">
    <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CUIDADOR) %>" method="post">
     
 
    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.CUIDADOR_BUSCAR%>"/>
    
-<section>
+
     <div class="busqueda">
    
         <p>
@@ -80,9 +83,83 @@
     Precio hasta:<br>
     <input type="text" name="<%=ParameterNames.PRECIO_HASTA %>" >
 </p>
- </section>
-
-    <input class="buscar" type="submit" value="buscar">
 
 
+    <input id="buscarB" type="submit" value="buscar">
+</form>
+
+<section>
+<p>Resultados de tu búsqueda:<%=cuidadores.size()%></p>
+	<%
+	
+	for(Cuidador c: cuidadores){
+		%>
+		<section class="results">
+		<a href="<%=UrlBuilder.builderUrlForm(request,"/cuidador?action=detail&" + ParameterNames.ID_CUIDADOR + "=")%>
+		<%=c.getIdcuidador()%>"><%=c.getNombre()%> <%=c.getApellidos()%></a>
+	
+	<div class="caracteristicas">
+		<h4>Idiomas:</h4>
+		<div class="carP">
+		<%for(Idioma i: c.getIdiomas()){ %>
+		<p><%=i.getIdioma()%></p>
+		<%} %>
+		</div>
+	</div>
+	<div class="caracteristicas">
+		<h4>Experiencia:</h4>
+	<div class="carP">
+		<p><%=c.getExperiencia().getValor()%></p>
+		</div>
+		</div>
+		
+		<div class="caracteristicas">
+		<h4>Especies:</h4>
+		<div class="carP">
+		<%for(TipoEspecie e: c.getEspecies()){ %>
+			<p><%=e.getNombre()%></p>
+		<%} %>
+		</div>
+		</div>
+		<div class="caracteristicas">
+		<h4>Servicios:</h4>
+		<div class="carP">
+		<%for (ServicioOfrecido so: c.getServiciosOfrecidos()){ %>
+		<p><%=so.getNombreServicio()%></p>
+		<p><%=so.getPrecio()%> euros</p>
+		<%} %>
+		</div>
+		</div >
+		<div class="caracteristicas">
+		<h4>Teléfono:</h4>
+		<div class="carP">
+			<p><%=c.getTelefono()%></p>
+			</div>
+			</div>
+			<div class="caracteristicas">
+			<h4>Población</h4>
+			<div class="carP">
+			<p><%=c.getDireccion().getNombrePoblacion()%></p>
+			</div>
+			</div>
+			<div class="caracteristicas">
+			<h4>Provincia:</h4>
+			<div class="carP">
+			<p><%=c.getDireccion().getNombreProvincia()%></p>
+			</div>
+			</div>
+			<div class="caracteristicas">
+			<h4>Puntuación media:</h4>
+			<div class="carP">
+			<p><%=c.getPuntuacionMedia()%></p>
+			</div>
+			</div>
+			</section>
+	<%
+	}
+%>
+
+
+</section>
+</section>
       <%@include file="/html/common/footer.jsp"%>

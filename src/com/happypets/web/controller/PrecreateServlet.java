@@ -12,16 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 import com.happypets.aplicacion.model.Cuidador;
 import com.happypets.aplicacion.model.Experiencia;
 import com.happypets.aplicacion.model.Idioma;
-
 import com.happypets.aplicacion.model.Poblacion;
 import com.happypets.aplicacion.model.Provincia;
 import com.happypets.aplicacion.model.Servicio;
 import com.happypets.aplicacion.model.TipoEspecie;
-
+import com.happypets.aplicacion.service.CuidadorCriteria;
 import com.happypets.aplicacion.service.CuidadorService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.ExperienciaService;
@@ -31,7 +29,6 @@ import com.happypets.aplicacion.service.PoblacionService;
 import com.happypets.aplicacion.service.ProvinciaService;
 import com.happypets.aplicacion.service.ServicioService;
 import com.happypets.aplicacion.service.TipoEspecieService;
-
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ExperienciaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
@@ -46,7 +43,6 @@ import com.happypets.web.utils.ContextsPath;
 import com.happypets.web.utils.ErrorCodes;
 import com.happypets.web.utils.Errors;
 import com.happypets.web.utils.ParameterNames;
-
 import com.happypets.web.utils.UrlBuilder;
 import com.happypets.web.utils.ViewsNames;
 
@@ -63,6 +59,7 @@ public class PrecreateServlet extends HttpServlet {
 	private TipoEspecieService tipEspService;
 	private ProvinciaService provinciaService;
 	private MascotaService mascotaServ;
+
 	private CuidadorService cuidadorServ;
 	public PrecreateServlet() {
 		servicioService = new ServicioServiceImpl();
@@ -105,11 +102,11 @@ public class PrecreateServlet extends HttpServlet {
 			}
 
 		}
-		
+
 		if(ActionNames.REGISTRO_CLIENTE.equals(action)) {
 			try {
 				List<Provincia>listProvincia = provinciaService.findAll();
-				
+
 				request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
 				target = ViewsNames.REGISTRO_CLIENTE;
 			} catch (DataException e) {
@@ -120,11 +117,11 @@ public class PrecreateServlet extends HttpServlet {
 			}
 
 		}
-		
+
 		if(ActionNames.CONTRATAR.equals(action)) {
 			try {
 				String cuidador=request.getParameter(ParameterNames.ID_CUIDADOR);
-			
+
 				Cuidador c= cuidadorServ.findById(Long.valueOf(cuidador));
 				request.setAttribute(AttributeNames.CUIDADOR, c);
 				target =ViewsNames.SOLICITUD_CONTRATO;
@@ -137,11 +134,15 @@ public class PrecreateServlet extends HttpServlet {
 		}
 		if(ActionNames.CUIDADOR_BUSCAR.equals(action)) {
 			List<Provincia> listProvincia;
+			List<Cuidador> listCuidadores;
 			try {
 				listProvincia = provinciaService.findAll();
-		
-			request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
-			target =ViewsNames.BUSQUEDA_CUIDADORES;
+				CuidadorCriteria cuid  = new CuidadorCriteria();
+				
+				listCuidadores = cuidadorServ.findByCriteria(cuid);
+				request.setAttribute(AttributeNames.PROVINCIA, listProvincia);
+				request.setAttribute(AttributeNames.CUIDADOR, listCuidadores);
+				target =ViewsNames.BUSQUEDA_CUIDADORES;
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);
 				errors.addError(ActionNames.CUIDADOR_BUSCAR, ErrorCodes.ERROR_GENERIC);
@@ -185,19 +186,19 @@ public class PrecreateServlet extends HttpServlet {
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
 		}
-		
-	if(redirect) {
-		logger.info("Redirect to..."+ target);
-		response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
-	}else {
-		logger.info("Forwading to..." + target);
-		request.getRequestDispatcher(target).forward(request, response);
+
+		if(redirect) {
+			logger.info("Redirect to..."+ target);
+			response.sendRedirect(UrlBuilder.builderUrlForm(request, target));
+		}else {
+			logger.info("Forwading to..." + target);
+			request.getRequestDispatcher(target).forward(request, response);
+		}
 	}
-}
 
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	doGet(request, response);
-}
+		doGet(request, response);
+	}
 
 }

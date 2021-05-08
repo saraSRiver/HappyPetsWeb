@@ -8,14 +8,11 @@
     Cliente cl= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
     %>
 <h2><%=cl.getNombre()%>  <%=cl.getApellidos()%></h2>
+<div  class="cliente">
  <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CLIENTE) %>"  method="post">
   <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.PERFIL_CLIENTE%>"/>
-<div  class="cliente">
-<div class="cliente1">
 
-</div>
-<div class="cliente2">
-<p>Datos personales</p>
+<p class="datos">Datos personales</p>
 <p>Residencia: <%=cl.getDireccion().getCalle()%>, <%=cl.getDireccion().getPortal()%>,
 <%=cl.getDireccion().getPiso()%>.<%=cl.getDireccion().getNombrePoblacion()%>,
 <%=cl.getDireccion().getNombreProvincia()%></p>
@@ -24,18 +21,19 @@
 <p>Idiomas: <%for(Idioma i: cl.getIdiomas()){ %>
 		<%=i.getIdioma()%>
 		<%} %></p>
-</div>   
-</div>
+  
+
 <div id="editar">
-  <button type="button" value="Editar perfil"> 
+  <button type="button" value="Editar perfil" id="editar"> 
     <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE,
     		ActionNames.EDIT_PERFIL_CLIENTE)%>">Editar perfil</a></button>
-    		<a  id="perlfMas"  href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.TUS_MASCOTAS) %>">Tus mascotas</a>
-    		<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
+    		<button type="button" id="editar"><a  href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.TUS_MASCOTAS) %>">Tus mascotas</a></button>
+    		<button type="button" value="Eliminar" id="editar"><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CLIENTE, ActionNames.ELIMINAR, ParameterNames.ID_CLIENTE, 
-    		String.valueOf(cl.getIdcliente()))%>">Darse de baja de Happy Pets</a></button>
+    		String.valueOf(cl.getIdcliente()))%>"> Darse de baja de Happy Pets</a></button>
     		
     </div>
 	
  </form>
+ </div> 
      <%@include file="/html/common/footer.jsp"%>

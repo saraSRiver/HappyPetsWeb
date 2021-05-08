@@ -10,18 +10,18 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
 %>
 
 <h2><%=m.getNombre()%></h2>
-	
+	 <div class="mascotas">
     <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.MASCOTA)%>"  method="post">
   <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.EDIT_PERFIL_MASCOTA%>"/>
    <input type=hidden name="<%=ParameterNames.ID_MASCOTA%>" value="<%=m.getIdMascota()%>">    
-        <div class="mascotas">
+       
         <div class="fotoMascota">
         
        <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>" width="250" height="350">
     </div>
     
-    <div class="mascotasInfo">
-        <form>
+   	<div>
+      
          <p>
             <strong>Nombre:</strong><br>
             <input type="text" name="<%=ParameterNames.NOMBRE_MASCOTA%>"  value="<%=m.getNombre()%>">
@@ -107,8 +107,9 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         <strong>Descripción:</strong><br>
         <textarea id="descripcion" name="<%=ParameterNames.DESCRIPCION%>"><%if(m.getDescripcion() != null){%><%=m.getDescripcion()%><%}%></textarea>
     </p>
-     </div>
-</div>
-    <input type="submit" value="Guardar">
-
+    
+    <button type="submit" value="Guardar">Actualizar perfil</button>
+ </div>
+  </form>
+  </div>
      <%@include file="/html/common/footer.jsp"%>

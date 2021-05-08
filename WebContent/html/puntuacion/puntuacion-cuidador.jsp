@@ -55,6 +55,7 @@ Puntuacion pt = (Puntuacion) request.getAttribute(AttributeNames.PUNTUACION);
 }%>></label>
 
 	</div>
+	<div id="comentario">
 	<%
 	if (pt != null) {
 	%>
@@ -82,5 +83,6 @@ Puntuacion pt = (Puntuacion) request.getAttribute(AttributeNames.PUNTUACION);
 		%>Actualizar valoración
 		<%}%>
 	</button>
+	</div>
 </form>
 <%@include file="/html/common/footer.jsp"%>

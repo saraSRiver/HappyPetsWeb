@@ -11,18 +11,18 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
 %>
 
     <h2><%=m.getNombre()%></h2>
-	
+	   <div class="mascotas">
     <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.MASCOTA) %>"  method="post">
   <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.PERFIL_MASCOTA%>"/>
    
-        <div class="mascotas">
+     
         <div class="fotoMascota">
         <!--imagen de la masctoa-->
-       <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>" width="250" height="300">
+       <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>">
     </div>
  
-    <div class="mascotasInfo">
-        <form>
+    
+    	<div>
      
         <p>
             Fecha de nacimiento (aproximada):<br>
@@ -78,7 +78,7 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
 
 	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA,ActionNames.ELIMINAR, ParameterNames.ID_MASCOTA, 
     		String.valueOf(m.getIdMascota()))%>">Eliminar</a></button>
-    </div>
-</div>
+   </div>
   </form>
+  </div>
      <%@include file="/html/common/footer.jsp"%>

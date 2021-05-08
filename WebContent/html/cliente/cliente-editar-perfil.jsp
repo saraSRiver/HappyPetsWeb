@@ -5,6 +5,9 @@
       <%@include file="/html/common/header.jsp"%>
    
  <h2>Actualiza tu perfil</h2>
+ 
+ <div id="access">
+ 
     <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CLIENTE) %>"  method="post">
     <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.EDIT_PERFIL_CLIENTE%>"/>
   
@@ -92,4 +95,5 @@ Provincia<br>
       
         <input class="buscar" type="submit" value="Listo">
 </form>
+</div>
       <%@include file="/html/common/footer.jsp"%>

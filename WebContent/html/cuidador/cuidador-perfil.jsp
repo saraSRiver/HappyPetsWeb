@@ -8,21 +8,10 @@
 Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 %>
 <h2><%=c.getNombre()%> <%= c.getApellidos()%></h2>
+<div class= "perfil2">
 <div  class="cuidador">
-<a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.CUIDADOR, ActionNames.HISTORIAL_CUIDADOR, ParameterNames.ID_CUIDADOR, String.valueOf(c.getIdcuidador())) %>">Tus contratos</a>
-<div class="cuidador1">
-    <p>Servicios</p>
-   <%for (ServicioOfrecido so: c.getServiciosOfrecidos()){ %>
-		<p><%=so.getNombreServicio()%></p>
-		<p><%=so.getPrecio()%></p>
-			
-		<%} %>
-		<h4>Experiencia:</h4>
-<p><%=c.getExperiencia().getValor()%></p>
-</div>
 
-<div class="cuidador2">
-<p>Datos personales</p>
+<p class="datos">Datos personales</p>
 <%=c.getDireccion().getCalle()%>, <%=c.getDireccion().getPortal()%>,
 <%=c.getDireccion().getPiso()%>.<%=c.getDireccion().getNombrePoblacion()%>,
 <%=c.getDireccion().getNombreProvincia()%></p>
@@ -31,17 +20,30 @@ Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 <p>Idiomas: <%for(Idioma i: c.getIdiomas()){ %>
 		<%=i.getIdioma()%>
 		<%} %></p> 
+</div>
 
-<div class="cuidador3">
-    <p>Especies</p>
+<div id="datos">
+    <p class="datos">Servicios</p>
+   <%for (ServicioOfrecido so: c.getServiciosOfrecidos()){ %>
+		<p><%=so.getNombreServicio()%>, <%=so.getPrecio()%> euros</p>
+		
+
+		<%} %>
+		<p class="datos">Experiencia:</p>
+<p><%=c.getExperiencia().getValor()%></p>
+    <p class="datos">Especies</p>
 <%for(TipoEspecie e: c.getEspecies()){ %>
 			<p><%=e.getNombre()%></p>
 		<%} %>
+		
 </div>
 
-</div>
+
+ </div> 
+ <div id="editar">
 	<button type="button" value="Eliminar"> <a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CUIDADOR, ActionNames.ELIMINAR, ParameterNames.ID_CUIDADOR, 
     		String.valueOf(c.getIdcuidador()))%>">Darse de baja de Happy Pets</a></button>
-
+   <button type="button"><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.CUIDADOR, ActionNames.HISTORIAL_CUIDADOR, ParameterNames.ID_CUIDADOR, String.valueOf(c.getIdcuidador())) %>">Tus contratos</a></button>
+</div>
      <%@include file="/html/common/footer.jsp"%>

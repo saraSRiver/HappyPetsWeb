@@ -101,7 +101,7 @@ public class CuidadorServlet extends HttpServlet {
 				cuidadores=cuidServ.findByCriteria(criteria);
 
 				request.setAttribute(AttributeNames.CUIDADOR,cuidadores);
-				target = ViewsNames.RESULTS;
+				target = ViewsNames.SEARCH_CUIDADOR;
 				
 			} catch (DataException e) {
 				logger.warn(e.getMessage(),e);

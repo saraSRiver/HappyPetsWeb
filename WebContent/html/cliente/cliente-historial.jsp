@@ -9,30 +9,31 @@
     Cliente cl= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
 %>
 <h2 class=>Historial de contratos</h2>
-<form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CONTRATOS) %>" method="post">
+<div id="contHistorial">
+<form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CONTRATOS) %>" method="post" id="historial">
  <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.HISTORIAL_CLIENTE%>"/>
 
-<div class="seccionesHistorial">
+
 
 <%for(ContratoDTO ct: contratos){%>
-
+	<div class="seccionesHistorial">
     <p><strong><%=ct.getNombreCuidador()%> <%=ct.getApellidosCuidador()%></strong></p>
-    <p><strong><%=ct.getNombreServicio()%></strong></p>
-    <p><strong><%=ct.getPrecioFinal()%></strong></p>
     <p><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CONTRATO, ActionNames.DETAIL, ParameterNames.ID_CONTRATO, 
     		String.valueOf(ct.getIdContrato()))%>">Detalles</a></p>
-</div>
-
-<div class="seccionesHistorial">
+	</div>
+<div id="contenedor">
+<div class="seccionesHistorial2">
+   <p><strong><%=ct.getNombreServicio()%></strong></p>
+    <p><strong><%=ct.getPrecioFinal()%></strong></p>
     <p><%=ct.getFechaContrato()%></p>
-    
-</div>
-<div class="seccionesHistorial">
-    <p><strong><%=ct.getIdEstado()%></strong></p>
+     <p><strong><%if(ct.getIdEstado()=='A'){%>Aceptado<%}else if(ct.getIdEstado() == 'P'){%>Pendiente<%}else{%>Rechazado<%}%></strong></p>
      <a  href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.PUNTUACION, ActionNames.CUIDADORES_PUNTUADOS, ParameterNames.ID_CUIDADOR, 
     		String.valueOf(ct.getIdCuidador()))%>">Puntuar cuidador</a>
+</div>
+<div class="seccionesHistorial3">
+   
     <%if(ct.getIdEstado()!='R'){%>
      <button><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CONTRATO, ActionNames.ELIMINAR, ParameterNames.ID_CONTRATO, 
@@ -41,9 +42,9 @@
 	(request, ContextsPath.PRECREATE, ActionNames.CONTRATAR, ParameterNames.ID_CUIDADOR, 
     		String.valueOf(ct.getIdCuidador()))%>">Volver a  contratar</a></button>
 </div>
-
+</div>
   <%} %>
   <%} %>
- 
   </form>
+ </div>
    <%@include file="/html/common/footer.jsp"%>
