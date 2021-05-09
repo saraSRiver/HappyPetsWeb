@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@ page import="com.happypets.aplicacion.model.*" %>
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
@@ -35,34 +34,34 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
             <p><%=tp.getNombre()%></p>
         </p>
         <p>
-            Tiene microchip?<br>
+            ¿Tiene microchip?<br>
             <p><%=m.getMicrochip()?"si":"no"%></p>
         </p>
         <p>
-            Está vacunado?<br>
+            ¿Está vacunado?<br>
             <p><%=m.getVacunado()?"si":"no"%></p>
     </p>
     <p>
-        Está desparasitado?<br>
+        ¿Está desparasitado?<br>
         <p><%=m.getDesparasitado()?"si":"no"%></p>
     </p>
     <p>
-        Padece alguna alergia? (señala cuál en la sección de descripción)<br>
+        ¿Padece alguna alergia? (señala cuál en la sección de descripción)<br>
         <p><%=m.getAlergia()?"si":"no"%></p>
     </p>
     <p>
-        Está bajo tratamiento? (señala cuál en la sección de descripción)<br>
+        ¿Está bajo tratamiento? (señala cuál en la sección de descripción)<br>
         <p><%=m.getTratamiento()?"si":"no"%></p>
         
     </p>
     <p>
-        Se lleva bien con otros animales?<br>
+        ¿Se lleva bien con otros animales?<br>
         <p><%=m.getBuenoConAnimales()?"si":"no"%></p>
         
      
     </p>
     <p>
-        Se lleva bien con los niños?<br>
+        ¿Se lleva bien con los niños?<br>
         <p><%=m.getBuenoConNinos()?"si":"no"%></p>
         
     </p>

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Happy Pets</title>
   <link rel= "stylesheet" href="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/css/estilos.css">
 <script defer src ="http://<%=request.getServerName()%>:<%=request.getServerPort()%>/<%=request.getContextPath()%>/js/puntuacion.js"></script>

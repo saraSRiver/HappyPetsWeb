@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
 <%@ page import="com.happypets.aplicacion.model.*" %>
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
@@ -48,7 +47,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
             	
         </p>
         <p>
-            <strong>Tiene microchip?</strong><br>
+            <strong>¿Tiene microchip?</strong><br>
             <select name="<%=ParameterNames.MICROCHIP%>">
                 <option value="true" <%if(m.getMicrochip()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getMicrochip()){%>selected<%}%>>No</option>
@@ -56,7 +55,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
             </select>
         </p>
         <p>
-            <strong>Está vacunado?</strong><br>
+            <strong>¿Está vacunado?</strong><br>
             <select name="<%=ParameterNames.VACUNADO%>">
                   <option value="true" <%if(m.getVacunado()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getVacunado()){%>selected<%}%>>No</option>
@@ -64,7 +63,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
             </select>
     </p>
     <p>
-        <strong>Está desparasitado?</strong><br>
+        <strong>¿Está desparasitado?</strong><br>
         <select name="<%=ParameterNames.DESPARASITADO%>">
             <option value="true" <%if(m.getDesparasitado()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getDesparasitado()){%>selected<%}%>>No</option>
@@ -72,7 +71,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         </select>
     </p>
     <p>
-        <strong>Padece alguna alergia? (señala cuál en la sección de descripción)</strong><br>
+        <strong>¿Padece alguna alergia? (señala cuál en la sección de descripción)</strong><br>
         <select name="<%=ParameterNames.ALERGIA%>">
            <option value="true" <%if(m.getAlergia()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getAlergia()){%>selected<%}%>>No</option>
@@ -80,7 +79,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         </select>
     </p>
     <p>
-       <strong> Está bajo tratamiento? (señala cuál en la sección de descripción)</strong><br>
+       <strong> ¿Está bajo tratamiento? (señala cuál en la sección de descripción)</strong><br>
         <select name="<%=ParameterNames.TRATAMIENTO%>">
              <option value="true" <%if(m.getTratamiento()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getTratamiento()){%>selected<%}%>>No</option>
@@ -88,7 +87,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         </select>
     </p>
     <p>
-        <strong>Se lleva bien con otros animales?</strong><br>
+        <strong>¿Se lleva bien con otros animales?</strong><br>
         <select name="<%=ParameterNames.BIEN_CON_ANIMALES%>">
              <option value="true" <%if(m.getBuenoConAnimales()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getBuenoConAnimales()){%>selected<%}%>>No</option>
@@ -96,7 +95,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         </select>
     </p>
     <p>
-        <strong>Se lleva bien con los niños?</strong><br>
+        <strong>¿Se lleva bien con los niños?</strong><br>
         <select name="<%=ParameterNames.BIEN_CON_NINOS%>">
           <option value="true" <%if(m.getBuenoConNinos()){%>selected<%}%>>Sí</option>
                 <option value="false" <%if(!m.getBuenoConNinos()){%>selected<%}%>>No</option>

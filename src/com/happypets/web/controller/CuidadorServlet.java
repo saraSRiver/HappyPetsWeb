@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 import com.happypets.aplicacion.model.ContratoDTO;
 import com.happypets.aplicacion.model.Cuidador;
 import com.happypets.aplicacion.model.DireccionDTO;
 import com.happypets.aplicacion.model.Experiencia;
+import com.happypets.aplicacion.model.Provincia;
 import com.happypets.aplicacion.model.Servicio;
 import com.happypets.aplicacion.model.ServicioOfrecido;
 import com.happypets.aplicacion.service.ContratoDTOService;
@@ -24,6 +24,7 @@ import com.happypets.aplicacion.service.CuidadorCriteria;
 import com.happypets.aplicacion.service.CuidadorService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.IdiomaService;
+import com.happypets.aplicacion.service.ProvinciaService;
 import com.happypets.aplicacion.service.ServicioOfrecidoService;
 import com.happypets.aplicacion.service.ServicioService;
 import com.happypets.aplicacion.service.TipoEspecieService;
@@ -31,6 +32,7 @@ import com.happypets.aplicacion.service.exceptions.MailException;
 import com.happypets.aplicacion.serviceImpl.ContratoDTOServiceImpl;
 import com.happypets.aplicacion.serviceImpl.CuidadorServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
+import com.happypets.aplicacion.serviceImpl.ProvinciaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ServicioOfrecidoServiceImpl;
 import com.happypets.aplicacion.serviceImpl.ServicioServiceImpl;
 import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
@@ -54,6 +56,7 @@ public class CuidadorServlet extends HttpServlet {
 	private ServicioOfrecidoService servOfrecido = null;
 	private TipoEspecieService servEspecie=null;
 	private ContratoDTOService contrDTOServ;
+	private ProvinciaService provinServ;
 	public CuidadorServlet() {
 		cuidServ= new CuidadorServiceImpl();
 		servOfrecido = new ServicioOfrecidoServiceImpl();
@@ -61,6 +64,7 @@ public class CuidadorServlet extends HttpServlet {
 		servIdioma= new IdiomaServiceImpl();
 		servServicio = new ServicioServiceImpl();
 		contrDTOServ= new ContratoDTOServiceImpl();
+		provinServ = new ProvinciaServiceImpl();
 	}	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -99,8 +103,9 @@ public class CuidadorServlet extends HttpServlet {
 			try {
 				List<Cuidador>cuidadores= new ArrayList();
 				cuidadores=cuidServ.findByCriteria(criteria);
-
+				List<Provincia> listPro = provinServ.findAll();
 				request.setAttribute(AttributeNames.CUIDADOR,cuidadores);
+				request.setAttribute(AttributeNames.PROVINCIA, listPro);
 				target = ViewsNames.SEARCH_CUIDADOR;
 				
 			} catch (DataException e) {

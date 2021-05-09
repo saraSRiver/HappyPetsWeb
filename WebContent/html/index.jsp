@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+
     <%@ page import="com.happypets.aplicacion.model.*" %>
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
@@ -16,9 +15,11 @@
           
       <img src="<%if(m != null){%>
       <%=UrlBuilder.builderUrlImgFav(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%><%}%>" alt="Mascota del mes" class="MASCMES" style="width:100%">
+      <%if(m.getIdMascota() != null){%>
       <div class="middle">
         <div class="text"><%=m.getNombre()%></div>
       </div>
+      <%}%>
     </div>
       <figcaption></figcaption>
     </figure>
