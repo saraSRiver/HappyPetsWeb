@@ -80,7 +80,7 @@
 				name="<%=ParameterNames.IDIOMAS %>" id="3" value="ga">Galego<br>
 		</p>
 
-		<input class="buscar" type="submit" value="Listo">
+		<button class="buscar" type="button" value="Listo">Registrar</button>
 	</form>
 </div>
 <%@include file="/html/common/footer.jsp"%>

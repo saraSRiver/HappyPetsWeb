@@ -3,7 +3,7 @@
     <%@ page import="com.happypets.aplicacion.model.*"%>
     <%@ page import="com.happypets.web.utils.*" %>
       <%@include file="/html/common/header.jsp"%>
-   
+   <%Cliente c = (Cliente)SessionManager.get(request,AttributeNames.CLIENTE);%>
  <h2>Actualiza tu perfil</h2>
  
  <div id="access">
@@ -12,12 +12,12 @@
     <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.EDIT_PERFIL_CLIENTE%>"/>
   
   <p>
-            Nombre:<br>
-        <input type="text" name="<%=ParameterNames.NOMBRE%>" >
+
+        <input type="text" name="<%=ParameterNames.NOMBRE%>" value="<%=c.getNombre()%>" >
     </p>
     <p>
         Apellidos:<br>
-        <input type="text" name="<%=ParameterNames.APELLIDOS%>">
+        <input type="text" name="<%=ParameterNames.APELLIDOS%>" value="<%=c.getApellidos()%>">
     </p>
   <p>
         Contraseña actual:<br>
@@ -33,7 +33,7 @@
     </p>
     <p>
         Correo electrónico:<br>
-    <input type="email" name="<%=ParameterNames.EMAIL%>" >
+    <input type="email" name="<%=ParameterNames.EMAIL%>" value="<%=c.getEmail()%>">
 </p>
 <p>
     Repetir correo electrónico:<br>
@@ -41,24 +41,24 @@
 </p>
 <p>
     Teléfono:<br>
-    <input type="text" name="<%=ParameterNames.TELEFONO%>">
+    <input type="text" name="<%=ParameterNames.TELEFONO%>" value="<%=c.getTelefono()%>">
 </p>
 <p>
     Piso:<br>
-    <input type="text" name="<%=ParameterNames.PISO%>" >
+    <input type="text" name="<%=ParameterNames.PISO%>" value="<%=c.getDireccion().getPiso()%>">
 </p>
 <p>
     Número de vivienda/portal:<br>
-    <input type="text" name="<%=ParameterNames.PORTAL%>" >
+    <input type="text" name="<%=ParameterNames.PORTAL%>" value="<%=c.getDireccion().getPortal()%>" >
 </p>
 
 <p>
     Código Postal:<br>
-    <input type="text" name="<%=ParameterNames.CP%>" >
+    <input type="text" name="<%=ParameterNames.CP%>" value="<%=c.getDireccion().getCp()%>" >
 </p>
 <p>
     Calle:<br>
-    <input type="text" name="<%=ParameterNames.CALLE%>">
+    <input type="text" name="<%=ParameterNames.CALLE%>" value="<%=c.getDireccion().getCalle()%>">
 </p>
 <p>
     Población:<br>

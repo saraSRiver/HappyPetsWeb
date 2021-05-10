@@ -68,11 +68,11 @@ public class UsuarioServlet extends HttpServlet {
 					logger.warn(e.getMessage(),e);
 					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
 					request.setAttribute(AttributeNames.ERRORS, errors);
-					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+					target = ViewsNames.LOGIN_USUARIO;
 				}
 				catch ( DataException e) {
 					logger.warn(e.getMessage(),e);
-					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_LOGIN);
 					request.setAttribute(AttributeNames.ERRORS, errors);
 					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 
@@ -94,9 +94,9 @@ public class UsuarioServlet extends HttpServlet {
 
 				}	catch(UserNotFoundException | IncorrectPasswordException e) {
 					logger.warn(e.getMessage(),e);
-					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
+					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_LOGIN);
 					request.setAttribute(AttributeNames.ERRORS, errors);
-					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
+					target = ViewsNames.LOGIN_USUARIO;
 				}
 				catch ( DataException e) {
 					logger.warn(e.getMessage(),e);

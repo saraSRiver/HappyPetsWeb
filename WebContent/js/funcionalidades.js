@@ -27,6 +27,7 @@
 	        //el recordatorio de usuario
 	        
 		    function recordarCookie(){
+		    if(recordarUsuario.checked){
 			   let email=mail.value;
 				let usuario = "";
 			if(inputCliente.checked){
@@ -40,6 +41,7 @@
 	        }
 			else{
 			recordarCook;
+			}
 			}
 			formLogin.submit();
 	    }
@@ -63,7 +65,7 @@
 	       let pass = document.querySelectorAll("input")[4];
 	       let recordarUs = document.querySelector("#formLogin button");
 	      let accessCook=document.getElementById("login");
-	
+	 let recordarUsuario = document.querySelectorAll("input")[5];
 	
 	      if(recordarUs!=null){
 			
@@ -73,7 +75,173 @@
 		}
 		
 
+	  //Expresiones regulares: para los registros de cliente y cuidador
 	 
+	 $(".buscar").click(function(){
+	let error = [];
+    error.push(ValidarNombre());
+    error.push(ValidarApellidos());
+    error.push(ValidarEmail());
+    error.push(ValidarRepEmail());
+    error.push(ValidarTelefono());
+    error.push(ValidarPassword());
+    error.push(ValidarRepPassword());
+    error.push(ValidarCP());
+    error.push(ValidarPortal());
+    error.push(ValidarPiso());
+    error.push(ValidarCalle());
+    if(!error.includes(true)){
+    	$("#access > form").submit();
+    }
+});
+
+function ValidarNombre(){
+let regExpNombre= new RegExp(/^[a-zA-Z\u00C0-\u024F\u1E00-\u1EFF]{3,45}$/);
+let nombre=document.getElementsByTagName("input")[1];
+if(regExpNombre.test(nombre.value)){
+nombre.style.backgroundColor="white";
+return false;
+}
+else{
+nombre.style.backgroundColor="red";
+return true;
+}
+
+}
+
+function ValidarApellidos(){
+let regExpApellidos= new RegExp(/^[A-Za-z\u00C0-\u024F\u1E00-\u1EFF]{1,45}$/);
+let apellidos=document.getElementsByTagName("input")[2];
+if(regExpApellidos.test(apellidos.value)){
+    apellidos.style.backgroundColor="white";
+    return false;
+   }
+   else{
+    apellidos.style.backgroundColor="red";
+    return true;
+   }
+
+}
+
+function ValidarPassword(){
+    let regExpPassword= new RegExp(/.+/);
+    let pass=document.getElementsByTagName("input")[3];
+    
+    if(regExpPassword.test(pass.value)){
+       pass.style.backgroundColor="white";
+       return false;
+       }
+       else{
+        pass.style.backgroundColor="red";
+        return true;
+       }
+    }
+    
+    function ValidarRepPassword(){
+    let regExpRegPassword= new RegExp(/.+/);
+
+    let repPass=document.getElementsByTagName("input")[4];
+    
+    if(regExpRegPassword.test(repPass.value)){
+        if(repPass.value==pass.value){
+            repPass.style.backgroundColor="white";
+            return false;
+        }
+        else{
+            repPass.style.backgroundColor="red";
+            return true;
+        }
+    }
+}
+
+function ValidarEmail(){
+let regExpEmail= new RegExp(/.+@.+\..+/);
+let email=document.getElementsByTagName("input")[5];
+if(regExpEmail.test(email.value)){
+    email.style.backgroundColor="white";
+    return false;
+   }
+   else{
+    email.style.backgroundColor="red";
+    return true;
+   }
+}
+function ValidarRepEmail(){
+    let regExpRepEmail= new RegExp(/.+@.+\..+/);
+    let repEmail=document.getElementsByTagName("input")[6];
+    if(regExpRepEmail.test(repEmail.value)){
+        repEmail.style.backgroundColor="white";
+        return false;
+       }
+       else{
+        repEmail.style.backgroundColor="red";
+        return true;
+       }
+    }
+
+function ValidarTelefono(){
+let regExpTelefono= new RegExp(/^[0-9]{9}$/);
+let tlf=document.getElementsByTagName("input")[7];
+if(regExpTelefono.test(tlf.value)){
+    tlf.style.backgroundColor="white";
+    return false;
+   }
+   else{
+    tlf.style.backgroundColor="red";
+    return true;
+   }
+}
+function ValidarPiso(){
+    let regExpPiso= new RegExp(/^[1-9][0-9]$|[1-9]$/);
+    let piso=document.getElementsByTagName("input")[8];
+    if(regExpPiso.test(piso.value)){
+        piso.style.backgroundColor="white";
+        return false;
+       }
+       else{
+        piso.style.backgroundColor="red";
+        return true;
+       }
+    }
+
+    function ValidarPortal(){
+        let regExpPortal= new RegExp(/[1-9][0-9]$|[1-9]$/);
+        let portal=document.getElementsByTagName("input")[9];
+        if(regExpPortal.test(portal.value)){
+            portal.style.backgroundColor="white";
+            return false;
+           }
+           else{
+            portal.style.backgroundColor="red";
+            return true;
+           }
+        }
+        
+
+function ValidarCP(){
+let regExpCP= new RegExp(/^[0-9]{5}$/);
+let cp=document.getElementsByTagName("input")[10];
+if(regExpCP.test(cp.value)){
+    cp.style.backgroundColor="white";
+    return false;
+   }
+   else{
+    cp.style.backgroundColor="red";
+    return true;
+   }
+}
+function ValidarCalle(){
+    let regExpCalle= new RegExp(/\s*([A-Za-z\u00C0-\u024F\u1E00-\u1EFF]{1,45}){1,10}/);
+    let calle=document.getElementsByTagName("input")[11];
+    if(regExpCalle.test(calle.value)){
+        calle.style.backgroundColor="white";
+        return false;
+       }
+       else{
+        calle.style.backgroundColor="red";
+        return true;
+       }
+    }
 	 //Date: para calcular la edad de una mascota
 	 
 	 let fecha = document.getElementById("fechaNacMasc");

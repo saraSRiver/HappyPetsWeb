@@ -139,9 +139,10 @@ public class ContratoServlet extends HttpServlet {
 
 		}
 		else if(ActionNames.CANCELAR.equals(action)) {
+			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
 			try {
-				Contrato co= new Contrato();
-				contrServ.updateEstado(co.getIdContrato(), 'R');
+				
+				contrServ.updateEstado(Long.valueOf(idContrato), 'R');
 				redirect = true;
 				target = UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE);
 			} catch (NumberFormatException e) {

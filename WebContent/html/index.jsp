@@ -12,7 +12,7 @@
         
         <div class="ContenedorIMG">
       
-          
+        
       <img src="<%if(m != null){%>
       <%=UrlBuilder.builderUrlImgFav(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%><%}%>" alt="Mascota del mes" class="MASCMES" style="width:100%">
       <%if(m.getIdMascota() != null){%>

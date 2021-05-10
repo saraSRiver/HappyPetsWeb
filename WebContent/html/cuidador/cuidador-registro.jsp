@@ -116,8 +116,8 @@
 
 		</p>
 
-		<input type="reset" value="Borrar datos"> <input type="submit"
-			value="Listo">
+		<input type="reset" value="Borrar datos"> <button type="button" class="buscar"
+			value="Listo">Registrar</button>
 	</form>
 </div>
 <%@include file="/html/common/footer.jsp"%>

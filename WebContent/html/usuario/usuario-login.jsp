@@ -31,7 +31,9 @@
 		</p>
 		<input type="text" name="password"> <label><input
 			type="radio" name="" value="1">Recordar usuario</label><br>
-
+		<%if(errors.printError(ActionNames.LOGIN) != null){%>
+		<p>!Usuario o contraseña incorrecta</p>
+		<%}%>
 		<button class="buscar" type="button">Iniciar sesión</button>
 	</form>
 </div>

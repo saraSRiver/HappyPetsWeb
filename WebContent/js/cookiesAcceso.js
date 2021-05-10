@@ -27,6 +27,7 @@
 			let inputCliente = document.querySelectorAll("input")[2];
        let mail = document.querySelectorAll("input")[3];
        let pass = document.querySelectorAll("input")[4];
+       let recordarUsuario = document.querySelector("input")[5];
        let recordarUs = document.querySelector("#formLogin button");
      
       let accessCook=document.getElementById("login");
@@ -34,6 +35,7 @@
         //función para establecer las cookies relacionadas con 
         //el recordatorio de usuario
     function recordarCookie(){
+    if(recordarUsuario.checked){
 	   let email=mail.value;
 		let usuario = "";
 		if(inputCliente.checked){
@@ -47,6 +49,7 @@
         }
 		else{
 		recordarCook;
+		}
 		}
 		formLogin.submit();
     }

@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ page import="com.happypets.aplicacion.model.*" %>
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
@@ -10,7 +11,7 @@ Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 <div  class="cuidador">
 
 <p class="datos">Datos personales</p>
-<%=c.getDireccion().getCalle()%>, <%=c.getDireccion().getPortal()%>,
+<p>Residencia: <%=c.getDireccion().getCalle()%>, <%=c.getDireccion().getPortal()%>,
 <%=c.getDireccion().getPiso()%>.<%=c.getDireccion().getNombrePoblacion()%>,
 <%=c.getDireccion().getNombreProvincia()%></p>
 <p>Teléfono: <%=c.getTelefono()%></p>
@@ -21,6 +22,7 @@ Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 </div>
 
 <div id="datos">
+
     <p class="datos">Servicios</p>
    <%for (ServicioOfrecido so: c.getServiciosOfrecidos()){ %>
 		<p><%=so.getNombreServicio()%>, <%=so.getPrecio()%> euros</p>

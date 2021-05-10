@@ -36,7 +36,7 @@
    
     <%if(ct.getIdEstado()!='R'){%>
      <button><a href="<%=UrlBuilder.getUrlForController
-	(request, ContextsPath.CONTRATO, ActionNames.ELIMINAR, ParameterNames.ID_CONTRATO, 
+	(request, ContextsPath.CONTRATO, ActionNames.CANCELAR, ParameterNames.ID_CONTRATO, 
     		String.valueOf(ct.getIdContrato()))%>">Cancelar contrato</a></button>
     		<button><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.PRECREATE, ActionNames.CONTRATAR, ParameterNames.ID_CUIDADOR, 
