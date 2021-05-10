@@ -41,10 +41,14 @@
     		<button><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.PRECREATE, ActionNames.CONTRATAR, ParameterNames.ID_CUIDADOR, 
     		String.valueOf(ct.getIdCuidador()))%>">Volver a  contratar</a></button>
+<%} %>
 </div>
+
 </div>
-  <%} %>
+  
+
   <%} %>
   </form>
  </div>
+ 
    <%@include file="/html/common/footer.jsp"%>

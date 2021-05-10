@@ -37,9 +37,9 @@
     <p><strong><%if(ct.getIdEstado()=='A'){%>Aceptado<%}else if(ct.getIdEstado() == 'P'){%>Pendiente<%}else{%>Rechazado<%}%></strong></p>
 </div>
 
-
+<div class="botonesHistorial">
 	<%if(ct.getIdEstado()=='P'){%>
-	<div class="seccionesHistorial">
+	
       <button><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CONTRATO, ActionNames.ACEPTAR, ParameterNames.ID_CONTRATO, 
     		String.valueOf(ct.getIdContrato()))%>">Aceptar contrato</a></button>
@@ -47,8 +47,10 @@
 	(request, ContextsPath.CONTRATO, ActionNames.ELIMINAR, ParameterNames.ID_CONTRATO, 
     		String.valueOf(ct.getIdContrato()))%>">Rechazar contrato</a></button>
         <%} %>
+        </div>
   <%} %>
     </div>
+   
 </form>
  </div>
 <%@include file="/html/common/footer.jsp"%>

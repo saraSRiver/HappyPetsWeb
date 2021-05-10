@@ -169,7 +169,7 @@ public class ClienteServlet extends HttpServlet {
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 				
 			}
-
+			
 			if(newPassword.equals(repPassword)) {
 				if(PasswordEncryptor.checkPassword(passwordActual, c.getPassword())) {
 					clienteActual.setIdcliente(c.getIdcliente());
@@ -178,7 +178,7 @@ public class ClienteServlet extends HttpServlet {
 					try {
 						Cliente cl;
 						cl = cliServ.update(clienteActual);
-						SessionManager.set(request, AttributeNames.CLIENTE,cl);
+						SessionManager.set(request, AttributeNames.CLIENTE, cl);
 						target = ViewsNames.PERFIL_CLIENTE;
 						redirect = true;
 					} catch (IncorrectPasswordException e) {
@@ -194,7 +194,13 @@ public class ClienteServlet extends HttpServlet {
 						target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 						
 					}
+				}else {
+					target = ViewsNames.PERFIL_CLIENTE;
+					redirect = true;
 				}
+			}else {
+				target = ViewsNames.PERFIL_CLIENTE;
+				redirect = true;
 			}
 		}
 			else if(ActionNames.ELIMINAR.equals(action)) {

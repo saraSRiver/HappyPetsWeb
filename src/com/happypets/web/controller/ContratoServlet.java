@@ -142,6 +142,8 @@ public class ContratoServlet extends HttpServlet {
 			try {
 				Contrato co= new Contrato();
 				contrServ.updateEstado(co.getIdContrato(), 'R');
+				redirect = true;
+				target = UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE);
 			} catch (NumberFormatException e) {
 				logger.warn(e.getMessage(),e);
 				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
@@ -170,36 +172,29 @@ public class ContratoServlet extends HttpServlet {
 				target = ViewsNames.INDEX;
 			}
 		}
+		
 		else if(ActionNames.ELIMINAR.equals(action)) {
 			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
-			
+		
 				try {
+					
 					contrServ.updateEstado(Long.valueOf(idContrato), 'R');
+					redirect = true;
+					target = UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CUIDADOR);
 				} catch (DataException e) {
 					logger.warn(e.getMessage(),e);
 					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
 					request.setAttribute(AttributeNames.ERRORS, errors);
 					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 				}
-				target = ViewsNames.HISTORIAL_CLIENTE;
-		}
-		else if(ActionNames.ELIMINAR.equals(action)) {
-			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
-			
-				try {
-					contrServ.updateEstado(Long.valueOf(idContrato), 'R');
-				} catch (DataException e) {
-					logger.warn(e.getMessage(),e);
-					errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
-					request.setAttribute(AttributeNames.ERRORS, errors);
-					target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
-				}
-				target = ViewsNames.HISTORIAL_CUIDADOR;
+				
 		}
 		else if(ActionNames.ACEPTAR.equals(action)) {
 			String idContrato= request.getParameter(ParameterNames.ID_CONTRATO);
 			try {
 				contrServ.updateEstado(Long.valueOf(idContrato),  'A');
+				redirect = true;
+				target = UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CUIDADOR);
 			} catch (NumberFormatException e) {
 				logger.warn(e.getMessage(),e);
 				errors.addError(ActionNames.LOGIN, ErrorCodes.ERROR_GENERIC);
@@ -211,7 +206,7 @@ public class ContratoServlet extends HttpServlet {
 				request.setAttribute(AttributeNames.ERRORS, errors);
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA_MES, ActionNames.INDEX, false);
 			}
-			target = ViewsNames.HISTORIAL_CUIDADOR;
+		
 		}
 		if(redirect) {
 			logger.info("Redirect to..."+ target);

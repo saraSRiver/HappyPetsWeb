@@ -664,6 +664,22 @@ box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
 #contador{
 	  margin-left: 5%;
 }
+.botonesHistorial{
+	margin-bottom:1%;
+    display: flex;
+    justify-content: flex-end;
+    width: 90%;
+   margin-left: 5%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+.botonesHistorial button{
+	 background-color: beige;
+	     border-radius:8px;
+	    -webkit-box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);
+}
 .detailCuid{
 	  display: flex;
     flex-direction: row;

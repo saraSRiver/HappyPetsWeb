@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     <%@ page import="com.happypets.web.utils.*" %>
 
 <footer role="contentinfo">
@@ -26,7 +27,8 @@
   </figure>
   
 </div>
-
+</div>
+</div>
 </footer>
 </body>
 </html>

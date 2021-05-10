@@ -10,6 +10,7 @@ Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
 %>
 
 <h2>Has solicitado los servicios de <%=c.getNombre()%> <%= c.getApellidos()%></h2>
+ <div id="access">
 <form action= "<%=UrlBuilder.builderUrlForm(request, ContextsPath.CONTRATO)%>" method="post">
     <input type="hidden" name="<%=ParameterNames.ID_CUIDADOR%>" value="<%=c.getIdcuidador()%>">
    <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.CONTRATAR%>"/>
@@ -48,7 +49,7 @@ Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
 			<p><%=contrato.getPrecioFinal()%></p>
 			<%}%>
 
-			</p>
+			
 	</div>
 
 </section>
@@ -56,5 +57,5 @@ Contrato contrato = (Contrato) request.getAttribute(AttributeNames.CONTRATOS);
 <input class="listo" type="submit" value="Listo">
 
 </form>
-
+</div>
 <%@include file="/html/common/footer.jsp"%>
