@@ -18,6 +18,10 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
         <div class="fotoMascota">
         <!--imagen de la masctoa-->
        <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>">
+     <p>
+        Descripción:<br>
+          <p><%=m.getDescripcion()%></p>
+  
     </div>
  
     
@@ -26,49 +30,46 @@ TipoEspecie tp = (TipoEspecie)request.getAttribute(AttributeNames.TIPO_ESPECIE);
         <p>
             Fecha de nacimiento (aproximada):<br>
             <p id="fechaNacMasc"><%=m.getFechaNacimiento()%></p>
-        </p>
+       
     	<p></p>
         <p>
         
             Especie:<br>
             <p><%=tp.getNombre()%></p>
-        </p>
+      
         <p>
             ¿Tiene microchip?<br>
             <p><%=m.getMicrochip()?"si":"no"%></p>
-        </p>
+     
         <p>
             ¿Está vacunado?<br>
             <p><%=m.getVacunado()?"si":"no"%></p>
-    </p>
+  
     <p>
         ¿Está desparasitado?<br>
         <p><%=m.getDesparasitado()?"si":"no"%></p>
-    </p>
+    
     <p>
         ¿Padece alguna alergia? (señala cuál en la sección de descripción)<br>
         <p><%=m.getAlergia()?"si":"no"%></p>
-    </p>
+   
     <p>
         ¿Está bajo tratamiento? (señala cuál en la sección de descripción)<br>
         <p><%=m.getTratamiento()?"si":"no"%></p>
         
-    </p>
+   
     <p>
         ¿Se lleva bien con otros animales?<br>
         <p><%=m.getBuenoConAnimales()?"si":"no"%></p>
         
      
-    </p>
+    
     <p>
         ¿Se lleva bien con los niños?<br>
         <p><%=m.getBuenoConNinos()?"si":"no"%></p>
         
-    </p>
-    <p>
-        Descripción:<br>
-          <p><%=m.getDescripcion()%></p>
-    </p>
+  
+   
    
    
     <button type="button" value="Editar perfil"> 

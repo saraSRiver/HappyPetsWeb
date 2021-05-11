@@ -6,16 +6,16 @@
     <%
 Cuidador c = (Cuidador)SessionManager.get(request,AttributeNames.CUIDADOR);
 %>
-<h2><%=c.getNombre()%> <%= c.getApellidos()%></h2>
+<h2>Bienvenido/a <%=c.getNombre()%></h2>
 <div class= "perfil2">
 <div  class="cuidador">
 
-<p class="datos">Datos personales</p>
+<p class="datos">Tus datos personales</p>
 <p>Residencia: <%=c.getDireccion().getCalle()%>, <%=c.getDireccion().getPortal()%>,
 <%=c.getDireccion().getPiso()%>.<%=c.getDireccion().getNombrePoblacion()%>,
 <%=c.getDireccion().getNombreProvincia()%></p>
-<p>Teléfono: <%=c.getTelefono()%></p>
-<p>Correo electrónico: <%=c.getEmail()%></p>
+<p>Telefono: <%=c.getTelefono()%></p>
+<p>Correo electronico: <%=c.getEmail()%></p>
 <p>Idiomas: <%for(Idioma i: c.getIdiomas()){ %>
 		<%=i.getIdioma()%>
 		<%} %></p> 

@@ -3,7 +3,7 @@
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
           <div class="MascotaMes">
-            <h2>Mascota del mes</h2>
+            <h2>Bienvenido a Happy Pets</h2>
                 <%
 	Mascota m = (Mascota) request.getAttribute(AttributeNames.MASCOTA);
 %>

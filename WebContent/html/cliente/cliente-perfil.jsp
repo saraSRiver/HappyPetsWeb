@@ -7,12 +7,12 @@
     <%
     Cliente cl= (Cliente)SessionManager.get(request, AttributeNames.CLIENTE);
     %>
-<h2><%=cl.getNombre()%>  <%=cl.getApellidos()%></h2>
+<h2>Bienvenido/a <%=cl.getNombre()%></h2>
 <div  class="cliente">
  <form action= "<%=UrlBuilder.builderUrlForm(request, AttributeNames.CLIENTE) %>"  method="post">
   <input type=hidden name="<%=ActionNames.ACTION%>" value="<%=ActionNames.PERFIL_CLIENTE%>"/>
 
-<p class="datos">Datos personales</p>
+<p class="datos">Tus datos personales</p>
 <p>Residencia: <%=cl.getDireccion().getCalle()%>, <%=cl.getDireccion().getPortal()%>,
 <%=cl.getDireccion().getPiso()%>.<%=cl.getDireccion().getNombrePoblacion()%>,
 <%=cl.getDireccion().getNombreProvincia()%></p>

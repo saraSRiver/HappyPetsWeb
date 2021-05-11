@@ -114,10 +114,9 @@
 			value="<%=s.getIdServicio()%>"><%=s.getNombreServicio()%></label><br>
 		<%}%>
 
-		</p>
+		
 
-		<input type="reset" value="Borrar datos"> <button type="button" class="buscar"
-			value="Listo">Registrar</button>
+		<button type="button" class="buscar" value="Listo">Registrar</button>
 	</form>
 </div>
 <%@include file="/html/common/footer.jsp"%>

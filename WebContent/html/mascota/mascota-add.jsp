@@ -108,6 +108,6 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
     </p>
      </div>
 </div>
- <input type="submit" value="Guardar">
+ <input type="submit" value="Listo" id="addMas">
 
      <%@include file="/html/common/footer.jsp"%>

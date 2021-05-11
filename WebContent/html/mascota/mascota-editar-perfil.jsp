@@ -17,6 +17,10 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         <div class="fotoMascota">
         
        <img src="<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%>" width="250" height="350">
+   <p>
+        <strong>Descripción:</strong><br>
+        <textarea id="descripcion" name="<%=ParameterNames.DESCRIPCION%>"><%if(m.getDescripcion() != null){%><%=m.getDescripcion()%><%}%></textarea>
+    </p>
     </div>
     
    	<div>
@@ -102,10 +106,7 @@ List<TipoEspecie>especies=(List<TipoEspecie>)request.getAttribute(AttributeNames
         
         </select>
     </p>
-    <p>
-        <strong>Descripción:</strong><br>
-        <textarea id="descripcion" name="<%=ParameterNames.DESCRIPCION%>"><%if(m.getDescripcion() != null){%><%=m.getDescripcion()%><%}%></textarea>
-    </p>
+    
     
     <button type="submit" value="Guardar">Actualizar perfil</button>
  </div>
