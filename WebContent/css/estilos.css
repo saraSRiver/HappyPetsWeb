@@ -223,8 +223,9 @@ figure {
 	position: relative;
 }
 
-.MascotaMes h2 {
+.MascotaMes h1 {
 	text-align: center;
+	margin-bottom: 5%;
 }
 
 .ContenedorIMG {
@@ -240,11 +241,9 @@ figure {
 }
 
 .MASCMES {
-	transition: .5s ease;
-	backface-visibility: hidden;
-	opacity: 1;
+	
 	display: block;
-	border-radius: 10%;
+	
 	max-width: 100%;
 	height: auto;
 }
@@ -259,19 +258,13 @@ figure {
 	-ms-transform: translate(-50%, -50%)
 }
 
-.ContenedorIMG:hover .MASCMES {
-	opacity: 0.3;
-}
 
-.ContenedorIMG:hover .middle {
-	opacity: 1;
-}
 
 .text {
 	background-color: var(--colorNav);
 	color: var(- -colorFuente);
 	font-size: 13pt;
-	padding: 16px 32px;
+	padding: 36px 42px;
 	border-radius: 10%;
 }
 

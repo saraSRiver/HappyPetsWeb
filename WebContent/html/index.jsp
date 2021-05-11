@@ -3,7 +3,7 @@
         <%@ page import="com.happypets.web.utils.*" %>
     <%@include file="/html/common/header.jsp"%>
           <div class="MascotaMes">
-            <h2>Bienvenido a Happy Pets</h2>
+            <h1>Bienvenido a</h1>
                 <%
 	Mascota m = (Mascota) request.getAttribute(AttributeNames.MASCOTA);
 %>
@@ -17,7 +17,7 @@
       <%=UrlBuilder.builderUrlImgFav(request, String.valueOf(m.getIdMascota())+"-mascota.jpg")%><%}%>" alt="Mascota del mes" class="MASCMES" style="width:100%">
       <%if(m.getIdMascota() != null){%>
       <div class="middle">
-        <div class="text"><%=m.getNombre()%></div>
+        <div class="text">Vamos a ayudarte a cuidar a tus mascotas</div>
       </div>
       <%}%>
     </div>
