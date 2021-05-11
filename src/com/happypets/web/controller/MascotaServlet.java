@@ -16,10 +16,12 @@ import org.apache.logging.log4j.Logger;
 import com.happypets.aplicacion.model.Cliente;
 import com.happypets.aplicacion.model.Mascota;
 import com.happypets.aplicacion.model.TipoEspecie;
+import com.happypets.aplicacion.service.ClienteService;
 import com.happypets.aplicacion.service.DataException;
 import com.happypets.aplicacion.service.IdiomaService;
 import com.happypets.aplicacion.service.MascotaService;
 import com.happypets.aplicacion.service.TipoEspecieService;
+import com.happypets.aplicacion.serviceImpl.ClienteServiceImpl;
 import com.happypets.aplicacion.serviceImpl.IdiomaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.MascotaServiceImpl;
 import com.happypets.aplicacion.serviceImpl.TipoEspecieServiceImpl;
@@ -43,10 +45,12 @@ public class MascotaServlet extends HttpServlet {
 	private MascotaService mascServ;
 	private TipoEspecieService servEspecie=null;
 	private IdiomaService servIdioma=null;
+	private ClienteService clienteServ = null;
 	public MascotaServlet() {
 		mascServ= new MascotaServiceImpl();
 		servEspecie= new TipoEspecieServiceImpl();
 		servIdioma= new IdiomaServiceImpl();
+		clienteServ  = new ClienteServiceImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,7 +96,8 @@ public class MascotaServlet extends HttpServlet {
 			mascota.setFotoFavorita(Boolean.valueOf(fotoFavorita));
 			try {
 				mascota=mascServ.create(mascota);
-
+				Cliente cl = clienteServ.findById(cliente.getIdcliente());
+				SessionManager.set(request, AttributeNames.CLIENTE, cl);
 				target = UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(mascota.getIdMascota()));
 
 				redirect = true;

@@ -93,71 +93,49 @@
 	
 	for(Cuidador c: cuidadores){
 		%>
-		<section class="results">
-		<a href="<%=UrlBuilder.builderUrlForm(request,"/cuidador?action=detail&" + ParameterNames.ID_CUIDADOR + "=")%>
-		<%=c.getIdcuidador()%>"><%=c.getNombre()%> <%=c.getApellidos()%></a>
-	
-	<div class="caracteristicas">
-		<h4>Idiomas:</h4>
-		<div class="carP">
-		<%for(Idioma i: c.getIdiomas()){ %>
-		<p><%=i.getIdioma()%></p>
-		<%} %>
-		</div>
-	</div>
-	<div class="caracteristicas">
-		<h4>Experiencia:</h4>
-	<div class="carP">
-		<p><%=c.getExperiencia().getValor()%></p>
-		</div>
-		</div>
+		<section class="result">
 		
-		<div class="caracteristicas">
-		<h4>Especies:</h4>
-		<div class="carP">
-		<%for(TipoEspecie e: c.getEspecies()){ %>
-			<p><%=e.getNombre()%></p>
-		<%} %>
-		</div>
-		</div>
-		<div class="caracteristicas">
-		<h4>Servicios:</h4>
-		<div class="carP">
-		<%for (ServicioOfrecido so: c.getServiciosOfrecidos()){ %>
-		<p><%=so.getNombreServicio()%></p>
-		<p><%=so.getPrecio()%> euros</p>
-		<%} %>
-		</div>
-		</div >
-		<div class="caracteristicas">
-		<h4>Teléfono:</h4>
-		<div class="carP">
-			<p><%=c.getTelefono()%></p>
-			</div>
-			</div>
-			<div class="caracteristicas">
-			<h4>Población</h4>
-			<div class="carP">
-			<p><%=c.getDireccion().getNombrePoblacion()%></p>
-			</div>
-			</div>
-			<div class="caracteristicas">
-			<h4>Provincia:</h4>
-			<div class="carP">
-			<p><%=c.getDireccion().getNombreProvincia()%></p>
-			</div>
-			</div>
-			<div class="caracteristicas">
-			<h4>Puntuación media:</h4>
-			<div class="carP">
-			<p><%=c.getPuntuacionMedia()%></p>
-			</div>
-			</div>
-			</section>
+	<section class="results">
+    
+    <p id="nCuidador"><a href="<%=UrlBuilder.builderUrlForm(request,"/cuidador?action=detail&" + ParameterNames.ID_CUIDADOR + "=")%>
+		<%=c.getIdcuidador()%>"><%=c.getNombre()%> <%=c.getApellidos()%></a><span>4.00</span>
+
+<div class="caracteristicas">
+    <h5 id="dirCuid"><%=c.getDireccion().getNombreProvincia()%>, <%=c.getDireccion().getNombrePoblacion()%></h5>
+    <h4>Servicios</h4>
+    <div class="carP">
+    	<%for(ServicioOfrecido s : c.getServiciosOfrecidos()){%>
+        <p icon=<%if(s.getIdServicio() == 5){%>
+        	&#xe900;
+        	<%}else if(s.getIdServicio() == 4){%>
+        	&#xe902;
+        	<%}else if(s.getIdServicio() == 3){%>
+        	&#xe903;
+        	<%}else if(s.getIdServicio() == 2){%>
+        	&#xe901;
+        	<%}else if(s.getIdServicio() == 1){%>
+			&#xe904;
+        	<%}%>
+        	
+        
+        ><%=s.getNombreServicio()%>, <%=s.getPrecio()%> &#8364</p>
+        <%}%>
+
+        
+    
+    </div>
+</div>
+
+        
+</section>
+<figure class="imagenCuidador" style="background-image:url(<%=UrlBuilder.builderUrlImg(request, "cuidadores/" + String.valueOf(c.getIdcuidador()))+ "-detail.jpg"%>); background-repeat: no-repeat; background-size:cover;
+background-position:center;">
+
+</figure>
+</section>
 	<%
 	}
 %>
-
 
 </section>
 </section>

@@ -8,7 +8,6 @@
         <div>
       
         <a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.PERFIL_CLIENTE) %>"> Mi perfil</a>
-        <a href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.TUS_MASCOTAS) %>">Tus mascotas</a>
           <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.CONTRATO, ActionNames.HISTORIAL_CLIENTE)%>">Historial de contratos</a>
 	<a href="<%=UrlBuilder.builderUrlForm(request, ContextsPath.CLIENTE + "?" + ActionNames.ACTION + "=" + ActionNames.LOG_OUT)%>">Cerrar sesión</a>
         </div>

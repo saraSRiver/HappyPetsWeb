@@ -27,7 +27,9 @@
   <button type="button" value="Editar perfil" id="editar"> 
     <a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE,
     		ActionNames.EDIT_PERFIL_CLIENTE)%>">Editar perfil</a></button>
-    		<button type="button" id="editar"><a  href="<%=UrlBuilder.builderUrlForm(request, ViewsNames.TUS_MASCOTAS) %>">Tus mascotas</a></button>
+    	<%if(cliente.getMascotas().size() < 3){%>
+	<button id="editar" type="button"><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.PRECREATE, ActionNames.ADD_MASCOTA)%>">Añadir mascota</a></button>
+<%}%>
     		<button type="button" value="Eliminar" id="editar"><a href="<%=UrlBuilder.getUrlForController
 	(request, ContextsPath.CLIENTE, ActionNames.ELIMINAR, ParameterNames.ID_CLIENTE, 
     		String.valueOf(cl.getIdcliente()))%>"> Darse de baja de Happy Pets</a></button>
@@ -36,4 +38,13 @@
 	
  </form>
  </div> 
+ <div class="contenedorImg">
+ <%for(Mascota mas: cl.getMascotas()){
+				%>
+ <figure style="background-image:url(<%=UrlBuilder.builderUrlImgMascotas(request, String.valueOf(mas.getIdMascota())+"-mascota.jpg")%>); background-repeat:no-repeat; background-size: cover; position:relative; background-position:bottom;"> 
+ <figcaption><a href="<%=UrlBuilder.getUrlForController(request, ContextsPath.MASCOTA, ActionNames.DETAIL, ParameterNames.ID_MASCOTA, String.valueOf(mas.getIdMascota()))%>"><%=mas.getNombre()%></a></figcaption>
+ </figure>
+ <%}%>
+
+ </div>
      <%@include file="/html/common/footer.jsp"%>

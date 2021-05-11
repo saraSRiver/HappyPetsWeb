@@ -3,7 +3,7 @@
         <%@ page import="com.happypets.web.utils.*" %>
      
 <!DOCTYPE html>
-<html>
+<html  style="background-image: url(<%=UrlBuilder.builderUrlImgCommon(request, "/fondoPatas.jpg")%>); position:relative;">
 <head>
 <meta charset="UTF-8">
 <title>Happy Pets</title>
